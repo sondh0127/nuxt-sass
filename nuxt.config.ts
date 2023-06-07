@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
+    '@nuxtjs/supabase',
   ],
 
   experimental: {
@@ -20,6 +21,7 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
+    '@/assets/styles/global.css',
   ],
 
   colorMode: {
@@ -59,5 +61,27 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+  },
+  imports: {
+    imports: [
+      {
+        name: 'klona',
+        from: 'klona',
+      },
+    ],
+    presets: [
+      {
+        from: '@tanstack/vue-query',
+        imports: [
+          'useQuery',
+          'useInfiniteQuery',
+          'useMutation',
+          'useIsFetching',
+          'useIsMutating',
+          'useQueryClient',
+          'useQueries',
+        ],
+      },
+    ],
   },
 })
