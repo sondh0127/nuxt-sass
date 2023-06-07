@@ -27,7 +27,7 @@ const signUpMutation = useMutation(
     onSuccess: () => {
     },
     onError: (error) => {
-    // notifyStore.notify(error, NotificationType.Error)
+      // notifyStore.notify(error, NotificationType.Error)
     },
   },
 )
@@ -48,29 +48,27 @@ watchEffect(() => {
       <h1 class="text-center text-3xl font-bold">
         Sign up
       </h1>
-      <form class="space-y-4" @submit.prevent="handleStandardSignup">
-        <div>
-          <label for="email" class="mb-2 block font-bold">Email</label>
-          <UIInput class="px-4" />
-          <input
-            id="email" v-model="email" type="email" class="w-full border border-gray-400 rounded-md p-2"
-            placeholder="Enter your email" required
-          >
+      <form class="grid gap-4" @submit.prevent="handleStandardSignup">
+        <div class="grid w-full items-center gap-1.5">
+          <UILabel for="email">
+            Email
+          </UILabel>
+          <UIInput id="email" v-model="email" type="email" placeholder="Enter your email" required />
         </div>
-        <div>
-          <label for="password" class="mb-2 block font-bold">Password</label>
-          <input
-            id="password" v-model="password" type="password" class="w-full border border-gray-400 rounded-md p-2"
-            placeholder="Enter your password" required
-          >
+        <div class="grid w-full items-center gap-1.5">
+          <UILabel for="password">
+            Password
+          </UILabel>
+          <UIInput id="password" v-model="password" type="password" placeholder="Enter your password" required />
         </div>
-        <div>
-          <label for="confirmPassword" class="mb-2 block font-bold">Confirm Password</label>
-          <input
-            id="confirmPassword" v-model="confirmPassword" type="password"
-            class="w-full border border-gray-400 rounded-md p-2" placeholder="Confirm your password" required
-          >
+
+        <div class="grid w-full items-center gap-1.5">
+          <UILabel for="confirmPassword">
+            Confirm Password
+          </UILabel>
+          <UIInput id="confirmPassword" v-model="confirmPassword" type="password" placeholder="Confirm your password" required />
         </div>
+
         <button
           :disabled="loading || password === '' || (confirmPassword !== password)" type="submit"
           class="w-full rounded-md bg-indigo-600 py-2 text-white hover:bg-indigo-700"
@@ -79,7 +77,7 @@ watchEffect(() => {
         </button>
 
         <p v-if="signUpOk" class="mt-4 text-center text-lg">
-          You have successfully signed up.  Please check your email for a link to confirm your email address and proceed.
+          You have successfully signed up. Please check your email for a link to confirm your email address and proceed.
         </p>
       </form>
       <p class="text-center">
