@@ -3,39 +3,6 @@ import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 import { buttonVariants } from '~/components/UI/Button/meta'
 
 const user = useSupabaseUser()
-const supabase = useSupabaseAuthClient()
-
-// const notifyStore = useNotifyStore()
-
-const loading = ref(false)
-const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
-const signUpOk = ref(false)
-
-const signUpMutation = useMutation(
-  async (payload: SignUpWithPasswordCredentials) => {
-    const { data, error } = await supabase.auth.signUp(payload)
-    if (error)
-      throw error
-
-    else
-      signUpOk.value = true
-
-    return data
-  },
-  {
-    onSuccess: () => {
-    },
-    onError: (error) => {
-      // notifyStore.notify(error, NotificationType.Error)
-    },
-  },
-)
-
-async function handleStandardSignup() {
-  await signUpMutation.mutateAsync({ email: email.value, password: password.value })
-}
 
 watchEffect(() => {
   if (user.value)
@@ -46,68 +13,54 @@ watchEffect(() => {
 <template>
   <div class="relative hidden h-[800px] flex-col items-center justify-center container md:grid lg:grid-cols-2 lg:max-w-none lg:px-0">
     <NuxtLink
-      to="/signin"
-      class="absolute right-4 top-4 md:right-8 md:top-8"
+      to="/signin" class="absolute right-4 top-4 md:right-8 md:top-8"
       :class="[buttonVariants({ variant: 'ghost', size: 'sm' })]"
     >
       Login
     </NuxtLink>
-    <!-- <div class="max-w-md w-full rounded-lg p-6 shadow-lg space-y-6">
-      <h1 class="text-center text-3xl font-bold">
-        Sign up
-      </h1>
-      <form class="grid gap-4" @submit.prevent="handleStandardSignup">
-        <div class="grid w-full items-center gap-1.5">
-          <UILabel for="email">
-            Email
-          </UILabel>
-          <UIInput id="email" v-model="email" type="email" placeholder="Enter your email" required />
+    <div class="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
+      <div
+        class="absolute inset-0 bg-cover"
+        :style="{ backgroundImage: 'url(https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80)' }"
+      />
+      <div class="relative z-20 flex items-center text-lg font-medium">
+        <Command class="mr-2 h-6 w-6" /> Acme Inc
+      </div>
+      <div class="relative z-20 mt-auto">
+        <blockquote class="space-y-2">
+          <p class="text-lg">
+            &ldquo;This library has saved me countless hours of work and helped me deliver stunning designs to my clients
+            faster than ever before. Highly recommended!&rdquo;
+          </p>
+          <footer class="text-sm">
+            Sofia Davis
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+    <div class="lg:p-8">
+      <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">
+        <div class="flex flex-col text-center space-y-2">
+          <h1 class="text-2xl font-semibold tracking-tight">
+            Create an account
+          </h1>
+          <p class="text-sm text-muted-foreground">
+            Enter your email below to create your account
+          </p>
         </div>
-        <div class="grid w-full items-center gap-1.5">
-          <UILabel for="password">
-            Password
-          </UILabel>
-          <UIInput id="password" v-model="password" type="password" placeholder="Enter your password" required />
-        </div>
-
-        <div class="grid w-full items-center gap-1.5">
-          <UILabel for="confirmPassword">
-            Confirm Password
-          </UILabel>
-          <UIInput id="confirmPassword" v-model="confirmPassword" type="password" placeholder="Confirm your password" required />
-        </div>
-
-        <button
-          :disabled="loading || password === '' || (confirmPassword !== password)" type="submit"
-          class="w-full rounded-md bg-indigo-600 py-2 text-white hover:bg-indigo-700"
-        >
-          Sign up
-        </button>
-
-        <p v-if="signUpOk" class="mt-4 text-center text-lg">
-          You have successfully signed up. Please check your email for a link to confirm your email address and proceed.
+        <UserAuthForm />
+        <p class="px-8 text-center text-sm text-muted-foreground">
+          By clicking continue, you agree to our
+          <NuxtLink to="/terms" class="underline underline-offset-4 hover:text-primary">
+            Terms of Service
+          </NuxtLink>
+          and
+          <NuxtLink to="/privacy" class="underline underline-offset-4 hover:text-primary">
+            Privacy Policy
+          </NuxtLink>
+          .
         </p>
-      </form>
-      <p class="text-center">
-        or
-      </p>
-      <button
-        class="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700"
-        @click="supabase.auth.signInWithOAuth({ provider: 'google' })"
-      >
-        <span class="flex items-center justify-center space-x-2">
-          <i i-fa-brands:google class="h-5 w-5" />
-          <span>Sign up with Google</span>
-        </span>
-      </button>
-      <p class="mt-4 text-center text-xs text-gray-500">
-        By proceeding, I agree to the <NuxtLink to="/privacy">
-          Privacy Statement
-        </NuxtLink> and <NuxtLink to="/terms">
-          Terms
-          of Service
-        </NuxtLink>
-      </p>
-    </div> -->
+      </div>
+    </div>
   </div>
 </template>

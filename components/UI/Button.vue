@@ -6,7 +6,7 @@ const props = defineProps<ButtonProps>()
 </script>
 
 <template>
-  <button :class="[buttonVariants()]">
+  <button :class="[buttonVariants(props)]">
     <slot />
   </button>
 </template>
