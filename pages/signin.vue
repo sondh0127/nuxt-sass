@@ -56,12 +56,8 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <div class="h-screen flex flex-col items-center justify-center">
-    <details open>
-      <summary>data</summary>
-      <pre>{{ JSON.stringify(data, null, 2) }}</pre>
-    </details>
-    <div class="max-w-md w-full rounded-lg bg-white p-6 shadow-lg space-y-6">
+  <div class="relative hidden h-[800px] flex-col items-center justify-center container md:grid lg:grid-cols-2 lg:max-w-none lg:px-0">
+    <!-- <div class="max-w-md w-full rounded-lg bg-white p-6 shadow-lg space-y-6">
       <h1 class="text-center text-3xl font-bold">
         Sign in
       </h1>
@@ -102,6 +98,6 @@ watchEffect(async () => {
           <span>Sign in with Google</span>
         </span>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>

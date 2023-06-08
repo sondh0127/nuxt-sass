@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
+import { buttonVariants } from '~/components/UI/Button/meta'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseAuthClient()
@@ -43,8 +44,15 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="h-screen flex flex-col items-center justify-center">
-    <div class="max-w-md w-full rounded-lg p-6 shadow-lg space-y-6">
+  <div class="relative hidden h-[800px] flex-col items-center justify-center container md:grid lg:grid-cols-2 lg:max-w-none lg:px-0">
+    <NuxtLink
+      to="/signin"
+      class="absolute right-4 top-4 md:right-8 md:top-8"
+      :class="[buttonVariants({ variant: 'ghost', size: 'sm' })]"
+    >
+      Login
+    </NuxtLink>
+    <!-- <div class="max-w-md w-full rounded-lg p-6 shadow-lg space-y-6">
       <h1 class="text-center text-3xl font-bold">
         Sign up
       </h1>
@@ -100,6 +108,6 @@ watchEffect(() => {
           of Service
         </NuxtLink>
       </p>
-    </div>
+    </div> -->
   </div>
 </template>

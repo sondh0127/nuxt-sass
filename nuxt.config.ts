@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
+    '@nuxt/devtools',
   ],
 
   experimental: {
@@ -68,6 +69,10 @@ export default defineNuxtConfig({
         name: 'klona',
         from: 'klona',
       },
+      {
+        name: 'cva',
+        from: 'class-variance-authority',
+      },
     ],
     presets: [
       {
@@ -84,4 +89,8 @@ export default defineNuxtConfig({
       },
     ],
   },
+  components: [
+    { path: '~/components', extensions: ['vue'] },
+  ],
+
 })
