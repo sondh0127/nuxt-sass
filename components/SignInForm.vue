@@ -88,7 +88,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
             :disabled="isLoading"
           />
         </div>
-        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="block text-right">
+        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="block text-right text-sm text-muted-foreground hover:text-primary">
           Forgot your password?
         </NuxtLink>
 
