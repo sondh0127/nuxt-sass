@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
     '@nuxt/devtools',
+    '@vue-macros/nuxt',
   ],
 
   experimental: {

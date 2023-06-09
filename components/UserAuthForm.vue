@@ -48,7 +48,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
 
 <template>
   <div class="grid gap-6">
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="handleSubmit">
       <div class="grid gap-3">
         <div class="grid gap-1">
           <UILabel for="email">
@@ -85,7 +85,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
           />
         </div>
 
-        <UIButton :disabled="isLoading">
+        <UIButton type="submit" :disabled="isLoading">
           <template v-if="isLoading">
             <i class="i-ri:loader-2-line mr-2 h-4 w-4 animate-spin" />
           </template>
@@ -95,6 +95,11 @@ const { value: password, attrs: passwordAttrs } = register('password')
           You have successfully signed up. Please check your email for a link to confirm your email address and proceed.
         </p>
       </div>
+
+      <details open>
+        <summary>password</summary>
+        <pre>{{ JSON.stringify(password, null, 2) }}</pre>
+      </details>
     </form>
     <div class="relative">
       <div class="absolute inset-0 flex items-center">

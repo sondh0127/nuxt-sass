@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+const { modelValue } = defineModels<{
+  modelValue: string
+}>()
+
 const showPassword = ref(true)
 
 function togglePasswordVisibility() {
@@ -15,6 +19,7 @@ const isPassword = attrs.type === 'password'
 <template>
   <div class="relative">
     <input
+      v-model="modelValue"
       :type="showPassword ? 'text' : 'password'"
       class="h-10 w-full flex border border-input rounded-md bg-transparent px-3 py-2 text-sm ring-offset-background disabled:cursor-not-allowed file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
     >
