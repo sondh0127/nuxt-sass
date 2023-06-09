@@ -88,6 +88,9 @@ const { value: password, attrs: passwordAttrs } = register('password')
             :disabled="isLoading"
           />
         </div>
+        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="block text-right">
+          Forgot your password?
+        </NuxtLink>
 
         <UIButton type="submit" :disabled="isLoading">
           <template v-if="isLoading">
@@ -95,15 +98,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
           </template>
           Sign In with Email
         </UIButton>
-        <p v-if="signUpOk" class="mt-4 text-center text-lg">
-          You have successfully signed up. Please check your email for a link to confirm your email address and proceed.
-        </p>
       </div>
-
-      <details open>
-        <summary>password</summary>
-        <pre>{{ JSON.stringify(password, null, 2) }}</pre>
-      </details>
     </form>
     <div class="relative">
       <div class="absolute inset-0 flex items-center">
@@ -116,23 +111,20 @@ const { value: password, attrs: passwordAttrs } = register('password')
       </div>
     </div>
     <UIButton variant="outline" type="button" :disabled="isLoading">
-      <!-- <template v-if="isLoading">
-          <Icons.spinner class="mr-2 h-4 w-4 animate-spin" />
-        </template>
-        <template v-else>
-          <Icons.gitHub class="mr-2 h-4 w-4" />
-        </template> -->
-      Github
+      <i v-if="isLoading" class="i-ri:loader-2-line mr-2 h-5 w-5 animate-spin" />
+      <i v-else class="i-logos:github-icon mr-2 h-5 w-5" />
+      <span>Sign up with Github</span>
     </UIButton>
 
-    <!-- <button
-        class="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700"
-        @click="supabase.auth.signInWithOAuth({ provider: 'google' })"
-      >
-        <span class="flex items-center justify-center space-x-2">
-          <i i-fa-brands:google class="h-5 w-5" />
-          <span>Sign up with Google</span>
-        </span>
-      </button> -->
+    <UIButton
+      variant="outline" type="button" :disabled="isLoading"
+      @click="supabase.auth.signInWithOAuth({ provider: 'google' })"
+    >
+      <span class="flex items-center justify-center space-x-2">
+        <i v-if="isLoading" class="i-ri:loader-2-line mr-2 h-5 w-5 animate-spin" />
+        <i v-else i-logos:google-icon class="h-5 w-5" />
+        <span>Sign up with Google</span>
+      </span>
+    </UIButton>
   </div>
 </template>

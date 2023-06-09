@@ -18,7 +18,7 @@ watchEffect(() => {
       to="/signin" class="absolute right-4 top-4 md:right-8 md:top-8"
       :class="[buttonVariants({ variant: 'ghost', size: 'sm' })]"
     >
-      Login
+      Sign In
     </NuxtLink>
 
     <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">

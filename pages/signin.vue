@@ -15,19 +15,19 @@ watchEffect(() => {
 <template>
   <div>
     <NuxtLink
-      to="/signin" class="absolute right-4 top-4 md:right-8 md:top-8"
+      to="/signup" class="absolute right-4 top-4 md:right-8 md:top-8"
       :class="[buttonVariants({ variant: 'ghost', size: 'sm' })]"
     >
-      Login
+      Sign Up
     </NuxtLink>
 
     <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">
       <div class="flex flex-col text-center space-y-2">
         <h1 class="text-2xl font-semibold tracking-tight">
-          Create an account
+          Sign In
         </h1>
         <p class="text-sm text-muted-foreground">
-          Enter your email below to create your account
+          Enter your account details below
         </p>
       </div>
       <SignInForm />
