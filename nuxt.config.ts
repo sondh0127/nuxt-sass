@@ -62,6 +62,9 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+    componentInspector: {
+      toggleComboKey: 'meta-shift-x',
+    },
   },
   imports: {
     imports: [

@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
+import { useForm } from '@vorms/core'
+
 const supabase = useSupabaseAuthClient()
 
 // const notifyStore = useNotifyStore()
 
 const loading = ref(false)
-const email = ref('')
-const password = ref('')
 const confirmPassword = ref('')
 const signUpOk = ref(false)
 
@@ -31,21 +31,33 @@ const { isLoading, mutateAsync } = useMutation(
   },
 )
 
-async function onSubmit() {
-  await mutateAsync({ email: email.value, password: password.value })
-}
+const { register, errors, handleSubmit } = useForm({
+  initialValues: {
+    email: '',
+    password: '',
+  },
+  onSubmit: async (values) => {
+    console.log('[LOG] ~ file: UserAuthForm.vue:43 ~ values:', values)
+    // await mutateAsync(values)
+  },
+})
+
+const { value: email, attrs: emailAttrs } = register('email')
+const { value: password, attrs: passwordAttrs } = register('password')
 </script>
 
 <template>
   <div class="grid gap-6">
     <form @submit.prevent="onSubmit">
-      <div class="grid gap-2">
+      <div class="grid gap-3">
         <div class="grid gap-1">
-          <UILabel class="sr-only" for="email">
+          <UILabel for="email">
             Email
           </UILabel>
           <UIInput
+            v-bind="emailAttrs"
             id="email"
+            v-model="email"
             placeholder="name@example.com"
             type="email"
             autocapitalize="none"
@@ -54,9 +66,28 @@ async function onSubmit() {
             :disabled="isLoading"
           />
         </div>
+
+        <div class="grid gap-1">
+          <UILabel for="password">
+            Password
+          </UILabel>
+
+          <UIInput
+            v-bind="passwordAttrs"
+            id="password"
+            v-model="password"
+            placeholder="Enter your password"
+            type="password"
+            autocapitalize="none"
+            autocomplete="password"
+            autocorrect="off"
+            :disabled="isLoading"
+          />
+        </div>
+
         <UIButton :disabled="isLoading">
           <template v-if="isLoading">
-            <!-- <Icons.spinner class="mr-2 h-4 w-4 animate-spin" /> -->
+            <i class="i-ri:loader-2-line mr-2 h-4 w-4 animate-spin" />
           </template>
           Sign In with Email
         </UIButton>
