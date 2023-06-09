@@ -4,16 +4,21 @@ import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 import { useForm } from '@vorms/core'
 
 const supabase = useSupabaseAuthClient()
-
+const user = useSupabaseUser()
+watchEffect(() => {
+  if (user.value)
+    navigateTo('/dashboard', { replace: true })
+})
 // const notifyStore = useNotifyStore()
 
 const loading = ref(false)
+// TODO: password confirmation
 const confirmPassword = ref('')
 const signUpOk = ref(false)
 
 const { isLoading, mutateAsync } = useMutation(
   async (payload: SignUpWithPasswordCredentials) => {
-    const { data, error } = await supabase.auth.signUp(payload)
+    const { data, error } = await supabase.auth.signUp({ ...payload, options: { emailRedirectTo: '/dashboard' } })
     if (error)
       throw error
 
@@ -33,12 +38,11 @@ const { isLoading, mutateAsync } = useMutation(
 
 const { register, errors, handleSubmit } = useForm({
   initialValues: {
-    email: '',
-    password: '',
+    email: 'sondh0127@mailinator.com',
+    password: 'Password1@',
   },
   onSubmit: async (values) => {
-    console.log('[LOG] ~ file: UserAuthForm.vue:43 ~ values:', values)
-    // await mutateAsync(values)
+    await mutateAsync(values)
   },
 })
 

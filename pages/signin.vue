@@ -1,103 +1,47 @@
 <script setup lang="ts">
-import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
+import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
+import { buttonVariants } from '~/components/UI/Button/meta'
 
 const user = useSupabaseUser()
-const supabase = useSupabaseAuthClient()
-
-// const accountStore = useAccountStore()
-// const notifyStore = useNotifyStore()
-
-const loading = ref(false)
-const email = ref('')
-const password = ref('')
-
-const signInMutation = useMutation(
-  async (payload: SignInWithPasswordCredentials) => {
-    const { error } = await supabase.auth.signInWithPassword(payload)
-    if (error)
-      throw error
-  },
-  {
-    onSuccess: () => {
-    },
-    onError: (error) => {
-    // notifyStore.notify(error, NotificationType.Error)
-    },
-  },
-)
-
-async function handleStandardSignin() {
-  console.log(`handleStandardSignin email.value:${email.value}, password.value:${password.value}`)
-  await signInMutation.mutateAsync({ email: email.value, password: password.value })
-}
-
-async function handleGoogleSignin() {
-  console.log('handleGoogleSignin')
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
-    if (error)
-      throw error
-  }
-  catch (error) {
-    // notifyStore.notify(error, NotificationType.Error)
-  }
-  finally {
-    loading.value = false
-  }
-}
-
-watchEffect(async () => {
-  if (user.value) {
-    // await accountStore.init()
+definePageMeta({
+  layout: 'auth',
+})
+watchEffect(() => {
+  if (user.value)
     navigateTo('/dashboard', { replace: true })
-  }
 })
 </script>
 
 <template>
-  <div class="relative hidden h-[800px] flex-col items-center justify-center container md:grid lg:grid-cols-2 lg:max-w-none lg:px-0">
-    <!-- <div class="max-w-md w-full rounded-lg bg-white p-6 shadow-lg space-y-6">
-      <h1 class="text-center text-3xl font-bold">
-        Sign in
-      </h1>
-      <form class="space-y-4" @submit.prevent="handleStandardSignin">
-        <div>
-          <label for="email" class="mb-2 block font-bold">Email</label>
-          <input
-            id="email" v-model="email" type="email" class="w-full border border-gray-400 rounded-md p-2"
-            placeholder="Enter your email" required
-          >
-        </div>
-        <div>
-          <label for="password" class="mb-2 block font-bold">Password</label>
-          <input
-            id="password" v-model="password" type="password" class="w-full border border-gray-400 rounded-md p-2"
-            placeholder="Enter your password" required
-          >
-        </div>
-        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="block text-right">
-          Forgot your password?
+  <div>
+    <NuxtLink
+      to="/signin" class="absolute right-4 top-4 md:right-8 md:top-8"
+      :class="[buttonVariants({ variant: 'ghost', size: 'sm' })]"
+    >
+      Login
+    </NuxtLink>
+
+    <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">
+      <div class="flex flex-col text-center space-y-2">
+        <h1 class="text-2xl font-semibold tracking-tight">
+          Create an account
+        </h1>
+        <p class="text-sm text-muted-foreground">
+          Enter your email below to create your account
+        </p>
+      </div>
+      <SignInForm />
+      <p class="px-8 text-center text-sm text-muted-foreground">
+        By clicking continue, you agree to our
+        <NuxtLink to="/terms" class="underline underline-offset-4 hover:text-primary">
+          Terms of Service
         </NuxtLink>
-        <button
-          :disabled="loading || password === ''" type="submit"
-          class="w-full rounded-md bg-indigo-600 py-2 text-white hover:bg-indigo-700"
-        >
-          Sign in
-        </button>
-      </form>
-      <p class="text-center">
-        or
+        and
+        <NuxtLink to="/privacy" class="underline underline-offset-4 hover:text-primary">
+          Privacy Policy
+        </NuxtLink>
+        .
       </p>
-      <button
-        class="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700"
-        @click="handleGoogleSignin()"
-      >
-        <span class="flex items-center justify-center space-x-2">
-          <i i-fa-brands:google class="h-5 w-5" />
-          <span>Sign in with Google</span>
-        </span>
-      </button>
-    </div> -->
+    </div>
   </div>
 </template>
