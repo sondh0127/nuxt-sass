@@ -3,6 +3,7 @@ import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
   modules: [
+    '@anu-vue/nuxt',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
@@ -12,6 +13,17 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@vue-macros/nuxt',
   ],
+
+  // anu: {
+  //   themes: {
+  //     light: {
+  //       colors: {
+  //         primary: '350, 73%, 66.3%',
+  //       },
+  //     },
+  //   },
+  //   initialTheme: 'dark',
+  // },
 
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
@@ -23,7 +35,6 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    '@/assets/styles/global.css',
   ],
 
   colorMode: {

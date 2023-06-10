@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
-import { buttonVariants } from '~/components/UI/Button/meta'
-
 const user = useSupabaseUser()
 definePageMeta({
   layout: 'auth',
@@ -16,7 +13,7 @@ watchEffect(() => {
   <div>
     <NuxtLink
       to="/signin" class="absolute right-4 top-4 md:right-8 md:top-8"
-      :class="[buttonVariants({ variant: 'ghost', size: 'sm' })]"
+      :class="[]"
     >
       Sign In
     </NuxtLink>
