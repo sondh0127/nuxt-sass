@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const online = useOnline()
+
+const user = useSupabaseUser()
 </script>
 
 <template>
   <div>
-    <Logos mb-6 />
     <Suspense>
       <ClientOnly>
         <PageView v-if="online" />
@@ -18,6 +19,10 @@ const online = useOnline()
         </div>
       </template>
     </Suspense>
-    <InputEntry />
+
+    <details open>
+      <summary>user</summary>
+      <pre>{{ JSON.stringify(user, null, 2) }}</pre>
+    </details>
   </div>
 </template>

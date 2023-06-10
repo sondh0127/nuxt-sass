@@ -87,15 +87,16 @@ const { value: password, attrs: passwordAttrs } = register('password')
       </div>
       <ABtn
         variant="fill" color="white"
-        :icon="[isLoading ? 'i-ri:loader-2-line animate-spin' : 'i-logos:github-icon']"
+        icon="i-logos:github-icon"
+        @click="supabase.auth.signInWithOAuth({ provider: 'github' })"
       >
         <span>Sign up with Github</span>
       </ABtn>
 
       <ABtn
-        variant="fill" :disabled="isLoading"
+        variant="fill"
         color="white"
-        :icon="[isLoading ? 'i-ri:loader-2-line animate-spin' : 'i-logos:google-icon']"
+        icon="i-logos:google-icon"
         @click="supabase.auth.signInWithOAuth({ provider: 'google' })"
       >
         <span>Sign up with Google</span>
