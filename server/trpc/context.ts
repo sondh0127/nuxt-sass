@@ -15,12 +15,10 @@ export async function createContext(event: H3Event) {
 
   if (!user)
     user = await serverSupabaseUser(event)
-  console.log('[LOG] ~ file: context.ts:18 ~ user:', user)
 
   if (!dbUser && user) {
     const authService = new AuthService()
     dbUser = await authService.getFullUserBySupabaseId(user.id)
-    console.log('[LOG] ~ file: context.ts:22 ~ dbUser:', dbUser)
 
     if (!dbUser && user) {
       dbUser = await authService.createUser(user.id, user.user_metadata.full_name ? user.user_metadata.full_name : 'no name supplied', user.email ? user.email : 'no@email.supplied')
