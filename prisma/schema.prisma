@@ -84,6 +84,7 @@ model Note {
   @@map("note")
 }
 
+// token per day
 model Token {
   id         Int      @id @default(autoincrement())
   account_id Int?
