@@ -2,6 +2,9 @@ import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  build: {
+    transpile: ['trpc-nuxt'],
+  },
   modules: [
     '@anu-vue/nuxt',
     '@vueuse/nuxt',

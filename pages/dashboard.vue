@@ -2,8 +2,14 @@
 definePageMeta({
   middleware: ['auth'],
 })
+
+const { $client } = useNuxtApp()
+
+const { data: hello } = await $client.hello.useQuery({ text: 'client' })
 </script>
 
 <template>
-  Dashboard
+  <div>
+    <p>{{ hello?.greeting }}</p>
+  </div>
 </template>
