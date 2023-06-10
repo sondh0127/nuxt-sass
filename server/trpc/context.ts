@@ -1,17 +1,15 @@
 import type { inferAsyncReturnType } from '@trpc/server'
 import { TRPCError } from '@trpc/server'
 import type { H3Event } from 'h3'
-
 import type { User } from '@supabase/supabase-js'
 import { serverSupabaseUser } from '#supabase/server'
-
 import type { FullDBUser } from '~~/lib/services/service.types'
-import AuthService from '~/lib/services/auth.service'
+import AuthService from '~~/lib/services/auth.service'
 
 export async function createContext(event: H3Event) {
   let user: User | null = null
   let dbUser: FullDBUser | null = null
-  const activeAccountId: number | null = null
+  let activeAccountId: number | null = null
 
   if (!user)
     user = await serverSupabaseUser(event)
@@ -25,17 +23,17 @@ export async function createContext(event: H3Event) {
       console.log(`\n Created DB User \n ${JSON.stringify(dbUser)}\n`)
     }
 
-    // if (dbUser) {
-    //   const preferredAccountId = getCookie(event, 'preferred-active-account-id')
-    //   if (preferredAccountId && dbUser?.memberships.find(m => m.account_id === +preferredAccountId && !m.pending)) {
-    //     activeAccountId = +preferredAccountId
-    //   }
-    //   else {
-    //     const defaultActive = dbUser.memberships[0].account_id.toString()
-    //     setCookie(event, 'preferred-active-account-id', defaultActive, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10) })
-    //     activeAccountId = +defaultActive
-    //   }
-    // }
+    if (dbUser) {
+      const preferredAccountId = getCookie(event, 'preferred-active-account-id')
+      if (preferredAccountId && dbUser?.memberships.find(m => m.account_id === +preferredAccountId && !m.pending)) {
+        activeAccountId = +preferredAccountId
+      }
+      else {
+        const defaultActive = dbUser.memberships[0].account_id.toString()
+        setCookie(event, 'preferred-active-account-id', defaultActive, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 10) })
+        activeAccountId = +defaultActive
+      }
+    }
   }
 
   return {
