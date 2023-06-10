@@ -3,19 +3,19 @@ import { storeToRefs } from 'pinia'
 
 const supabase = useSupabaseAuthClient()
 const user = useSupabaseUser()
-// const accountStore = useAccountStore()
-// const { dbUser, activeAccountId } = storeToRefs(accountStore)
+const accountStore = useAccountStore()
+const { dbUser, activeAccountId } = storeToRefs(accountStore)
 // const notifyStore = useNotifyStore()
 // const { notifications } = storeToRefs(notifyStore)
 
 onMounted(async () => {
-  // await accountStore.init()
+  await accountStore.init()
 })
 
 async function signout() {
   await supabase.auth.signOut()
-  // if (accountStore)
-  //   accountStore.signout()
+  if (accountStore)
+    accountStore.signout()
 
   navigateTo('/signin', { replace: true })
 }

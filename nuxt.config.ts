@@ -80,6 +80,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
+    dirs: ['./stores'],
     imports: [
       {
         name: 'klona',
