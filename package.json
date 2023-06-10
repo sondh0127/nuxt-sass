@@ -12,7 +12,12 @@
     "generate": "nuxi generate",
     "start:generate": "npx serve .output/public"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "devDependencies": {
+    "stripe": "^11.12.0",
+    "ts-node": "^10.9.1",
     "@antfu/eslint-config": "^0.39.5",
     "@anu-vue/nuxt": "^0.14.0",
     "@iconify-json/carbon": "^1.1.17",

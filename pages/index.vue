@@ -2,6 +2,10 @@
 const online = useOnline()
 
 const user = useSupabaseUser()
+watchEffect(() => {
+  if (user.value)
+    navigateTo('/dashboard', { replace: true })
+})
 </script>
 
 <template>
