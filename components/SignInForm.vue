@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
+import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
 
 import { useForm } from '@vorms/core'
 
@@ -11,21 +11,15 @@ watchEffect(() => {
 })
 // const notifyStore = useNotifyStore()
 
-const loading = ref(false)
-// TODO: password confirmation
-const confirmPassword = ref('')
-const signUpOk = ref(false)
-
 const { isLoading, mutateAsync } = useMutation(
-  async (payload: SignUpWithPasswordCredentials) => {
-    const { data, error } = await supabase.auth.signUp({ ...payload, options: { emailRedirectTo: '/dashboard' } })
+  async (payload: SignInWithPasswordCredentials) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ ...payload })
     if (error)
       throw error
 
     else
-      signUpOk.value = true
 
-    return data
+      return data
   },
   {
     onSuccess: () => {
@@ -54,77 +48,53 @@ const { value: password, attrs: passwordAttrs } = register('password')
   <div class="grid gap-6">
     <form @submit.prevent="handleSubmit">
       <div class="grid gap-3">
-        <div class="grid gap-1">
-          <UILabel for="email">
-            Email
-          </UILabel>
-          <UIInput
-            v-bind="emailAttrs"
-            id="email"
-            v-model="email"
-            placeholder="name@example.com"
-            type="email"
-            autocapitalize="none"
-            autocomplete="email"
-            autocorrect="off"
-            :disabled="isLoading"
-          />
-        </div>
+        <AInput
+          v-bind="emailAttrs"
+          id="email" v-model="email" label="Email" placeholder="name@example.com" type="email"
+          autocapitalize="none" autocomplete="email" autocorrect="off" :disabled="isLoading"
+        />
 
-        <div class="grid gap-1">
-          <UILabel for="password">
-            Password
-          </UILabel>
+        <AInput
+          v-bind="passwordAttrs"
+          id="password" v-model="password" label="Password" placeholder="Enter your password"
+          type="password" autocapitalize="none" autocomplete="password" autocorrect="off" :disabled="isLoading"
+        />
 
-          <UIInput
-            v-bind="passwordAttrs"
-            id="password"
-            v-model="password"
-            placeholder="Enter your password"
-            type="password"
-            autocapitalize="none"
-            autocomplete="password"
-            autocorrect="off"
-            :disabled="isLoading"
-          />
-        </div>
-        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="block text-right text-sm text-muted-foreground hover:text-primary">
+        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="text-muted-foreground block text-right text-sm hover:text-primary">
           Forgot your password?
         </NuxtLink>
 
-        <UIButton type="submit" :disabled="isLoading">
-          <template v-if="isLoading">
-            <i class="i-ri:loader-2-line mr-2 h-4 w-4 animate-spin" />
-          </template>
+        <ABtn type="submit" :loading="isLoading">
           Sign In with Email
-        </UIButton>
+        </ABtn>
       </div>
     </form>
+
     <div class="relative">
       <div class="absolute inset-0 flex items-center">
         <span class="w-full border-t" />
       </div>
       <div class="relative flex justify-center text-xs uppercase">
-        <span class="bg-background px-2 text-muted-foreground">
+        <span class="bg-a-surface px-2">
           Or continue with
         </span>
       </div>
     </div>
-    <UIButton variant="outline" type="button" :disabled="isLoading">
-      <i v-if="isLoading" class="i-ri:loader-2-line mr-2 h-5 w-5 animate-spin" />
-      <i v-else class="i-logos:github-icon mr-2 h-5 w-5" />
-      <span>Sign up with Github</span>
-    </UIButton>
+    <ABtn
+      variant="fill" color="white"
+      icon="i-logos:github-icon"
+      @click="supabase.auth.signInWithOAuth({ provider: 'github' })"
+    >
+      <span>Sign in with Github</span>
+    </ABtn>
 
-    <UIButton
-      variant="outline" type="button" :disabled="isLoading"
+    <ABtn
+      variant="fill"
+      color="white"
+      icon="i-logos:google-icon"
       @click="supabase.auth.signInWithOAuth({ provider: 'google' })"
     >
-      <span class="flex items-center justify-center space-x-2">
-        <i v-if="isLoading" class="i-ri:loader-2-line mr-2 h-5 w-5 animate-spin" />
-        <i v-else i-logos:google-icon class="h-5 w-5" />
-        <span>Sign up with Google</span>
-      </span>
-    </UIButton>
+      <span>Sign in with Google</span>
+    </ABtn>
   </div>
 </template>

@@ -17,15 +17,20 @@ async function signout() {
   // if (accountStore)
   //   accountStore.signout()
 
-  navigateTo('/', { replace: true })
+  navigateTo('/signin', { replace: true })
 }
 </script>
 
 <template>
   <div>
-    <details open>
+    <details>
       <summary>user</summary>
       <pre>{{ JSON.stringify(user, null, 2) }}</pre>
     </details>
+    <div>
+      <ABtn @click="signout">
+        Sign out
+      </ABtn>
+    </div>
   </div>
 </template>

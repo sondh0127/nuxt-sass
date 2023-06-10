@@ -19,10 +19,5 @@ const user = useSupabaseUser()
         </div>
       </template>
     </Suspense>
-
-    <details open>
-      <summary>user</summary>
-      <pre>{{ JSON.stringify(user, null, 2) }}</pre>
-    </details>
   </div>
 </template>

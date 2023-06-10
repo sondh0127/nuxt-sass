@@ -75,32 +75,6 @@ const { value: password, attrs: passwordAttrs } = register('password')
           </p>
         </div>
       </form>
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <span class="w-full border-t" />
-        </div>
-        <div class="relative flex justify-center text-xs uppercase">
-          <span class="bg-a-surface px-2">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <ABtn
-        variant="fill" color="white"
-        icon="i-logos:github-icon"
-        @click="supabase.auth.signInWithOAuth({ provider: 'github' })"
-      >
-        <span>Sign up with Github</span>
-      </ABtn>
-
-      <ABtn
-        variant="fill"
-        color="white"
-        icon="i-logos:google-icon"
-        @click="supabase.auth.signInWithOAuth({ provider: 'google' })"
-      >
-        <span>Sign up with Google</span>
-      </ABtn>
     </div>
   </ACard>
 </template>
