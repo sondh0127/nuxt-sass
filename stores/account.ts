@@ -22,6 +22,25 @@ so that other routers can use them to filter results to the active user and acco
                        |             |               |
                     account       account        acccount*
 */
+
+// User
+// └─ memberships (Membership[])
+
+// Membership
+// ├─ account (Account)
+// └─ user (User)
+
+// Account
+// ├─ plan (Plan)
+// ├─ members (Membership[])
+// └─ notes (Note[])
+
+// Plan
+// └─ accounts (Account[])
+
+// Note
+// └─ account (Account)
+
 interface State {
   dbUser: FullDBUser | null
   activeAccountId: number | null
@@ -48,11 +67,11 @@ export const useAccountStore = defineStore('account', {
           this.dbUser = dbUser
       }
       console.log('[LOG] ~ file: account.ts:49 ~ this.dbUser:', this.dbUser)
-      // if (!this.activeAccountId) {
-      //   const { activeAccountId } = await $client.account.getActiveAccountId.query()
-      //   if (activeAccountId)
-      //     this.activeAccountId = activeAccountId
-      // }
+      if (!this.activeAccountId) {
+        const { activeAccountId } = await $client.account.getActiveAccountId.query()
+        if (activeAccountId)
+          this.activeAccountId = activeAccountId
+      }
     },
     signout() {
       this.dbUser = null

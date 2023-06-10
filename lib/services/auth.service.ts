@@ -23,8 +23,7 @@ export default class AuthService {
   }
 
   async createUser(supabase_uid: string, display_name: string, email: string): Promise<FullDBUser | null> {
-    console.log('[LOG] ~ file: auth.service.ts:26 ~ createUser:')
-    // const trialPlan = await prisma_client.plan.findFirstOrThrow({ where: { name: config.initialPlanName } })
+    const trialPlan = await prisma_client.plan.findFirstOrThrow({ where: { name: config.initialPlanName } })
     const join_password: string = generator.generate({
       length: 10,
       numbers: true,
@@ -34,23 +33,23 @@ export default class AuthService {
         supabase_uid,
         display_name,
         email,
-        // memberships: {
-        //   create: {
-        //     account: {
-        //       create: {
-        //         name: display_name,
-        //         current_period_ends: UtilService.addMonths(new Date(), config.initialPlanActiveMonths),
-        //         plan_id: trialPlan.id,
-        //         features: trialPlan.features,
-        //         max_notes: trialPlan.max_notes,
-        //         max_members: trialPlan.max_members,
-        //         plan_name: trialPlan.name,
-        //         join_password,
-        //       },
-        //     },
-        //     access: ACCOUNT_ACCESS.OWNER,
-        //   },
-        // },
+        memberships: {
+          create: {
+            account: {
+              create: {
+                name: display_name,
+                current_period_ends: UtilService.addMonths(new Date(), config.initialPlanActiveMonths),
+                plan_id: trialPlan.id,
+                features: trialPlan.features,
+                max_notes: trialPlan.max_notes,
+                max_members: trialPlan.max_members,
+                plan_name: trialPlan.name,
+                join_password,
+              },
+            },
+            access: ACCOUNT_ACCESS.OWNER,
+          },
+        },
       },
       ...fullDBUser,
     })
