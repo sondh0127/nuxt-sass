@@ -13,17 +13,15 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@vue-macros/nuxt',
   ],
-
-  // anu: {
-  //   themes: {
-  //     light: {
-  //       colors: {
-  //         primary: '350, 73%, 66.3%',
-  //       },
-  //     },
-  //   },
-  //   initialTheme: 'dark',
-  // },
+  anu: {
+    themes: {
+      light: {
+        colors: {
+          primary: '350, 73%, 66.3%',
+        },
+      },
+    },
+  },
 
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
