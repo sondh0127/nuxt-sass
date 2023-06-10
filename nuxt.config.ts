@@ -10,8 +10,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
-    '@nuxt/devtools',
     '@vue-macros/nuxt',
+    '@nuxt/devtools',
   ],
   anu: {
     themes: {
