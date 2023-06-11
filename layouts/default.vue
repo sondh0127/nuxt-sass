@@ -1,6 +1,6 @@
 <template>
-  <main class="grid-row min-h-screen">
-    <AppHeader />
+  <main class="h-screen">
+    <!-- <AppHeader /> -->
     <slot />
   </main>
 </template>
