@@ -39,10 +39,6 @@ export default defineNuxtConfig({
     '@unocss/reset/tailwind.css',
     '~/assets/scss/index.scss',
   ],
-  typescript: {
-    strict: true,
-    shim: false,
-  },
   // vueuse
   vueuse: {
     ssrHandlers: true,
