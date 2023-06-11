@@ -24,3 +24,8 @@ $-colors: (
 );
 
 @use './dark.scss';
+
+
+:root {
+  --el-menu-item-height: 46px;
+}
