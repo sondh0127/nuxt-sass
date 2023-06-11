@@ -74,6 +74,12 @@ function hoverMenu() {
 function handlePoint() {
   router.push('/point')
 }
+
+const color = useColorMode()
+const isDark = computed(() => color.value === 'dark')
+function handleSwitch() {
+  color.preference = color.value === 'dark' ? 'light' : 'dark'
+}
 </script>
 
 <template>
@@ -108,6 +114,15 @@ function handlePoint() {
           </el-menu>
 
           <el-menu class="!border-r-none">
+            <el-menu-item @click="handleSwitch">
+              <el-icon :class="[isDark ? 'i-carbon:sun' : 'i-carbon:moon']" />
+              <template #title>
+                <span>
+                  Switch mode
+                </span>
+              </template>
+            </el-menu-item>
+
             <el-menu-item @click="handlePoint">
               <el-icon i-carbon:hourglass />
               <template #title>
