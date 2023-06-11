@@ -2,6 +2,11 @@
 import { storeToRefs } from 'pinia'
 import { ACCOUNT_ACCESS } from '~/prisma/account-access-enum'
 
+definePageMeta({
+  layout: 'dashboard',
+  middleware: ['auth'],
+})
+
 const accountStore = useAccountStore()
 const { activeMembership, activeAccountMembers } = storeToRefs(accountStore)
 
