@@ -115,6 +115,48 @@ function handleSwitch() {
 
           <el-menu class="!border-r-none">
             <el-menu-item @click="handleSwitch">
+              <el-icon class="i-carbon:carbon" />
+              <template #title>
+                <span>
+                  Setting
+                </span>
+              </template>
+            </el-menu-item>
+            <el-menu-item @click="handleSwitch">
+              <el-icon class="i-carbon:carbon" />
+              <template #title>
+                <span>
+                  Custom API Key
+                </span>
+              </template>
+            </el-menu-item>
+            <el-menu-item @click="handleSwitch">
+              <el-icon class="i-carbon:carbon" />
+              <template #title>
+                <span>
+                  Robot?
+                </span>
+              </template>
+            </el-menu-item>
+            <el-menu-item @click="handleSwitch">
+              <el-icon class="i-carbon:carbon" />
+              <template #title>
+                <span>
+                  Download App (PWA, Tauri)
+                </span>
+              </template>
+            </el-menu-item>
+
+            <el-menu-item @click="handleSwitch">
+              <el-icon class="i-carbon:carbon" />
+              <template #title>
+                <span>
+                  Model Switch TODO
+                </span>
+              </template>
+            </el-menu-item>
+
+            <el-menu-item @click="handleSwitch">
               <el-icon :class="[isDark ? 'i-carbon:sun' : 'i-carbon:moon']" />
               <template #title>
                 <span>
