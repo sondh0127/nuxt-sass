@@ -11,5 +11,6 @@ const { data: hello } = await $client.hello.hello.useQuery({ text: 'client' })
 <template>
   <div>
     <p>{{ hello?.greeting }}</p>
+    <Examples />
   </div>
 </template>

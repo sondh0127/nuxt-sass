@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
+    '@element-plus/nuxt',
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
@@ -36,7 +37,16 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
+    '~/assets/scss/index.scss',
   ],
+  typescript: {
+    strict: true,
+    shim: false,
+  },
+  // vueuse
+  vueuse: {
+    ssrHandlers: true,
+  },
 
   colorMode: {
     classSuffix: '',
@@ -53,6 +63,22 @@ export default defineNuxtConfig({
       routes: ['/'],
       ignore: ['/hi'],
     },
+  },
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/element/index.scss" as element;',
+        },
+      },
+    },
+  },
+
+  elementPlus: {
+    icon: 'ElIcon',
+    importStyle: 'scss',
+    themes: ['dark'],
   },
 
   app: {
