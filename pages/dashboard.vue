@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
-
 const item = {
   date: '2016-05-02',
   name: 'Tom',
@@ -16,6 +14,71 @@ definePageMeta({
 const { $client } = useNuxtApp()
 
 // const { data: hello } = await $client.auth.useQuery({ text: 'client' })
+
+const supabase = useSupabaseAuthClient()
+const user = useSupabaseUser()
+const accountStore = useAccountStore()
+
+async function signout() {
+  await supabase.auth.signOut()
+  if (accountStore)
+    accountStore.signout()
+  ElMessage({
+    type: 'success',
+    message: 'Signout completed',
+  })
+
+  navigateTo('/signin', { replace: true })
+}
+
+function handleLogout(params: type) {
+  ElMessageBox.confirm(
+    'Sign out',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    },
+  )
+    .then(() => {
+      signout()
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Logout canceled',
+      })
+    })
+}
+
+const joinDialogVisible = ref(false)
+
+function handleJoin() {
+  joinDialogVisible.value = true
+}
+
+const router = useRouter()
+function handleAccount() {
+  router.push('/account')
+}
+
+// Whether the storage menu exists show tooltip attribute identification
+const menuTextRef = ref()
+const showTooltip = ref(true)
+
+function hoverMenu() {
+  nextTick(() => {
+    // Text overflows if the overall width of the text content is greater than its viewable width
+    menuTextRef.value?.scrollWidth > menuTextRef.value?.clientWidth
+      ? (showTooltip.value = true)
+      : (showTooltip.value = false)
+  })
+}
+
+function handlePoint() {
+  router.push('/point')
+}
 </script>
 
 <template>
@@ -49,69 +112,42 @@ const { $client } = useNuxtApp()
             </el-sub-menu>
           </el-menu>
 
-          <el-menu class="!border-r-none" :default-openeds="['1', '3']">
-            <el-sub-menu index="1">
+          <el-menu class="!border-r-none">
+            <el-menu-item @click="handlePoint">
+              <el-icon i-carbon:hourglass />
               <template #title>
-                <el-icon>
-                  <Message />
-                </el-icon>Navigator One
+                <span>
+                  Remaining point
+                </span>
+                <el-icon i-carbon:add-alt />
               </template>
-              <el-menu-item-group>
-                <template #title>
-                  Group 1
-                </template>
-                <el-menu-item index="1-1">
-                  Option 1
-                </el-menu-item>
-                <el-menu-item index="1-2">
-                  Option 2
-                </el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="1-3">
-                  Option 3
-                </el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="1-4">
-                <template #title>
-                  Option4
-                </template>
-                <el-menu-item index="1-4-1">
-                  Option 4-1
-                </el-menu-item>
-              </el-sub-menu>
-            </el-sub-menu>
-            <el-sub-menu index="2">
+            </el-menu-item>
+
+            <el-menu-item @click="handleAccount">
+              <el-icon i-carbon:user />
               <template #title>
-                <el-icon>
-                  <IconMenu />
-                </el-icon>Navigator Two
+                <el-tooltip :content="user?.email" placement="top" :offset="0" effect="dark" :disabled="!showTooltip">
+                  <span
+                    ref="menuTextRef" class="max-w-186px truncate"
+                    @mouseover="hoverMenu()"
+                  >
+                    {{ user?.email }}
+                  </span>
+                </el-tooltip>
               </template>
-              <el-menu-item-group>
-                <template #title>
-                  Group 1
-                </template>
-                <el-menu-item index="2-1">
-                  Option 1
-                </el-menu-item>
-                <el-menu-item index="2-2">
-                  Option 2
-                </el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="2-3">
-                  Option 3
-                </el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="2-4">
-                <template #title>
-                  Option 4
-                </template>
-                <el-menu-item index="2-4-1">
-                  Option 4-1
-                </el-menu-item>
-              </el-sub-menu>
-            </el-sub-menu>
+            </el-menu-item>
+            <el-menu-item @click="handleJoin">
+              <el-icon i-carbon:group />
+              <template #title>
+                Join the group
+              </template>
+            </el-menu-item>
+            <el-menu-item @click="handleLogout">
+              <el-icon i-carbon:logout />
+              <template #title>
+                Sign out
+              </template>
+            </el-menu-item>
           </el-menu>
         </div>
       </el-scrollbar>
@@ -142,4 +178,15 @@ const { $client } = useNuxtApp()
       </el-main>
     </el-container>
   </el-container>
+
+  <el-dialog v-model="joinDialogVisible" title="Tips" width="30%" align-center>
+    <span>This is a message</span>
+    <template #footer>
+      <span class="">
+        <el-button type="primary" @click="joinDialogVisible = false">
+          Got it
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
