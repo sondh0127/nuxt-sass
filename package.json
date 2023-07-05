@@ -16,7 +16,9 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "element-plus": "^2.3.7"
+    "drizzle-orm": "^0.27.0",
+    "element-plus": "^2.3.7",
+    "postgres": "^3.3.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.6",
@@ -42,6 +44,7 @@
     "@vueuse/nuxt": "^10.2.1",
     "class-variance-authority": "^0.6.1",
     "consola": "^3.2.2",
+    "drizzle-kit": "^0.19.3",
     "eslint": "^8.44.0",
     "generate-password-ts": "^1.6.3",
     "nuxt": "^3.6.1",
