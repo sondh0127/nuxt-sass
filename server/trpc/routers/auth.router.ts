@@ -1,3 +1,5 @@
+import { db } from '../../../db/client'
+import { users } from '../../../db/schema'
 import { publicProcedure, router } from '../trpc'
 
 export const authRouter = router({
@@ -7,4 +9,7 @@ export const authRouter = router({
         dbUser: ctx.dbUser,
       }
     }),
+  getAllUser: publicProcedure.query(({ ctx }) => {
+    return db.select().from(users)
+  }),
 })
