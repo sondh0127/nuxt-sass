@@ -1,0 +1,11 @@
+const baseURL = 'http://localhost:5050'
+// const token = useSupabaseToken()
+const token = 'Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Im5kVi9BSmNoRWg5cEd2T3MiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjg4NTc2NTEzLCJpYXQiOjE2ODg1NzI5MTMsImlzcyI6Imh0dHBzOi8vaHR0cHM6Ly9oZmxtc3ZvZXpud3dlZ2x4cm55dy5zdXBhYmFzZS5jby9hdXRoL3YxIiwic3ViIjoiNGM0NzliZTctMjFkMC00NjI0LWJiZWItYWIzY2RlZWQ5NGVhIiwiZW1haWwiOiJzb25kaDAxMjM0NUBtYWlsaW5hdG9yLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4ODQ3OTY3MX1dLCJzZXNzaW9uX2lkIjoiOWE1OTg4NzUtMjMzMS00NzNjLWJiYzktMjExN2Q0N2M0ZTY1In0.xC28M5ifGD0J5XYxsg_l7-Rg82i60J5eGIDYtxMuKus'
+
+export const $$fetch = $fetch.create({
+  baseURL,
+  headers: {
+    Authorization: token,
+    // 'Openai-Api-Key': config.openAiKey,
+  },
+})

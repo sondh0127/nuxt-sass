@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
+
 const item = {
   date: '2016-05-02',
   name: 'Tom',
@@ -80,6 +82,29 @@ const isDark = computed(() => color.value === 'dark')
 function handleSwitch() {
   color.preference = color.value === 'dark' ? 'light' : 'dark'
 }
+
+// SECTION: Brains
+const brainVisible = ref(false)
+function handleBrain() {
+  brainVisible.value = true
+}
+const { createBrain, createMutation } = useBrainState()
+const ruleFormRef = ref<FormInstance>()
+const brainForm = ref({
+  brain_name: null,
+})
+
+function submitBrain() {
+  ruleFormRef.value?.validate(async (valid) => {
+    if (valid) {
+      await createBrain(brainForm.value.brain_name!)
+    }
+    else {
+      console.log('error submit!')
+      return false
+    }
+  })
+}
 </script>
 
 <template>
@@ -114,6 +139,15 @@ function handleSwitch() {
           </el-menu>
 
           <el-menu class="!border-r-none">
+            <el-menu-item @click="handleBrain">
+              <el-icon class="i-carbon:ibm-cloud-pak-integration" />
+              <template #title>
+                <span>
+                  Brain
+                </span>
+              </template>
+            </el-menu-item>
+
             <el-menu-item @click="handleSwitch">
               <el-icon class="i-carbon:carbon" />
               <template #title>
@@ -179,10 +213,7 @@ function handleSwitch() {
               <el-icon i-carbon:user />
               <template #title>
                 <el-tooltip :content="user?.email" placement="top" :offset="0" effect="dark" :disabled="!showTooltip">
-                  <span
-                    ref="menuTextRef" class="max-w-186px truncate"
-                    @mouseover="hoverMenu()"
-                  >
+                  <span ref="menuTextRef" class="max-w-186px truncate" @mouseover="hoverMenu()">
                     {{ user?.email }}
                   </span>
                 </el-tooltip>
@@ -231,12 +262,45 @@ function handleSwitch() {
     </el-container>
   </el-container>
 
+  <!-- SECTION: Tip -->
   <el-dialog v-model="joinDialogVisible" title="Tips" width="30%" align-center>
     <span>This is a message</span>
     <template #footer>
       <span class="">
         <el-button type="primary" @click="joinDialogVisible = false">
           Got it
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- SECTION Brain -->
+
+  <el-dialog v-model="brainVisible" title="Brains" width="40%" align-center>
+    <el-form ref="ruleFormRef" :model="brainForm" status-icon @submit.prevent>
+      <div class="flex items-start justify-between gap-2">
+        <el-form-item
+          prop="brain_name" class="flex-1" :rules="[{
+            required: true,
+            message: 'Brain name is required',
+            trigger: 'change',
+          }]"
+        >
+          <el-input v-model="brainForm.brain_name" placeholder="Add a new brain" />
+        </el-form-item>
+        <el-button type="primary" @click="submitBrain">
+          <template #icon>
+            <el-icon class="i-carbon:add" />
+          </template>
+        </el-button>
+      </div>
+    </el-form>
+    <div>
+      Brain list
+    </div>
+    <template #footer>
+      <span class="">
+        <el-button @click="brainVisible = false">
+          Close
         </el-button>
       </span>
     </template>
