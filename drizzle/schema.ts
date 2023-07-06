@@ -73,18 +73,4 @@ export const users = pgTable('users', {
   supabaseUid: text('supabase_uid').notNull(),
   email: text('email'),
   displayName: text('display_name'),
-},
-(table) => {
-  return {
-    confirmationTokenIdx: uniqueIndex('confirmation_token_idx').on(table.confirmationToken),
-    emailChangeTokenCurrentIdx: uniqueIndex('email_change_token_current_idx').on(table.emailChangeTokenCurrent),
-    emailChangeTokenNewIdx: uniqueIndex('email_change_token_new_idx').on(table.emailChangeTokenNew),
-    reauthenticationTokenIdx: uniqueIndex('reauthentication_token_idx').on(table.reauthenticationToken),
-    recoveryTokenIdx: uniqueIndex('recovery_token_idx').on(table.recoveryToken),
-    emailPartialKey: uniqueIndex('users_email_partial_key').on(table.email),
-    instanceIdEmailIdx: index('users_instance_id_email_idx').on(table.instanceId),
-    instanceIdIdx: index('users_instance_id_idx').on(table.instanceId),
-    phoneKey: uniqueIndex('users_phone_key').on(table.phone),
-    usersPkey: primaryKey(table.id, table.id),
-  }
 })
