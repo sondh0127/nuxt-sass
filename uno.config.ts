@@ -8,8 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { presetThemeDefault } from '@anu-vue/preset-theme-default'
-import { presetAnu } from 'anu-vue'
+import { green, grass, mauve } from '@radix-ui/colors'
 
 export default defineConfig({
   presets: [
@@ -26,8 +25,6 @@ export default defineConfig({
         mono: 'DM Mono',
       },
     }),
-    presetAnu(),
-    presetThemeDefault(),
   ],
   transformers: [
     transformerDirectives(),
@@ -35,8 +32,23 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      'a-surface': 'hsla(var(--a-surface-c),var(--un-bg-opacity,1))',
+      ...mauve,
+      ...green,
+      ...grass,
+    },
+    animation: {
+      keyframes: {
+        slideDown: '{from{ height: 0 }to{ height: var(--radix-accordion-content-height) }}',
+        slideUp: '{from{ height: var(--radix-accordion-content-height) }to{ height: 0 }}',
+      },
+      durations: {
+        slideDown: '300ms',
+        slideUp: '300ms',
+      },
+      timingFns: {
+        slideDown: 'cubic-bezier(0.87, 0, 0.13, 1)',
+        slideUp: 'cubic-bezier(0.87, 0, 0.13, 1)',
+      }
     },
   },
-  include: [/.*\/anu-vue\.js(.*)?$/, './**/*.vue', './**/*.md'],
 })

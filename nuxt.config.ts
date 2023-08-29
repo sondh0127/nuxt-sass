@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     transpile: ['trpc-nuxt'],
   },
   modules: [
-    '@anu-vue/nuxt',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
@@ -16,17 +15,8 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vue-macros/nuxt',
     '@nuxt/devtools',
+    'radix-vue/nuxt',
   ],
-  anu: {
-    themes: {
-      light: {
-        colors: {
-          primary: '350, 73%, 66.3%',
-        },
-      },
-    },
-  },
-
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
     // but missing on offline, disabling extraction it until fixed
@@ -54,11 +44,11 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
-    },
+    // prerender: {
+    //   crawlLinks: false,
+    //   routes: ['/'],
+    //   ignore: ['/hi'],
+    // },
   },
 
   vite: {

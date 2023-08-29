@@ -6,7 +6,7 @@ import { brainRouter } from './brain.router'
 
 export const appRouter = router({
   auth: authRouter,
-  account: accountRouter,
-  notes: notesRouter,
-  brain: brainRouter,
+  // account: accountRouter,
+  // notes: notesRouter,
+  // brain: brainRouter,
 })

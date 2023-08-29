@@ -1,6 +1,6 @@
 import { defineStore, storeToRefs } from 'pinia'
 import type { Ref } from 'vue'
-import type { Note } from '.prisma/client'
+// import type { Note } from '.prisma/client'
 
 /*
 Note) the Notes Store needs to be a 'Setup Store' (https://pinia.vuejs.org/core-concepts/#setup-stores)
