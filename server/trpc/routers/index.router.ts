@@ -10,3 +10,7 @@ export const appRouter = router({
   // notes: notesRouter,
   // brain: brainRouter,
 })
+
+// export only the type definition of the API
+// None of the actual implementation is exposed to the client
+export type AppRouter = typeof appRouter

@@ -24,11 +24,20 @@ const accordionItems = [
     content: 'Yes! You can use the transition prop to configure the animation.',
   },
 ]
+
+const { $client } = useNuxtApp()
+const { data } = await $client.auth.getAllUser.useQuery()
 </script>
 
 <template>
   <div>
     Index
+    <DevOnly>
+      <details open>
+        <summary>data</summary>
+        <pre>{{ JSON.stringify(data, null, 2) }}</pre>
+      </details>
+    </DevOnly>
     <AccordionRoot
       class="w-[300px] rounded-md bg-mauve6 shadow-[0_2px_10px] shadow-black/5" default-value="'item-1'"
       type="single" :collapsible="true"

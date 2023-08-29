@@ -6,10 +6,6 @@ import { createNuxtApiHandler } from 'trpc-nuxt'
 import { appRouter } from '../../trpc/routers/index.router'
 import { createContext } from '../../trpc/context'
 
-// export only the type definition of the API
-// None of the actual implementation is exposed to the client
-export type AppRouter = typeof appRouter
-
 // export API handler
 export default createNuxtApiHandler({
   router: appRouter,
