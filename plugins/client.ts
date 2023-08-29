@@ -22,3 +22,9 @@ export default defineNuxtPlugin(() => {
     },
   }
 })
+
+declare module '#app' {
+  interface NuxtApp {
+    $client: ReturnType<typeof createTRPCNuxtClient<AppRouter>>
+  }
+}
