@@ -8,7 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { green, grass, mauve } from '@radix-ui/colors'
+import { grass, green, mauve } from '@radix-ui/colors'
 
 export default defineConfig({
   presets: [
@@ -48,7 +48,7 @@ export default defineConfig({
       timingFns: {
         slideDown: 'cubic-bezier(0.87, 0, 0.13, 1)',
         slideUp: 'cubic-bezier(0.87, 0, 0.13, 1)',
-      }
+      },
     },
   },
 })
