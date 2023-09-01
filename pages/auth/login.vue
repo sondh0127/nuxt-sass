@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
+
 const user = useSupabaseUser()
 definePageMeta({
   layout: 'auth',
@@ -12,29 +14,28 @@ watchEffect(() => {
 <template>
   <div>
     <NuxtLink
-      to="/signin" class="absolute right-4 top-4 md:right-8 md:top-8"
-      :class="[]"
+      to="/signup" class="absolute right-4 top-4 md:right-8 md:top-8"
     >
-      Sign In
+      Sign Up
     </NuxtLink>
 
     <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">
       <div class="flex flex-col text-center space-y-2">
         <h1 class="text-2xl font-semibold tracking-tight">
-          Create an account
+          Sign In
         </h1>
-        <p class="text-sm text-muted-foreground">
-          Enter your email below to create your account
+        <p class="text-muted-foreground text-sm">
+          Enter your account details below
         </p>
       </div>
-      <SignUpForm />
-      <p class="px-8 text-center text-sm text-muted-foreground">
+      <SignInForm />
+      <p class="text-muted-foreground px-8 text-center text-sm">
         By clicking continue, you agree to our
-        <NuxtLink to="/terms" class="underline underline-offset-4 hover:text-primary">
+        <NuxtLink to="/terms" class="hover:text-primary underline underline-offset-4">
           Terms of Service
         </NuxtLink>
         and
-        <NuxtLink to="/privacy" class="underline underline-offset-4 hover:text-primary">
+        <NuxtLink to="/privacy" class="hover:text-primary underline underline-offset-4">
           Privacy Policy
         </NuxtLink>
         .

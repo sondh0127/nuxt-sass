@@ -52,7 +52,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
 
 <template>
   <ACard>
-    <div class="grid gap-6 a-card-body">
+    <div class="a-card-body grid gap-6">
       <form @submit.prevent="handleSubmit">
         <div class="grid gap-3">
           <AInput

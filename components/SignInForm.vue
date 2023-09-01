@@ -60,7 +60,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
           type="password" autocapitalize="none" autocomplete="password" autocorrect="off" :disabled="isLoading"
         />
 
-        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="text-muted-foreground block text-right text-sm hover:text-primary">
+        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="text-muted-foreground hover:text-primary block text-right text-sm">
           Forgot your password?
         </NuxtLink>
 
