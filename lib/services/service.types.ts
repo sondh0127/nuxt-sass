@@ -10,6 +10,8 @@
 // })
 // export type MembershipWithUser = Prisma.MembershipGetPayload<typeof membershipWithUser>
 
+// NOTE: refercence model
+
 // export const fullDBUser = Prisma.validator<Prisma.UserArgs>()({
 //   include: {
 //     memberships: {

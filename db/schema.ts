@@ -14,23 +14,23 @@ import { integer, pgTable, serial, text, timestamp, uniqueIndex, varchar } from 
 //   }
 // })
 
-// export const account = pgTable('account', {
-//   id: serial('id').primaryKey().notNull(),
-//   name: text('name').notNull(),
-//   currentPeriodEnds: timestamp('current_period_ends', { precision: 3, mode: 'string' }).defaultNow().notNull(),
-//   features: text('features').array(),
-//   planId: integer('plan_id').notNull().references(() => plan.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
-//   planName: text('plan_name').notNull(),
-//   maxNotes: integer('max_notes').default(100).notNull(),
-//   stripeSubscriptionId: text('stripe_subscription_id'),
-//   stripeCustomerId: text('stripe_customer_id'),
-//   maxMembers: integer('max_members').default(1).notNull(),
-//   joinPassword: text('join_password').notNull(),
-// })
-
 export const users = pgTable('users', {
   id: serial('id').notNull(),
   supabaseUid: text('supabase_uid').notNull(),
   email: text('email'),
   displayName: text('display_name'),
+})
+
+export const account = pgTable('account', {
+  // id: serial('id').primaryKey().notNull(),
+  // name: text('name').notNull(),
+  // currentPeriodEnds: timestamp('current_period_ends', { precision: 3, mode: 'string' }).defaultNow().notNull(),
+  // features: text('features').array(),
+  // planId: integer('plan_id').notNull().references(() => plan.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+  // planName: text('plan_name').notNull(),
+  // maxNotes: integer('max_notes').default(100).notNull(),
+  // stripeSubscriptionId: text('stripe_subscription_id'),
+  // stripeCustomerId: text('stripe_customer_id'),
+  // maxMembers: integer('max_members').default(1).notNull(),
+  // joinPassword: text('join_password').notNull(),
 })
