@@ -16,7 +16,16 @@ export default defineNuxtConfig({
     '@vue-macros/nuxt',
     '@nuxt/devtools',
     'radix-vue/nuxt',
+    '@nuxtjs/google-fonts',
   ],
+  googleFonts: {
+    families: {
+      Roboto: true,
+      Inter: true,
+      Montserrat: true,
+    },
+    download: true,
+  },
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
     // but missing on offline, disabling extraction it until fixed

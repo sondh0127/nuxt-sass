@@ -1,5 +1,3 @@
 <template>
-  <main class="h-screen">
-    <slot />
-  </main>
+  <slot />
 </template>

@@ -23,6 +23,7 @@
     "@iconify-json/twemoji": "^1.1.12",
     "@nuxt/devtools": "^0.8.2",
     "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/supabase": "^0.3.8",
     "@pinia/nuxt": "^0.4.11",
     "@radix-ui/colors": "^2.1.0",
