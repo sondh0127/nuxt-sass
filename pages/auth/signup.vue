@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
-definePageMeta({
-  layout: 'auth',
-})
+
+const supabaseClient = useSupabaseClient()
+
 watchEffect(() => {
   if (user.value)
     navigateTo('/dashboard', { replace: true })

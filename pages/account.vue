@@ -63,7 +63,7 @@ function joinURL() {
         <span>{{ formatDate(activeMembership?.account.current_period_ends) }}</span>
       </div>
 
-      <div class="flex items-center gap-4">
+      <!-- <div class="flex items-center gap-4">
         <span class="w-32 font-bold">Permitted Features:</span>
         <div class="flex flex-wrap gap-2">
           <span
@@ -71,7 +71,7 @@ function joinURL() {
             class="rounded-full bg-gray-200 px-2 py-1 font-semibold text-gray-700"
           >{{ feature }}</span>
         </div>
-      </div>
+      </div> -->
 
       <div class="flex items-center gap-4">
         <span class="w-32 font-bold">Maximum Notes:</span>

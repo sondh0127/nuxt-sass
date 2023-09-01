@@ -1,7 +1,8 @@
 import generator from 'generate-password-ts'
 import type { AccountWithMembers, MembershipWithAccount, MembershipWithUser } from './service.types'
 import { accountWithMembers, membershipWithAccount, membershipWithUser } from './service.types'
-import { ACCOUNT_ACCESS } from '~~/prisma/account-access-enum'
+
+// import { ACCOUNT_ACCESS } from '~~/prisma/account-access-enum'
 import prisma_client from '~~/prisma/prisma.client'
 
 export default class AccountService {

@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="lg:p-8">
-        <slot />
+        <NuxtPage />
       </div>
     </div>
   </main>

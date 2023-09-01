@@ -2,9 +2,7 @@
 import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 const user = useSupabaseUser()
-definePageMeta({
-  layout: 'auth',
-})
+
 watchEffect(() => {
   if (user.value)
     navigateTo('/dashboard', { replace: true })

@@ -2,7 +2,6 @@ import generator from 'generate-password-ts'
 import type { FullDBUser } from './service.types'
 import { fullDBUser } from './service.types'
 import { UtilService } from './util.service'
-import { ACCOUNT_ACCESS } from '~~/prisma/account-access-enum'
 import prisma_client from '~~/prisma/prisma.client'
 import { db, users } from '@/db'
 
