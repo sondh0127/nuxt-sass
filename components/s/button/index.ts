@@ -1,11 +1,4 @@
-<script setup lang="ts">
-import { cva } from 'class-variance-authority'
-
-withDefaults(defineProps<Props>(), {
-  as: 'button',
-})
-
-const buttonVariants = cva(
+export const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
@@ -33,20 +26,3 @@ const buttonVariants = cva(
     },
   },
 )
-
-interface Props {
-  variant?: NonNullable<Parameters<typeof buttonVariants>[0]>['variant']
-  size?: NonNullable<Parameters<typeof buttonVariants>[0]>['size']
-  as?: string
-}
-</script>
-
-<template>
-  <component
-    v-bind="$attrs"
-    :is="as"
-    :class="buttonVariants({ variant, size })"
-  >
-    <slot />
-  </component>
-</template>

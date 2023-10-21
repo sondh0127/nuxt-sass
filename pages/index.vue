@@ -48,6 +48,11 @@ async function submitEdit() {
   refreshNuxtData('/api/todo')
   editting.value = undefined
 }
+
+async function deleteTodo(id: number) {
+  await $fetch(`/api/todo/${id}`, { method: 'DELETE' })
+  refreshNuxtData('/api/todo')
+}
 </script>
 
 <template>
@@ -74,6 +79,9 @@ async function submitEdit() {
           </p>
           <SButton @click="editTodo(item)">
             Edit
+          </SButton>
+          <SButton variant="destructive" @click="deleteTodo(item.id)">
+            Delete
           </SButton>
         </div>
 

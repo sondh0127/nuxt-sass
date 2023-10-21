@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     // '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
-    '@vue-macros/nuxt',
+    // '@vue-macros/nuxt',
     '@nuxt/devtools',
     'radix-vue/nuxt',
     '@nuxtjs/google-fonts',
@@ -136,9 +136,6 @@ export default defineNuxtConfig({
       },
     ],
   },
-  components: [
-    { path: '~/components', extensions: ['vue'] },
-  ],
   runtimeConfig: {
     stripeSecretKey: process.env.STRIPE_SECRET_KEY,
     stripeEndpointSecret: process.env.STRIPE_ENDPOINT_SECRET,
