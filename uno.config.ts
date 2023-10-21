@@ -22,7 +22,8 @@ export default defineConfig({
     presetTypography(),
     presetTheme({
       theme: {
-        dark: {
+
+        light: {
           colors: {
             border: 'hsl(214.3,31.8%,91.4%)',
             input: 'hsl(214.3,31.8%,91.4%)',
@@ -42,16 +43,16 @@ export default defineConfig({
               foreground: 'hsl(210,40%,98%)',
             },
             muted: {
-              DEFAULT: 'hsl(var(--muted))',
-              foreground: 'hsl(var(--muted-foreground))',
+              DEFAULT: 'hsl(210,40%,96.1%)',
+              foreground: 'hsl(215.4,16.3%,46.9%)',
             },
             accent: {
-              DEFAULT: 'hsl(var(--accent))',
-              foreground: 'hsl(var(--accent-foreground))',
+              DEFAULT: 'hsl(210,40%,96.1%)',
+              foreground: 'hsl(222.2,47.4%,11.2%)',
             },
             popover: {
-              DEFAULT: 'hsl(var(--popover))',
-              foreground: 'hsl(var(--popover-foreground))',
+              DEFAULT: 'hsl(0,0%,100%)',
+              foreground: 'hsl(222.2,84%,4.9%)',
             },
             card: {
               DEFAULT: 'hsl(0,0%,100%)',
@@ -59,7 +60,40 @@ export default defineConfig({
             },
           },
         },
-        light: {
+        dark: {
+          border: 'hsl(217.2,32.6%,17.5%)',
+          input: 'hsl(217.2,32.6%,17.5%)',
+          ring: 'hsl(224.3,76.3%,48%)',
+          background: 'hsl(222.2,84%,4.9%)',
+          foreground: 'hsl(210,40%,98%)',
+          popover: {
+            DEFAULT: 'hsl(222.2,84%,4.9%)',
+            foreground: 'hsl(210,40%,98%)',
+          },
+          primary: {
+            DEFAULT: 'hsl(217.2,91.2%,59.8%)',
+            foreground: 'hsl(222.2,47.4%,11.2%)',
+          },
+          secondary: {
+            DEFAULT: 'hsl(217.2,32.6%,17.5%)',
+            foreground: 'hsl(210,40%,98%)',
+          },
+          muted: {
+            DEFAULT: 'hsl(217.2,32.6%,17.5%)',
+            foreground: 'hsl(215.4,16.3%,46.9%)',
+          },
+          accent: {
+            DEFAULT: 'hsl(217.2,32.6%,17.5%)',
+            foreground: 'hsl(222.2,47.4%,11.2%)',
+          },
+          destructive: {
+            DEFAULT: 'hsl(0,62.8%,30.6%)',
+            foreground: 'hsl(210,40%,98%)',
+          },
+          card: {
+            DEFAULT: 'hsl(222.2,84%,4.9%)',
+            foreground: 'hsl(210,40%,98%)',
+          },
         },
       },
     }),
@@ -73,9 +107,9 @@ export default defineConfig({
   ],
   theme: {
     borderRadius: {
-      lg: 'var(--radius)',
-      md: 'calc(var(--radius) - 2px)',
-      sm: 'calc(var(--radius) - 4px)',
+      lg: '0.5rem',
+      md: 'calc(0.5rem - 2px)',
+      sm: 'calc(0.5rem - 4px)',
     },
     boxShadow: {
       switch:

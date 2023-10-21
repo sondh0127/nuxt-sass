@@ -45,7 +45,7 @@ interface Props {
   <component
     v-bind="$attrs"
     :is="as"
-    :class="cn(buttonVariants({ variant, size }), $attrs.class ?? '')"
+    :class="buttonVariants({ variant, size })"
   >
     <slot />
   </component>
