@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, text, timestamp, uniqueIndex, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, serial, text, timestamp, uniqueIndex, varchar, boolean, time } from 'drizzle-orm/pg-core'
 
 // export const plan = pgTable('plan', {
 //   id: serial('id').primaryKey().notNull(),
@@ -33,4 +33,12 @@ export const account = pgTable('account', {
   // stripeCustomerId: text('stripe_customer_id'),
   // maxMembers: integer('max_members').default(1).notNull(),
   // joinPassword: text('join_password').notNull(),
+})
+
+
+export const todo = pgTable('todo', {
+  id: serial('id').primaryKey().notNull(),
+  text: text('text').notNull(),
+  done: boolean('done').default(false),
+  createdAt: time('createdAt')
 })

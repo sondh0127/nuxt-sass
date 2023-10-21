@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     payloadExtraction: false,
     inlineSSRStyles: false,
     renderJsonPayloads: true,
+    typedPages: true,
   },
 
   css: [
@@ -92,7 +93,7 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
+  // pwa,
 
   devtools: {
     enabled: true,
