@@ -7,7 +7,7 @@ import type { FullDBUser } from '~~/lib/services/service.types'
 import AuthService from '~~/lib/services/auth.service'
 
 export async function createContext(event: H3Event) {
-  let user: User | null = null
+  const user: User | null = null
   // let dbUser: FullDBUser | null = null
   // let activeAccountId: number | null = null
 

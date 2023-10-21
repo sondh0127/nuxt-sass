@@ -59,6 +59,9 @@ export default defineNuxtConfig({
     //   routes: ['/'],
     //   ignore: ['/hi'],
     // },
+    imports: {
+      dirs: ['server/db', 'server/trpc'],
+    },
   },
 
   vite: {
@@ -99,7 +102,7 @@ export default defineNuxtConfig({
     enabled: true,
   },
   imports: {
-    dirs: ['./stores'],
+    dirs: ['stores'],
     imports: [
       {
         name: 'klona',
