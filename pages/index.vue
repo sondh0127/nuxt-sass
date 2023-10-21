@@ -27,11 +27,23 @@ import { $$fetch } from '~/lib/services/fetch'
 //   },
 // ]
 
-const { data } = await useFetch('/api/todo')
+const { data } = await useFetch('/api/todo', { key: '/api/todo' })
 
 const text = ref()
+const editting = ref()
+
 async function createTodo() {
   await $fetch('/api/todo', { method: 'POST', body: { text: text.value } })
+  refreshNuxtData('/api/todo')
+}
+
+function editTodo(item: any) {
+  editting.value = klona(item)
+}
+
+async function submitEdit() {
+  await $fetch('/api/todo', { method: 'PATCH', body: { text: editting.value.text } })
+  refreshNuxtData('/api/todo')
 }
 </script>
 
@@ -44,6 +56,27 @@ async function createTodo() {
         <pre>{{ JSON.stringify(data, null, 2) }}</pre>
       </details>
     </DevOnly>
+    <div>
+      <div v-for="item in data" :key="item.id">
+        <div v-if="editting" class="flex">
+          <SInput v-model="editting.text" />
+          <SButton @click="submitEdit">
+            Submit
+          </SButton>
+        </div>
+
+        <div v-else class="flex">
+          <p>
+            {{ item.text }}
+          </p>
+          <SButton @click="editTodo(item)">
+            Edit
+          </SButton>
+        </div>
+
+        <p>Done: {{ item.done }}</p>
+      </div>
+    </div>
     <SInput v-model="text" />
     <SButton @click="createTodo">
       Create
