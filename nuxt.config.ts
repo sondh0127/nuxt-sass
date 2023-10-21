@@ -61,6 +61,14 @@ export default defineNuxtConfig({
     // },
     imports: {
       dirs: ['server/db', 'server/trpc'],
+      presets: [
+        {
+          from: 'drizzle-orm',
+          imports: [
+            'eq', 'ne', 'gt', 'gte', 'lt', 'lte',
+          ],
+        },
+      ],
     },
   },
 

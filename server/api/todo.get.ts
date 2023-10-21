@@ -1,3 +1,7 @@
+import { asc } from 'drizzle-orm'
+
 export default defineEventHandler(async (event) => {
-  return db.select().from(todo)
+  return await db.query.todo.findMany({
+    orderBy: [asc(todo.id)],
+  })
 })

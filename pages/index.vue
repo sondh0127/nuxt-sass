@@ -35,6 +35,7 @@ const editting = ref()
 async function createTodo() {
   await $fetch('/api/todo', { method: 'POST', body: { text: text.value } })
   refreshNuxtData('/api/todo')
+  text.value = undefined
 }
 
 function editTodo(item: any) {
@@ -42,8 +43,10 @@ function editTodo(item: any) {
 }
 
 async function submitEdit() {
-  await $fetch('/api/todo', { method: 'PATCH', body: { text: editting.value.text } })
+  const { text, id } = editting.value
+  await $fetch(`/api/todo/${id}`, { method: 'PATCH', body: { text } })
   refreshNuxtData('/api/todo')
+  editting.value = undefined
 }
 </script>
 
@@ -58,7 +61,7 @@ async function submitEdit() {
     </DevOnly>
     <div>
       <div v-for="item in data" :key="item.id">
-        <div v-if="editting" class="flex">
+        <div v-if="editting?.id === item.id" class="flex">
           <SInput v-model="editting.text" />
           <SButton @click="submitEdit">
             Submit

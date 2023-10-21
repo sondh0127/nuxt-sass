@@ -1,4 +1,7 @@
-import { boolean, date, integer, pgTable, serial, text, time, timestamp, uniqueIndex, varchar } from 'drizzle-orm/pg-core'
+import {
+  boolean, date, integer, pgTable, serial, text, time, timestamp,
+  uniqueIndex, varchar,
+} from 'drizzle-orm/pg-core'
 
 // export const plan = pgTable('plan', {
 //   id: serial('id').primaryKey().notNull(),
