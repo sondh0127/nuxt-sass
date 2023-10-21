@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { $$fetch } from '~/lib/services/fetch'
+
 // const user = useSupabaseUser()
 // watchEffect(() => {
 //   if (user.value)
@@ -25,8 +27,12 @@
 //   },
 // ]
 
-// const { $client } = useNuxtApp()
-// const { data } = await $client.auth.getAllUser.useQuery()
+const { data } = await useFetch('/api/todo')
+
+const text = ref()
+async function createTodo() {
+  await $fetch('/api/todo', { method: 'POST', body: { text: text.value } })
+}
 </script>
 
 <template>
@@ -38,46 +44,9 @@
         <pre>{{ JSON.stringify(data, null, 2) }}</pre>
       </details>
     </DevOnly>
-    <SButton>
-      Hello
+    <SInput v-model="text" />
+    <SButton @click="createTodo">
+      Create
     </SButton>
-    <SInput />
-    <AccordionRoot
-      class="w-[300px] rounded-md bg-mauve6 shadow-[0_2px_10px] shadow-black/5" default-value="'item-1'"
-      type="single" :collapsible="true"
-    >
-      <template v-for="item in accordionItems" :key="item.value">
-        <AccordionItem class="accordion-item" :value="item.value">
-          <AccordionHeader class="flex">
-            <AccordionTrigger class="accordion-trigger group">
-              <span>{{ item.title }}</span>
-              <div
-                class="text-green10 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
-                aria-hidden i-radix-icons:chevron-down
-              />
-            </AccordionTrigger>
-          </AccordionHeader>
-          <AccordionContent class="accordion-content">
-            <div class="px-5 py-4">
-              {{ item.content }}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </template>
-    </AccordionRoot>
   </div>
 </template>
-
-<style scoped>
-.accordion-item {
-  @apply focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_0_2px];
-}
-
-.accordion-trigger {
-  @apply text-grass11 shadow-mauve6 hover:bg-mauve2 flex h-[45px] flex-1 cursor-default items-center justify-between bg-white px-5 text-[15px] leading-none shadow-[0_1px_0] outline-none;
-}
-
-.accordion-content {
-  @apply text-mauve11 bg-mauve2 data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden text-[15px];
-}
-</style>

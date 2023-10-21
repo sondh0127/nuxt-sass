@@ -1,5 +1,5 @@
 export const todoRouter = router({
-  getAllUser: publicProcedure.query(({ ctx }) => {
-    return db.select().from(users)
+  getAllTodo: publicProcedure.query(({ ctx }) => {
+    return db.select().from(todo)
   }),
 })
