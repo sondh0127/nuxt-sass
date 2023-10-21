@@ -37,7 +37,7 @@
     "class-variance-authority": "^0.6.1",
     "consola": "^3.2.3",
     "drizzle-kit": "^0.19.13",
-    "drizzle-orm": "^0.28.5",
+    "drizzle-orm": "^0.28.6",
     "element-plus": "^2.3.12",
     "eslint": "^8.48.0",
     "generate-password-ts": "^1.6.3",
