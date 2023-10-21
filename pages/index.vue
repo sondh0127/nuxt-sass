@@ -41,6 +41,7 @@
     <SButton>
       Hello
     </SButton>
+    <SInput />
     <AccordionRoot
       class="w-[300px] rounded-md bg-mauve6 shadow-[0_2px_10px] shadow-black/5" default-value="'item-1'"
       type="single" :collapsible="true"
