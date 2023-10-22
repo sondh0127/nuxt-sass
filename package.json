@@ -46,6 +46,7 @@
     "generate-password-ts": "^1.6.5",
     "nuxt": "^3.8.0",
     "openai": "^3.3.0",
+    "pg": "^8.11.3",
     "pinia": "^2.1.7",
     "postgres": "^3.4.0",
     "radix-vue": "^1.0.0-beta.2",
