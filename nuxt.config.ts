@@ -1,12 +1,27 @@
 import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
-const sharedPresets = [{
-  from: 'drizzle-orm',
-  imports: [
-    'eq', 'ne', 'gt', 'gte', 'lt', 'lte', 'asc', 'desc',
-  ],
-}]
+const sharedPresets = [
+  {
+    from: 'drizzle-orm',
+    imports: [
+      'eq', 'ne', 'gt', 'gte', 'lt', 'lte', 'asc', 'desc',
+    ],
+  },
+  {
+    from: 'drizzle-zod',
+    imports: [
+      'createInsertSchema',
+      'createSelectSchema',
+    ],
+  },
+  {
+    from: 'zod',
+    imports: [
+      'z',
+    ],
+  },
+]
 
 export default defineNuxtConfig({
   build: {
@@ -112,7 +127,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
-    dirs: ['stores', 'db'],
+    dirs: ['db', 'stores'],
     imports: [
       {
         name: 'klona',
@@ -134,19 +149,6 @@ export default defineNuxtConfig({
           'useIsMutating',
           'useQueryClient',
           'useQueries',
-        ],
-      },
-      {
-        from: 'drizzle-zod',
-        imports: [
-          'createInsertSchema',
-          'createSelectSchema',
-        ],
-      },
-      {
-        from: 'zod',
-        imports: [
-          'z',
         ],
       },
       ...sharedPresets,
