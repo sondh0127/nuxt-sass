@@ -28,7 +28,7 @@
 const { data } = await useFetch('/api/todo', { key: '/api/todo' })
 
 const text = ref()
-const editting = ref()
+const editting = ref<EditSchema>()
 
 async function createTodo() {
   await $fetch('/api/todo', { method: 'POST', body: { text: text.value } })
