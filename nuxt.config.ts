@@ -68,6 +68,13 @@ export default defineNuxtConfig({
             'eq', 'ne', 'gt', 'gte', 'lt', 'lte',
           ],
         },
+        {
+          from: 'drizzle-zod',
+          imports: [
+            'createInsertSchema',
+            'createSelectSchema',
+          ],
+        },
       ],
     },
   },
@@ -136,6 +143,9 @@ export default defineNuxtConfig({
       },
     ],
   },
+  components: [
+    { path: '~/components', extensions: ['vue'] },
+  ],
   runtimeConfig: {
     stripeSecretKey: process.env.STRIPE_SECRET_KEY,
     stripeEndpointSecret: process.env.STRIPE_ENDPOINT_SECRET,
