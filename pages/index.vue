@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { $$fetch } from '~/lib/services/fetch'
-
 // const user = useSupabaseUser()
 // watchEffect(() => {
 //   if (user.value)
@@ -38,7 +36,7 @@ async function createTodo() {
   text.value = undefined
 }
 
-function editTodo(item: any) {
+function editTodo(item: EditSchema) {
   editting.value = klona(item)
 }
 

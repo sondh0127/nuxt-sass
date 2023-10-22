@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 export default {
-  schema: './server/db/schema.ts',
-  out: './server/db/migration',
+  schema: './db/schema.ts',
+  out: './db/migration',
   driver: 'pg',
   dbCredentials: {
     connectionString: process.env.DATABASE_URL,

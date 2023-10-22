@@ -1,6 +1,13 @@
 import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
+const sharedPresets = [{
+  from: 'drizzle-orm',
+  imports: [
+    'eq', 'ne', 'gt', 'gte', 'lt', 'lte', 'asc', 'desc',
+  ],
+}]
+
 export default defineNuxtConfig({
   build: {
     transpile: ['trpc-nuxt'],
@@ -48,37 +55,6 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
 
-  nitro: {
-    esbuild: {
-      options: {
-        target: 'esnext',
-      },
-    },
-    // prerender: {
-    //   crawlLinks: false,
-    //   routes: ['/'],
-    //   ignore: ['/hi'],
-    // },
-    imports: {
-      dirs: ['server/db', 'server/trpc'],
-      presets: [
-        {
-          from: 'drizzle-orm',
-          imports: [
-            'eq', 'ne', 'gt', 'gte', 'lt', 'lte',
-          ],
-        },
-        {
-          from: 'drizzle-zod',
-          imports: [
-            'createInsertSchema',
-            'createSelectSchema',
-          ],
-        },
-      ],
-    },
-  },
-
   vite: {
     css: {
       preprocessorOptions: {
@@ -116,8 +92,27 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
+    // prerender: {
+    //   crawlLinks: false,
+    //   routes: ['/'],
+    //   ignore: ['/hi'],
+    // },
+    imports: {
+      dirs: ['db', 'server/trpc'],
+      presets: [
+        ...sharedPresets,
+      ],
+    },
+  },
   imports: {
-    dirs: ['stores'],
+    dirs: ['stores', 'db'],
     imports: [
       {
         name: 'klona',
@@ -141,6 +136,20 @@ export default defineNuxtConfig({
           'useQueries',
         ],
       },
+      {
+        from: 'drizzle-zod',
+        imports: [
+          'createInsertSchema',
+          'createSelectSchema',
+        ],
+      },
+      {
+        from: 'zod',
+        imports: [
+          'z',
+        ],
+      },
+      ...sharedPresets,
     ],
   },
   components: [
