@@ -60,6 +60,7 @@ export default defineNuxtConfig({
   css: [
     '@unocss/reset/tailwind.css',
     '~/assets/scss/index.scss',
+    'vue-json-pretty/lib/styles.css',
   ],
   // vueuse
   vueuse: {
@@ -132,6 +133,10 @@ export default defineNuxtConfig({
       {
         name: 'klona',
         from: 'klona',
+      },
+      {
+        name: 'destr',
+        from: 'destr',
       },
       {
         name: 'cva',

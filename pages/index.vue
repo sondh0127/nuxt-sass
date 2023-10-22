@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { destr } from 'destr'
+
 // const user = useSupabaseUser()
 // watchEffect(() => {
 //   if (user.value)
@@ -29,11 +31,17 @@ const { data } = await useFetch('/api/todo', { key: '/api/todo' })
 
 const text = ref()
 const editting = ref<EditSchema>()
+const error = ref([])
 
 async function createTodo() {
-  await $fetch('/api/todo', { method: 'POST', body: { text: text.value } })
-  refreshNuxtData('/api/todo')
-  text.value = undefined
+  try {
+    const res = await $fetch('/api/todo', { method: 'POST', body: { text: text.value } })
+    refreshNuxtData('/api/todo')
+    text.value = undefined
+  }
+  catch (err) {
+    error.value = destr(err.data.message)
+  }
 }
 
 function editTodo(item: EditSchema) {
@@ -90,5 +98,10 @@ async function deleteTodo(id: number) {
     <SButton @click="createTodo">
       Create
     </SButton>
+    <DevOnly>
+      <details open>
+        <VueJsonPretty :data="error" />
+      </details>
+    </DevOnly>
   </div>
 </template>

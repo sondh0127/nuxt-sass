@@ -15,9 +15,11 @@
 		"scope": "html",
 		"prefix": "debug-pretty",
 		"body": [
-			"<div>",
-			"\t<VueJsonPretty :data=\"${1:value}\"/>",
-			"</div>",
+			"<DevOnly>",
+			"\t<details open>",
+			"\t\t<VueJsonPretty :data=\"${1:value}\"/>",
+			"\t</details>",
+			"</DevOnly>",
 		]
 	},
 }
