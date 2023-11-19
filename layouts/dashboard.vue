@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
 
 const item = {
   date: '2016-05-02',
