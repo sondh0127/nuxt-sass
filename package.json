@@ -15,7 +15,7 @@
     "db:studio": "pnpm drizzle-kit studio"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^1.2.1",
+    "@antfu/eslint-config": "^2.4.3",
     "@iconify-json/carbon": "^1.1.25",
     "@iconify-json/logos": "^1.1.40",
     "@iconify-json/radix-icons": "^1.1.13",
@@ -27,9 +27,9 @@
     "@pinia/nuxt": "^0.5.1",
     "@radix-ui/colors": "^3.0.0",
     "@tanstack/vue-query": "^5.13.4",
-    "@unocss/eslint-config": "^0.57.7",
-    "@unocss/nuxt": "^0.57.7",
-    "@vite-pwa/nuxt": "^0.2.3",
+    "@unocss/eslint-config": "^0.58.0",
+    "@unocss/nuxt": "^0.58.0",
+    "@vite-pwa/nuxt": "^0.3.5",
     "@vorms/core": "^1.1.0",
     "@vue-macros/nuxt": "^1.9.7",
     "@vueuse/core": "^10.7.0",
