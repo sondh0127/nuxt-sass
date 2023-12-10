@@ -24,9 +24,6 @@ const sharedPresets = [
 ]
 
 export default defineNuxtConfig({
-  build: {
-    transpile: ['trpc-nuxt'],
-  },
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -107,7 +104,7 @@ export default defineNuxtConfig({
     //   ignore: ['/hi'],
     // },
     imports: {
-      dirs: ['db', 'server/trpc'],
+      dirs: ['db'],
       presets: [
         ...sharedPresets,
       ],
