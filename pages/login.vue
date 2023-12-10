@@ -19,4 +19,6 @@ const signInWithOtp = async () => {
     </button>
     <input v-model="email" type="email" />
   </div>
+
+  <AuthUserForm/>
 </template>
