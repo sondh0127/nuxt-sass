@@ -5,3 +5,9 @@ dist
 .nuxt
 .env
 .idea/
+
+# Supabase
+volumes/db/data
+volumes/storage
+test.http
+docker-compose.override.yml
