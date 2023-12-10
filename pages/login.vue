@@ -2,18 +2,20 @@
 const supabase = useSupabaseClient()
 const email = ref('')
 
-const signInWithOtp = async () => {
+async function signInWithOtp() {
   const { error } = await supabase.auth.signInWithOtp({
     email: email.value,
     options: {
       emailRedirectTo: 'http://localhost:3000/confirm',
-    }
+    },
   })
-  if (error) console.log(error)
+  if (error)
+    console.log(error)
 }
 </script>
+
 <template>
   <div>
-    <AuthUserForm/>
+    <AuthUserForm />
   </div>
 </template>
