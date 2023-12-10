@@ -2,10 +2,6 @@
 // import LucideSpinner from '~icons/lucide/loader-2'
 // import GitHubLogo from '~icons/radix-icons/github-logo'
 
-// import { Button } from '@/lib/registry/new-york/ui/button'
-// import { Input } from '@/lib/registry/new-york/ui/input'
-// import { Label } from '@/lib/registry/new-york/ui/label'
-
 const isLoading = ref(false)
 async function onSubmit(event: Event) {
   event.preventDefault()
@@ -22,18 +18,11 @@ async function onSubmit(event: Event) {
     <form @submit="onSubmit">
       <div class="grid gap-2">
         <div class="grid gap-1">
-          <Label class="sr-only" for="email">
+          <SLabel class="sr-only" for="email">
             Email
-          </Label>
-          <Input
-            id="email"
-            placeholder="name@example.com"
-            type="email"
-            auto-capitalize="none"
-            auto-complete="email"
-            auto-correct="off"
-            :disabled="isLoading"
-          />
+          </SLabel>
+          <SInput id="email" placeholder="name@example.com" type="email" auto-capitalize="none" auto-complete="email"
+            auto-correct="off" :disabled="isLoading" />
         </div>
         <SButton :disabled="isLoading">
           <LucideSpinner v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
