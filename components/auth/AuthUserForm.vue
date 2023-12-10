@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// import LucideSpinner from '~icons/lucide/loader-2'
-// import GitHubLogo from '~icons/radix-icons/github-logo'
-
 const isLoading = ref(false)
 async function onSubmit(event: Event) {
   event.preventDefault()
@@ -27,7 +24,7 @@ async function onSubmit(event: Event) {
           />
         </div>
         <SButton :disabled="isLoading">
-          <LucideSpinner v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
+          <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
           Sign In with Email
         </SButton>
       </div>
@@ -44,7 +41,7 @@ async function onSubmit(event: Event) {
     </div>
     <SButton variant="outline" type="button" :disabled="isLoading">
       <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
-      <GitHubLogo v-else class="mr-2 h-4 w-4" />
+      <i v-else i-ri:github-fill class="mr-2 h-4 w-4" />
       GitHub
     </SButton>
   </div>
