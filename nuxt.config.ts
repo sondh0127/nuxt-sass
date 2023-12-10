@@ -5,7 +5,14 @@ const sharedPresets = [
   {
     from: 'drizzle-orm',
     imports: [
-      'eq', 'ne', 'gt', 'gte', 'lt', 'lte', 'asc', 'desc',
+      'eq',
+      'ne',
+      'gt',
+      'gte',
+      'lt',
+      'lte',
+      'asc',
+      'desc',
     ],
   },
   {
@@ -36,6 +43,9 @@ export default defineNuxtConfig({
     'radix-vue/nuxt',
     '@nuxtjs/google-fonts',
   ],
+  macros: {
+    betterDefine: false,
+  },
   googleFonts: {
     families: {
       Roboto: true,

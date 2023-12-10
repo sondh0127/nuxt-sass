@@ -1,7 +1,8 @@
 {
+  "type": "module",
   "private": true,
-  "module": "true",
   "packageManager": "pnpm@8.12.0",
+  "module": "true",
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
@@ -9,6 +10,7 @@
     "start": "node .output/server/index.mjs",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "postinstall": "nuxi prepare",
     "db:push": "pnpm drizzle-kit push:pg",
     "db:migrate": "pnpm drizzle-kit generate:pg",
@@ -18,6 +20,7 @@
     "@antfu/eslint-config": "^2.4.3",
     "@iconify-json/carbon": "^1.1.25",
     "@iconify-json/logos": "^1.1.40",
+    "@iconify-json/lucide": "^1.1.144",
     "@iconify-json/radix-icons": "^1.1.13",
     "@iconify-json/ri": "^1.1.15",
     "@iconify-json/twemoji": "^1.1.14",

@@ -21,8 +21,10 @@ async function onSubmit(event: Event) {
           <SLabel class="sr-only" for="email">
             Email
           </SLabel>
-          <SInput id="email" placeholder="name@example.com" type="email" auto-capitalize="none" auto-complete="email"
-            auto-correct="off" :disabled="isLoading" />
+          <SInput
+            id="email" placeholder="name@example.com" type="email" auto-capitalize="none" auto-complete="email"
+            auto-correct="off" :disabled="isLoading"
+          />
         </div>
         <SButton :disabled="isLoading">
           <LucideSpinner v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
@@ -41,7 +43,7 @@ async function onSubmit(event: Event) {
       </div>
     </div>
     <SButton variant="outline" type="button" :disabled="isLoading">
-      <LucideSpinner v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
+      <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
       <GitHubLogo v-else class="mr-2 h-4 w-4" />
       GitHub
     </SButton>
