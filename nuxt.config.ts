@@ -42,7 +42,16 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     'radix-vue/nuxt',
     '@nuxtjs/google-fonts',
+    '@nuxt/image',
+    '@vee-validate/nuxt',
   ],
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: 'SForm',
+      Field: 'SFormField',
+    },
+  },
   macros: {
     betterDefine: false,
   },
@@ -79,7 +88,13 @@ export default defineNuxtConfig({
   vite: {
 
   },
-
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      exclude: ['/register'],
+    },
+  },
   app: {
     head: {
       viewport: 'width=device-width,initial-scale=1',
@@ -134,6 +149,10 @@ export default defineNuxtConfig({
       {
         name: 'cva',
         from: 'class-variance-authority',
+      },
+      {
+        name: 'toTypedSchema',
+        from: '@vee-validate/zod',
       },
     ],
     presets: [

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
 
-import { useForm } from '@vorms/core'
-
 const supabase = useSupabaseAuthClient()
 const user = useSupabaseUser()
 watchEffect(() => {
@@ -60,7 +58,7 @@ const { value: password, attrs: passwordAttrs } = register('password')
           type="password" autocapitalize="none" autocomplete="password" autocorrect="off" :disabled="isLoading"
         />
 
-        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="text-muted-foreground hover:text-primary block text-right text-sm">
+        <NuxtLink id="forgotPasswordLink" to="/forgotpassword" class="block text-right text-sm text-muted-foreground hover:text-primary">
           Forgot your password?
         </NuxtLink>
 

@@ -23,18 +23,18 @@ watchEffect(() => {
         <h1 class="text-2xl font-semibold tracking-tight">
           Create an account
         </h1>
-        <p class="text-muted-foreground text-sm">
+        <p class="text-sm text-muted-foreground">
           Enter your email below to create your account
         </p>
       </div>
       <SignUpForm />
-      <p class="text-muted-foreground px-8 text-center text-sm">
+      <p class="px-8 text-center text-sm text-muted-foreground">
         By clicking continue, you agree to our
-        <NuxtLink to="/terms" class="hover:text-primary underline underline-offset-4">
+        <NuxtLink to="/terms" class="underline underline-offset-4 hover:text-primary">
           Terms of Service
         </NuxtLink>
         and
-        <NuxtLink to="/privacy" class="hover:text-primary underline underline-offset-4">
+        <NuxtLink to="/privacy" class="underline underline-offset-4 hover:text-primary">
           Privacy Policy
         </NuxtLink>
         .
