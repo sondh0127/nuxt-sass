@@ -1,0 +1,11 @@
+<script setup lang="ts">
+import { ToastTitle, type ToastTitleProps } from 'radix-vue'
+
+const props = defineProps<ToastTitleProps & { class?: string }>()
+</script>
+
+<template>
+  <ToastTitle v-bind="props" :class="cn('text-sm font-semibold', props.class)">
+    <slot />
+  </ToastTitle>
+</template>

@@ -17,6 +17,7 @@
     "db:studio": "pnpm drizzle-kit studio"
   },
   "dependencies": {
+    "@antfu/utils": "^0.7.7",
     "@vee-validate/nuxt": "^4.12.2",
     "@vee-validate/zod": "^4.12.2",
     "vee-validate": "^4.12.2"

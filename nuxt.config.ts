@@ -154,6 +154,10 @@ export default defineNuxtConfig({
         name: 'toTypedSchema',
         from: '@vee-validate/zod',
       },
+      {
+        name: 'useToast',
+        from: '@/components/s/toast/use-toast.ts',
+      },
     ],
     presets: [
       {

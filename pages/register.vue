@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { sleep } from '@antfu/utils'
+
 // import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 // const supabase = useSupabaseClient()
@@ -12,54 +14,51 @@
 // const confirmPassword = ref('')
 // const signUpOk = ref(false)
 
-// const { isLoading, mutateAsync } = useMutation(
-//   async (payload: SignUpWithPasswordCredentials) => {
-//     const { data, error } = await supabase.auth.signUp({ ...payload, options: { emailRedirectTo: '/dashboard' } })
-//     if (error)
-//       throw error
+const { isLoading, mutateAsync } = useMutation(
+  () => sleep(500),
+  // async (payload: SignUpWithPasswordCredentials) => {
+  //   const { data, error } = await supabase.auth.signUp({ ...payload, options: { emailRedirectTo: '/dashboard' } })
+  //   if (error)
+  //     throw error
 
-//     else
-//       signUpOk.value = true
+  //   else
+  //     signUpOk.value = true
 
-//     return data
-//   },
-//   {
-//     onSuccess: () => {
-//     },
-//     onError: (error) => {
-//       // notifyStore.notify(error, NotificationType.Error)
-//     },
-//   },
-// )
-
-import { h } from 'vue'
-import { useForm } from 'vee-validate'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
-
-// import { toast } from '@/components/ui/toast'
+  //   return data
+  // },
+  // {
+  //   onSuccess: () => {
+  //   },
+  //   onError: (error) => {
+  //     // notifyStore.notify(error, NotificationType.Error)
+  //   },
+  // },
+)
 
 const formSchema = toTypedSchema(z.object({
-  username: z.string().min(2).max(50),
+  email: z.string().email(),
 }))
 
 const { handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
+const { toast } = useToast()
+
 const onSubmit = handleSubmit((values) => {
-  // toast({
-  //   title: 'You submitted the following values:',
-  //   description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))),
-  // })
+  toast({
+    title: 'You submitted the following values:',
+    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))),
+  })
 })
-resolveComponent('NuxtLink')
 </script>
 
 <template>
   <NuxtLayout name="auth">
-    <SButton variant="ghost" as="NuxtLink" to="/login" :class="cn('absolute right-4 top-4 md:right-8 md:top-8')">
-      Login
+    <SButton variant="ghost" as-child :class="cn('absolute right-4 top-4 md:right-8 md:top-8')">
+      <NuxtLink to="/login">
+        Login
+      </NuxtLink>
     </SButton>
     <div class="lg:p-8">
       <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">
@@ -73,7 +72,7 @@ resolveComponent('NuxtLink')
         </div>
         <div :class="cn('grid gap-6', $attrs.class ?? '')">
           <form class="w-full space-y-6" @submit="onSubmit">
-            <SFormField v-slot="{ componentField }" name="username">
+            <SFormField v-slot="{ componentField }" name="email">
               <SFormItem>
                 <SFormLabel>Email</SFormLabel>
                 <SFormControl>
@@ -89,7 +88,7 @@ resolveComponent('NuxtLink')
               </SFormItem>
             </SFormField>
 
-            <SButton :disabled="isLoading" type="submit">
+            <SButton class="w-full" :disabled="isLoading" type="submit">
               <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
               Register with Email
             </SButton>

@@ -8,6 +8,7 @@ useHead({
 
 <template>
   <!-- <VitePwaManifest /> -->
+  <SToastToaster />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
