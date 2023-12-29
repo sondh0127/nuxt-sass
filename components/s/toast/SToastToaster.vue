@@ -27,3 +27,9 @@ const { toasts } = useToast()
     <SToastViewport />
   </SToastProvider>
 </template>
+
+<style>
+[role="region"] {
+  position: absolute;
+}
+</style>

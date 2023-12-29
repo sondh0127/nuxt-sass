@@ -4,7 +4,7 @@
 
 <template>
   <div
-    class="relative hidden h-full flex-col items-center justify-center container md:grid lg:grid-cols-2 lg:max-w-none lg:px-0"
+    class="relative hidden h-full flex flex-col items-center justify-center container md:grid lg:grid-cols-2 lg:max-w-none lg:px-0"
   >
     <div class="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
       <div class="absolute inset-0 from-primary to-primary/90 bg-gradient-to-r" />

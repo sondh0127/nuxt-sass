@@ -4,8 +4,9 @@ import { toValue } from 'vue'
 import { useFormField } from './useFormField'
 
 const { name, formMessageId } = useFormField()
+const submitCount = useSubmitCount()
 </script>
 
 <template>
-  <ErrorMessage :id="formMessageId" as="p" :name="toValue(name)" class="text-sm text-destructive font-medium" />
+  <ErrorMessage v-if="submitCount" :id="formMessageId" as="p" :name="toValue(name)" class="text-sm text-destructive font-medium" />
 </template>

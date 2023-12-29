@@ -1,56 +1,45 @@
 <script setup lang="ts">
 import { sleep } from '@antfu/utils'
-
-// import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
-
-// const supabase = useSupabaseClient()
-// const user = useSupabaseUser()
-// watchEffect(() => {
-//   if (user.value)
-//     navigateTo('/dashboard', { replace: true })
-// })
-// // const notifyStore = useNotifyStore()
-
-// const confirmPassword = ref('')
-// const signUpOk = ref(false)
-
-const { isLoading, mutateAsync } = useMutation(
-  () => sleep(500),
-  // async (payload: SignUpWithPasswordCredentials) => {
-  //   const { data, error } = await supabase.auth.signUp({ ...payload, options: { emailRedirectTo: '/dashboard' } })
-  //   if (error)
-  //     throw error
-
-  //   else
-  //     signUpOk.value = true
-
-  //   return data
-  // },
-  // {
-  //   onSuccess: () => {
-  //   },
-  //   onError: (error) => {
-  //     // notifyStore.notify(error, NotificationType.Error)
-  //   },
-  // },
-)
-
-const formSchema = toTypedSchema(z.object({
-  email: z.string().email(),
-}))
-
-const { handleSubmit } = useForm({
-  validationSchema: formSchema,
-})
+import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 const { toast } = useToast()
 
-const onSubmit = handleSubmit((values) => {
-  toast({
-    title: 'You submitted the following values:',
-    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))),
-  })
+const supabase = useSupabaseClient()
+
+// const confirmPassword = ref('')
+
+const { mutateAsync, isPending } = useMutation({
+  mutationFn: (payload: SignUpWithPasswordCredentials) => supabase.auth.signUp({ ...payload, options: {} }),
+  onSuccess: () => {
+  },
+  onError: () => {
+
+  },
 })
+
+const formSchema = toTypedSchema(z.object({
+  email: z.string().min(1, 'Email is required').email(),
+  password: z.string().min(1, 'Password is required'),
+}))
+
+const { handleSubmit } = useForm({
+  initialValues: {
+    email: '',
+    password: '',
+  },
+  validationSchema: formSchema,
+})
+
+const onSubmit = handleSubmit((values) => {
+  // mutateAsync({ email: values.email })
+  toast({
+    title: 'You have successfully signed up. Please check your email for a link to confirm your email address and proceed.',
+  })
+  console.log('[LOG] ~ file: register.vue:49 ~ values:', values)
+})
+
+// Github
+const isLoadingGithub = ref(false)
 </script>
 
 <template>
@@ -77,7 +66,7 @@ const onSubmit = handleSubmit((values) => {
                 <SFormLabel>Email</SFormLabel>
                 <SFormControl>
                   <SInput
-                    v-bind="componentField" placeholder="name@example.com" type="email" auto-capitalize="none"
+                    v-bind="componentField" placeholder="email@example.com" type="email" auto-capitalize="none"
                     auto-complete="email" auto-correct="off" :disabled="isLoading"
                   />
                 </SFormControl>
@@ -88,6 +77,21 @@ const onSubmit = handleSubmit((values) => {
               </SFormItem>
             </SFormField>
 
+            <SFormField v-slot="{ componentField }" name="password">
+              <SFormItem>
+                <SFormLabel>Password</SFormLabel>
+                <SFormControl>
+                  <SInput
+                    v-bind="componentField" placeholder="Enter your password" type="password" auto-complete="password"
+                    :disabled="isLoading"
+                  />
+                </SFormControl>
+                <!-- <SFormDescription>
+                  Email to login
+                </SFormDescription> -->
+                <SFormMessage />
+              </SFormItem>
+            </SFormField>
             <SButton class="w-full" :disabled="isLoading" type="submit">
               <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
               Register with Email
@@ -105,7 +109,7 @@ const onSubmit = handleSubmit((values) => {
             </div>
           </div>
           <SButton variant="outline" type="button" :disabled="isLoading">
-            <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
+            <i v-if="isLoadingGithub" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
             <i v-else i-ri:github-fill class="mr-2 h-4 w-4" />
             GitHub
           </SButton>
@@ -124,8 +128,4 @@ const onSubmit = handleSubmit((values) => {
       </div>
     </div>
   </NuxtLayout>
-
-  <p class="mt-4 text-center text-lg">
-    You have successfully signed up. Please check your email for a link to confirm your email address and proceed.
-  </p>
 </template>
