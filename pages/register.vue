@@ -2,6 +2,10 @@
 import { sleep } from '@antfu/utils'
 import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
+definePageMeta({
+  middleware: 'none-auth',
+})
+
 const { toast } = useToast()
 
 const supabase = useSupabaseClient()
@@ -9,7 +13,8 @@ const supabase = useSupabaseClient()
 // const confirmPassword = ref('')
 
 const { mutateAsync, isPending } = useMutation({
-  mutationFn: (payload: SignUpWithPasswordCredentials) => supabase.auth.signUp({ ...payload, options: {} }),
+  mutationFn: (payload: SignUpWithPasswordCredentials) => supabase.auth.signUp({ ...payload, options: {
+  } }),
   onSuccess: () => {
   },
   onError: () => {
@@ -30,12 +35,12 @@ const { handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((values) => {
-  // mutateAsync({ email: values.email })
+const onSubmit = handleSubmit(async (values) => {
+  const res = await mutateAsync({ email: values.email, password: values.password })
+  console.log('[LOG] ~ file: register.vue:35 ~ res:', res)
   toast({
     title: 'You have successfully signed up. Please check your email for a link to confirm your email address and proceed.',
   })
-  console.log('[LOG] ~ file: register.vue:49 ~ values:', values)
 })
 
 // Github

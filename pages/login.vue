@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'none-auth',
+})
+
 const supabase = useSupabaseClient()
 const email = ref('')
 
