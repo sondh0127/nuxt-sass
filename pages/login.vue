@@ -1,23 +1,38 @@
 <script setup lang="ts">
+import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
+
 definePageMeta({
   middleware: 'none-auth',
 })
 
 const supabase = useSupabaseClient()
-const email = ref('')
-
-async function signInWithOtp() {
-  const { error } = await supabase.auth.signInWithOtp({
-    email: email.value,
-    options: {
-      emailRedirectTo: 'http://localhost:3000/confirm',
-    },
-  })
-  if (error)
-    console.log(error)
-}
 
 const NuxtLink = resolveComponent('NuxtLink')
+
+const { mutateAsync, isPending } = useMutation({
+  mutationFn: (payload: SignInWithPasswordCredentials) => supabase.auth.signInWithPassword({ ...payload, options: {
+  } }),
+})
+
+const formSchema = toTypedSchema(z.object({
+  email: z.string().min(1, 'Email is required').email(),
+  password: z.string().min(1, 'Password is required'),
+}))
+const { handleSubmit } = useForm({
+  initialValues: {
+    email: '',
+    password: '',
+  },
+  validationSchema: formSchema,
+})
+const { toast } = useToast()
+
+const onSubmit = handleSubmit(async (values) => {
+  const res = await mutateAsync({ email: values.email, password: values.password })
+  toast({
+    title: 'Welcome !',
+  })
+})
 </script>
 
 <template>
@@ -29,13 +44,49 @@ const NuxtLink = resolveComponent('NuxtLink')
       <div class="mx-auto w-full flex flex-col justify-center sm:w-[350px] space-y-6">
         <div class="flex flex-col text-center space-y-2">
           <h1 class="text-2xl font-semibold tracking-tight">
-            Create an account
+            Login
           </h1>
           <p class="text-sm text-muted-foreground">
-            Enter your email below to create your account
+            Enter to Saving Book
           </p>
         </div>
-        <AuthUserForm />
+        <form class="w-full space-y-6" @submit="onSubmit">
+          <SFormField v-slot="{ componentField }" name="email">
+            <SFormItem>
+              <SFormLabel>Email</SFormLabel>
+              <SFormControl>
+                <SInput
+                  v-bind="componentField" placeholder="email@example.com" type="email" auto-capitalize="none"
+                  auto-complete="email" auto-correct="off" :disabled="isLoading"
+                />
+              </SFormControl>
+              <!-- <SFormDescription>
+                  Email to login
+                </SFormDescription> -->
+              <SFormMessage />
+            </SFormItem>
+          </SFormField>
+
+          <SFormField v-slot="{ componentField }" name="password">
+            <SFormItem>
+              <SFormLabel>Password</SFormLabel>
+              <SFormControl>
+                <SInput
+                  v-bind="componentField" placeholder="Enter your password" type="password" auto-complete="password"
+                  :disabled="isLoading"
+                />
+              </SFormControl>
+              <!-- <SFormDescription>
+                  Email to login
+                </SFormDescription> -->
+              <SFormMessage />
+            </SFormItem>
+          </SFormField>
+          <SButton class="w-full" :disabled="isLoading" type="submit">
+            <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
+            Login
+          </SButton>
+        </form>
         <p class="px-8 text-center text-sm text-muted-foreground">
           By clicking continue, you agree to our
           <a href="/terms" class="underline underline-offset-4 hover:text-primary">

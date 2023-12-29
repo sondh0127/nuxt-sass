@@ -3,6 +3,13 @@ const sb = useSupabaseClient()
 function logout() {
   sb.auth.signOut()
 }
+
+const user = useSupabaseUser()
+
+watchEffect(() => {
+  if (!user.value)
+    navigateTo('/login')
+})
 </script>
 
 <template>

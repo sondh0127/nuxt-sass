@@ -30,7 +30,7 @@ definePageMeta({
 //   },
 // ]
 
-const { data } = await useFetch('/api/todo', { key: '/api/todo' })
+const { data } = useFetch('/api/todo', { key: '/api/todo' })
 
 const text = ref()
 const editting = ref<EditSchema>()
@@ -65,7 +65,7 @@ async function deleteTodo(id: number) {
 </script>
 
 <template>
-  <NuxtPage name="dashboard">
+  <NuxtLayout name="home">
     <div>
       Index
       <DevOnly>
@@ -108,5 +108,5 @@ async function deleteTodo(id: number) {
         </details>
       </DevOnly>
     </div>
-  </NuxtPage>
+  </NuxtLayout>
 </template>

@@ -1,5 +1,10 @@
 <script setup lang="ts">
+const user = useSupabaseUser()
 
+watchEffect(() => {
+  if (user.value)
+    navigateTo('/')
+})
 </script>
 
 <template>
@@ -10,7 +15,7 @@
       <div class="absolute inset-0 from-primary to-primary/90 bg-gradient-to-r" />
       <div class="relative z-20 flex items-center gap-2 text-lg font-medium">
         <div i-ri:book-3-line />
-        SavingBook
+        Saving Book
       </div>
       <div class="relative z-20 mt-auto flex items-center gap-2">
         <DarkToggle />

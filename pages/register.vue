@@ -7,7 +7,6 @@ definePageMeta({
 })
 
 const { toast } = useToast()
-
 const supabase = useSupabaseClient()
 
 // const confirmPassword = ref('')
@@ -15,11 +14,6 @@ const supabase = useSupabaseClient()
 const { mutateAsync, isPending } = useMutation({
   mutationFn: (payload: SignUpWithPasswordCredentials) => supabase.auth.signUp({ ...payload, options: {
   } }),
-  onSuccess: () => {
-  },
-  onError: () => {
-
-  },
 })
 
 const formSchema = toTypedSchema(z.object({
@@ -37,7 +31,6 @@ const { handleSubmit } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
   const res = await mutateAsync({ email: values.email, password: values.password })
-  console.log('[LOG] ~ file: register.vue:35 ~ res:', res)
   toast({
     title: 'You have successfully signed up. Please check your email for a link to confirm your email address and proceed.',
   })
