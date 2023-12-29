@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { destr } from 'destr'
 
+definePageMeta({
+  middleware: 'auth',
+})
 // const user = useSupabaseUser()
 // watchEffect(() => {
 //   if (user.value)
@@ -62,46 +65,48 @@ async function deleteTodo(id: number) {
 </script>
 
 <template>
-  <div>
-    Index
-    <DevOnly>
-      <details open>
-        <summary>data</summary>
-        <pre>{{ JSON.stringify(data, null, 2) }}</pre>
-      </details>
-    </DevOnly>
+  <NuxtPage name="dashboard">
     <div>
-      <div v-for="item in data" :key="item.id">
-        <div v-if="editting?.id === item.id" class="flex">
-          <SInput v-model="editting.text" />
-          <SButton @click="submitEdit">
-            Submit
-          </SButton>
-        </div>
+      Index
+      <DevOnly>
+        <details open>
+          <summary>data</summary>
+          <pre>{{ JSON.stringify(data, null, 2) }}</pre>
+        </details>
+      </DevOnly>
+      <div>
+        <div v-for="item in data" :key="item.id">
+          <div v-if="editting?.id === item.id" class="flex">
+            <SInput v-model="editting.text" />
+            <SButton @click="submitEdit">
+              Submit
+            </SButton>
+          </div>
 
-        <div v-else class="flex">
-          <p>
-            {{ item.text }}
-          </p>
-          <SButton @click="editTodo(item)">
-            Edit
-          </SButton>
-          <SButton variant="destructive" @click="deleteTodo(item.id)">
-            Delete
-          </SButton>
-        </div>
+          <div v-else class="flex">
+            <p>
+              {{ item.text }}
+            </p>
+            <SButton @click="editTodo(item)">
+              Edit
+            </SButton>
+            <SButton variant="destructive" @click="deleteTodo(item.id)">
+              Delete
+            </SButton>
+          </div>
 
-        <p>Done: {{ item.done }}</p>
+          <p>Done: {{ item.done }}</p>
+        </div>
       </div>
+      <SInput v-model="text" />
+      <SButton @click="createTodo">
+        Create
+      </SButton>
+      <DevOnly>
+        <details open>
+          <VueJsonPretty :data="error" />
+        </details>
+      </DevOnly>
     </div>
-    <SInput v-model="text" />
-    <SButton @click="createTodo">
-      Create
-    </SButton>
-    <DevOnly>
-      <details open>
-        <VueJsonPretty :data="error" />
-      </details>
-    </DevOnly>
-  </div>
+  </NuxtPage>
 </template>
