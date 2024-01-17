@@ -50,7 +50,7 @@
     "drizzle-zod": "^0.5.1",
     "eslint": "^8.56.0",
     "generate-password-ts": "^1.6.5",
-    "nuxt": "^3.8.2",
+    "nuxt": "^3.9.2",
     "openai": "^4.24.0",
     "pg": "^8.11.3",
     "pinia": "^2.1.7",
