@@ -4,8 +4,9 @@ import type { PresetMiniOptions, Theme } from 'unocss/preset-mini'
 
 export interface PresetShadcnOptions extends PresetMiniOptions { }
 
-const handleMatchNumber = (v: string, defaultVal = '0') =>
-  h.bracket.cssvar.global.auto.fraction.number(v || defaultVal)?.replace('%', '')
+function handleMatchNumber(v: string, defaultVal = '0') {
+  return h.bracket.cssvar.global.auto.fraction.number(v || defaultVal)?.replace('%', '')
+}
 const handleMatchRem = (v: string, defaultVal = 'full') => h.bracket.cssvar.global.auto.fraction.rem(v || defaultVal)
 
 export function presetShadcn(options: PresetShadcnOptions = {}): Preset<Theme> {
@@ -170,7 +171,7 @@ export function presetShadcn(options: PresetShadcnOptions = {}): Preset<Theme> {
         md: `calc(var(--radius) - 2px)`,
         sm: 'calc(var(--radius) - 4px)',
       },
-    }
+    },
   }
 }
 
