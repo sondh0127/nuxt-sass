@@ -37,7 +37,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     // '@vite-pwa/nuxt',
-    '@nuxtjs/supabase',
     '@vue-macros/nuxt',
     '@nuxt/devtools',
     'radix-vue/nuxt',
@@ -87,13 +86,6 @@ export default defineNuxtConfig({
 
   vite: {
 
-  },
-  supabase: {
-    redirectOptions: {
-      login: '/login',
-      callback: '/confirm',
-      exclude: ['/register'],
-    },
   },
   app: {
     head: {
