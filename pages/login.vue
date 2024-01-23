@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
-
 definePageMeta({
   middleware: 'none-auth',
 })
 
-const supabase = useSupabaseClient()
-
 const NuxtLink = resolveComponent('NuxtLink')
 
 const { mutateAsync, isPending } = useMutation({
-  mutationFn: (payload: SignInWithPasswordCredentials) => supabase.auth.signInWithPassword({ ...payload, options: {
-  } }),
+  mutationFn: (payload) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(payload)
+      }, 1000)
+    })
+  },
 })
 
 const formSchema = toTypedSchema(z.object({

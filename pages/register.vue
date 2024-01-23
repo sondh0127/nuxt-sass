@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import { sleep } from '@antfu/utils'
-import type { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 definePageMeta({
   middleware: 'none-auth',
 })
 
 const { toast } = useToast()
-const supabase = useSupabaseClient()
 
 // const confirmPassword = ref('')
 
 const { mutateAsync, isPending } = useMutation({
-  mutationFn: (payload: SignUpWithPasswordCredentials) => supabase.auth.signUp({ ...payload, options: {
-  } }),
+  mutationFn: (payload) => {
+    return sleep(1000)
+  },
 })
 
 const formSchema = toTypedSchema(z.object({
