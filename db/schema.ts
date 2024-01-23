@@ -1,4 +1,4 @@
-import { bigint, pgTable, varchar } from 'drizzle-orm/pg-core'
+import { bigint, boolean, date, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('auth_user', {
   id: varchar('id', {
@@ -35,4 +35,11 @@ export const key = pgTable('user_key', {
   hashedPassword: varchar('hashed_password', {
     length: 255,
   }),
+})
+
+export const todo = pgTable('todo', {
+  id: serial('id').primaryKey().notNull(),
+  text: text('text').notNull(),
+  done: boolean('done').default(false),
+  createdAt: date('createdAt').defaultNow(),
 })
