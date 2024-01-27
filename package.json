@@ -21,6 +21,7 @@
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/zod": "^4.12.4",
     "drizzle-orm": "^0.29.3",
+    "pg": "^8.11.3",
     "postgres": "^3.4.3",
     "vee-validate": "^4.12.4"
   },
