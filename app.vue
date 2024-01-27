@@ -15,7 +15,9 @@ useHead({
 </template>
 
 <style>
-html, body , #__nuxt{
+html,
+body,
+#__nuxt {
   height: 100dvh;
   margin: 0;
   padding: 0;

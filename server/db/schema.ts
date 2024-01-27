@@ -1,41 +1,21 @@
-import { bigint, boolean, date, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core'
+import { boolean, date, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
-export const user = pgTable('auth_user', {
-  id: varchar('id', {
-    length: 15,
-  }).primaryKey(),
+export const userTable = pgTable('user', {
+  id: text('id').primaryKey(),
 })
 
-export const session = pgTable('user_session', {
-  id: varchar('id', { length: 128 }).primaryKey(),
-  userId: varchar('user_id', {
-    length: 15,
-  })
+export const sessionTable = pgTable('session', {
+  id: text('id').primaryKey(),
+  userId: text('user_id')
     .notNull()
-    .references(() => user.id),
-  activeExpires: bigint('active_expires', {
-    mode: 'number',
-  }).notNull(),
-  idleExpires: bigint('idle_expires', {
-    mode: 'number',
+    .references(() => userTable.id),
+  expiresAt: timestamp('expires_at', {
+    withTimezone: true,
+    mode: 'date',
   }).notNull(),
 })
 
-export const key = pgTable('user_key', {
-  id: varchar('id', {
-    length: 255,
-  }).primaryKey(),
-  userId: varchar('user_id', {
-    length: 15,
-  })
-    .notNull()
-    .references(() => user.id),
-  hashedPassword: varchar('hashed_password', {
-    length: 255,
-  }),
-})
-
-export const todo = pgTable('todo', {
+export const todoTable = pgTable('todo', {
   id: serial('id').primaryKey().notNull(),
   text: text('text').notNull(),
   done: boolean('done').default(false),
