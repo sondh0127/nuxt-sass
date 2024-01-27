@@ -3,7 +3,7 @@ import { verifyRequestOrigin } from 'lucia'
 import type { Session, User } from 'lucia'
 
 export default defineEventHandler(async (event) => {
-  if (event.node.req.method !== 'GET') {
+  if (event.method !== 'GET') {
     const originHeader = getHeader(event, 'Origin') ?? null
     const hostHeader = getHeader(event, 'Host') ?? null
     if (!originHeader || !hostHeader || !verifyRequestOrigin(originHeader, [hostHeader]))
@@ -19,10 +19,10 @@ export default defineEventHandler(async (event) => {
 
   const { session, user } = await lucia.validateSession(sessionId)
   if (session && session.fresh)
-    appendHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
+    appendResponseHeader(event, 'Set-Cookie', lucia.createSessionCookie(session.id).serialize())
 
   if (!session)
-    appendHeader(event, 'Set-Cookie', lucia.createBlankSessionCookie().serialize())
+    appendResponseHeader(event, 'Set-Cookie', lucia.createBlankSessionCookie().serialize())
 
   event.context.session = session
   event.context.user = user
