@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const user = useSupabaseUser()
+// const user = useSupabaseUser()
 
-watchEffect(() => {
-  if (user.value)
-    navigateTo('/')
-})
+// watchEffect(() => {
+//   if (user.value)
+//     navigateTo('/')
+// })
 </script>
 
 <template>

@@ -21,6 +21,7 @@
     "@lucia-auth/adapter-drizzle": "^1.0.0",
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/zod": "^4.12.4",
+    "arctic": "^1.1.0",
     "drizzle-orm": "^0.29.3",
     "lucia": "^3.0.0",
     "oslo": "^1.0.2",

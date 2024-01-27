@@ -58,7 +58,7 @@ const onSubmit = handleSubmit(async (values) => {
               <SFormControl>
                 <SInput
                   v-bind="componentField" placeholder="email@example.com" type="email" auto-capitalize="none"
-                  auto-complete="email" auto-correct="off" :disabled="isLoading"
+                  auto-complete="email" auto-correct="off" :disabled="isPending"
                 />
               </SFormControl>
               <!-- <SFormDescription>
@@ -74,7 +74,7 @@ const onSubmit = handleSubmit(async (values) => {
               <SFormControl>
                 <SInput
                   v-bind="componentField" placeholder="Enter your password" type="password" auto-complete="password"
-                  :disabled="isLoading"
+                  :disabled="isPending"
                 />
               </SFormControl>
               <!-- <SFormDescription>
@@ -83,8 +83,8 @@ const onSubmit = handleSubmit(async (values) => {
               <SFormMessage />
             </SFormItem>
           </SFormField>
-          <SButton class="w-full" :disabled="isLoading" type="submit">
-            <i v-if="isLoading" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
+          <SButton class="w-full" :disabled="isPending" type="submit">
+            <i v-if="isPending" i-lucide:loader-2 class="mr-2 h-4 w-4 animate-spin" />
             Login
           </SButton>
         </form>
@@ -99,6 +99,10 @@ const onSubmit = handleSubmit(async (values) => {
           </a>
           .
         </p>
+
+        <div>
+          <a href="/login/github">Sign in with GitHub</a>
+        </div>
       </div>
     </div>
   </NuxtLayout>

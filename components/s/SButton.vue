@@ -38,7 +38,7 @@ const buttonVariants = cva(
 interface Props extends PrimitiveProps {
   variant?: NonNullable<Parameters<typeof buttonVariants>[0]>['variant']
   size?: NonNullable<Parameters<typeof buttonVariants>[0]>['size']
-  as?: string
+  as?: any
 }
 </script>
 

@@ -8,6 +8,13 @@
       "when": 1706372534208,
       "tag": "0000_broad_justin_hammer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706375026680,
+      "tag": "0001_parallel_starbolt",
+      "breakpoints": true
     }
   ]
 }

@@ -17,6 +17,9 @@ dependencies:
   '@vee-validate/zod':
     specifier: ^4.12.4
     version: 4.12.4(vue@3.4.15)
+  arctic:
+    specifier: ^1.1.0
+    version: 1.1.0
   drizzle-orm:
     specifier: ^0.29.3
     version: 0.29.3(pg@8.11.3)(postgres@3.4.3)
@@ -5285,6 +5288,12 @@ packages:
       tar-stream: 3.1.7
       zip-stream: 5.0.1
     dev: true
+
+  /arctic@1.1.0:
+    resolution: {integrity: sha512-O2Mcoq991UMI2KCb2zuw7jWfCYCfMu4aveXVDUmfro3MAeq0gMCk7qTl4Y5WB0YXs21xgQFMsh2gs6WBlorAyQ==}
+    dependencies:
+      oslo: 1.0.1
+    dev: false
 
   /are-docs-informative@0.0.2:
     resolution: {integrity: sha512-ixiS0nLNNG5jNQzgZJNoUpBKdo9yTYZMGJ+QgT2jmjR7G7+QHRCc4v6LQ3NgE7EBJq+o0ams3waJwkrlBom8Ig==}
