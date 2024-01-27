@@ -43,7 +43,16 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxt/image',
     '@vee-validate/nuxt',
+    'nuxt-module-eslint-config',
   ],
+  features: {
+    // For UnoCSS
+    inlineStyles: false,
+  },
+
+  eslintConfig: {
+    setup: false,
+  },
   veeValidate: {
     autoImports: true,
     componentNames: {
@@ -66,7 +75,6 @@ export default defineNuxtConfig({
     // when using generate, payload js assets included in sw precache manifest
     // but missing on offline, disabling extraction it until fixed
     payloadExtraction: false,
-    inlineSSRStyles: false,
     renderJsonPayloads: true,
     typedPages: true,
   },

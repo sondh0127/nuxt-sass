@@ -7,9 +7,7 @@ export const user = pgTable('auth_user', {
 })
 
 export const session = pgTable('user_session', {
-  id: varchar('id', {
-    length: 128,
-  }).primaryKey(),
+  id: varchar('id', { length: 128 }).primaryKey(),
   userId: varchar('user_id', {
     length: 15,
   })
