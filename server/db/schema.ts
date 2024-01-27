@@ -5,6 +5,7 @@ export const userTable = pgTable('user', {
   githubId: text('github_id').unique(),
   username: text('username'),
 })
+export type UserDB = typeof userTable.$inferSelect
 
 export const sessionTable = pgTable('session', {
   id: text('id').primaryKey(),

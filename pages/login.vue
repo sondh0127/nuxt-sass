@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: 'none-auth',
-})
-
 const NuxtLink = resolveComponent('NuxtLink')
 
 const { mutateAsync, isPending } = useMutation({

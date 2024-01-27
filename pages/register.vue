@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { sleep } from '@antfu/utils'
 
-definePageMeta({
-  middleware: 'none-auth',
-})
-
 const { toast } = useToast()
 
 // const confirmPassword = ref('')

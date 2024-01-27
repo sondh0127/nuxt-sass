@@ -1,12 +1,15 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: ['protected'],
+})
+const user = useAuthenticatedUser()
+
 async function logout() {
   await $fetch('/api/logout', {
     method: 'POST',
   })
   navigateTo('/login')
 }
-
-const { data } = useFetch('/api/user')
 </script>
 
 <template>
@@ -15,8 +18,8 @@ const { data } = useFetch('/api/user')
   </form>
   <DevOnly>
     <details open>
-      <summary>data</summary>
-      <pre>{{ JSON.stringify(data, null, 2) }}</pre>
+      <summary>user</summary>
+      <pre>{{ JSON.stringify(user, null, 2) }}</pre>
     </details>
   </DevOnly>
 </template>

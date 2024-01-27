@@ -1,5 +1,7 @@
 import { Lucia } from 'lucia'
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle'
+import { GitHub } from 'arctic'
+import type { UserDB } from '../db/schema'
 import { sessionTable, userTable } from '../db/schema'
 import { db } from './db'
 
@@ -15,8 +17,7 @@ export const lucia = new Lucia(adapter, {
   },
   getUserAttributes: (attributes) => {
     return {
-      // attributes has the type of DatabaseUserAttributes
-      githubId: attributes.github_id,
+      githubId: attributes.githubId,
       username: attributes.username,
     }
   },
@@ -26,11 +27,10 @@ export const lucia = new Lucia(adapter, {
 declare module 'lucia' {
   interface Register {
     Lucia: typeof lucia
-    DatabaseUserAttributes: DatabaseUserAttributes
+    DatabaseUserAttributes: Omit<UserDB, 'id'>
   }
 }
 
-interface DatabaseUserAttributes {
-  github_id: number
-  username: string
-}
+const config = useRuntimeConfig()
+
+export const github = new GitHub(config.githubClientId, config.githubClientSecret)
