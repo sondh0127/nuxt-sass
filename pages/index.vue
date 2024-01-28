@@ -14,45 +14,53 @@ async function logout() {
 const content = ref('')
 const messages = ref<{ id: number, user: string, content: string }[]>([])
 
-async function onClick() {
-  if (!content.value)
+const isLoading = ref(false)
+async function sendContent() {
+  isLoading.value = true
+  const _content = content.value
+  content.value = ''
+  if (!_content)
     return
   messages.value.push({
     id: messages.value.length,
     user: 'me',
-    content: content.value,
+    content: _content,
   })
-  const res = await $fetch('/api/chat', { method: 'POST', body: { content: content.value } })
-  messages.value.push({
-    id: messages.value.length,
-    user: res.message.role,
-    content: res.message.content,
-  })
+  try {
+    const res = await $fetch('/api/chat', { method: 'POST', body: { content: _content } })
+    messages.value.push({
+      id: messages.value.length,
+      user: res.message.role,
+      content: res.message.content,
+    })
+  }
+  catch (error) {
 
-  content.value = ''
+  }
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
 <template>
   <div>
     <form @submit.prevent="logout">
+      <div>
+        {{ user?.username }}
+      </div>
       <button>Sign out</button>
     </form>
     <div>
-      <SInput v-model="content" />
-      <SButton @click="onClick">
+      <SInput v-model="content" @keyup.enter="sendContent" />
+      <SButton :loading="isLoading" @click="sendContent">
+        <i v-if="isLoading" class="i-lucide:loader-2 mr-2 h-4 w-4 animate-spin" />
         Chat
       </SButton>
     </div>
 
-    <div v-for="item in messages" :key="item">
+    <div v-for="item in messages" :key="item.id">
       {{ item.content }}
     </div>
-    <DevOnly>
-      <details open>
-        <summary>user</summary>
-        <pre>{{ JSON.stringify(user, null, 2) }}</pre>
-      </details>
-    </DevOnly>
   </div>
 </template>

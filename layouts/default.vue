@@ -3,5 +3,7 @@
 </script>
 
 <template>
-  <slot />
+  <div>
+    <slot />
+  </div>
 </template>

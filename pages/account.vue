@@ -4,7 +4,6 @@ import { storeToRefs } from 'pinia'
 // import { ACCOUNT_ACCESS } from '~/prisma/account-access-enum'
 
 definePageMeta({
-  layout: 'dashboard',
   middleware: ['auth'],
 })
 
@@ -33,7 +32,7 @@ function joinURL() {
 <template>
   <div class="mx-auto p-6 container">
     <div class="mb-12 text-center">
-      <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 md:text-6xl sm:text-5xl">
+      <h2 class="mb-4 text-4xl text-gray-900 font-extrabold tracking-tight md:text-6xl sm:text-5xl">
         Account Information
       </h2>
     </div>
@@ -50,7 +49,7 @@ function joinURL() {
             placeholder="Enter new name"
           >
           <button
-            class="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600"
+            class="rounded bg-green-500 px-4 py-2 text-white font-bold hover:bg-green-600"
             @click.prevent="accountStore.changeAccountName(newAccountName)"
           >
             Change Name
@@ -85,10 +84,10 @@ function joinURL() {
 
       <div class="flex items-center gap-4">
         <span class="w-32 font-bold">Access Level:</span>
-        <span class="rounded-full bg-green-500 px-2 py-1 font-semibold text-white">{{ activeMembership?.access }}</span>
+        <span class="rounded-full bg-green-500 px-2 py-1 text-white font-semibold">{{ activeMembership?.access }}</span>
         <button
           v-if="activeMembership && activeMembership.access === ACCOUNT_ACCESS.ADMIN"
-          class="focus:shadow-outline-blue rounded bg-orange-500 px-4 py-2 font-bold text-white hover:bg-orange-600 focus:outline-none"
+          class="focus:shadow-outline-blue rounded bg-orange-500 px-4 py-2 text-white font-bold hover:bg-orange-600 focus:outline-none"
           @click.prevent="accountStore.claimOwnershipOfAccount()"
         >
           Claim Ownership
@@ -106,7 +105,7 @@ function joinURL() {
           <input disabled type="text" class="w-full border border-gray-400 rounded p-2" :value="joinURL()">
           <button
             v-if="activeMembership && (activeMembership.access === ACCOUNT_ACCESS.OWNER || activeMembership.access === ACCOUNT_ACCESS.ADMIN)"
-            class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+            class="rounded bg-blue-500 px-4 py-2 text-white font-bold hover:bg-blue-600"
             @click.prevent="accountStore.rotateJoinPassword()"
           >
             ReGen
@@ -121,39 +120,39 @@ function joinURL() {
         <div class="flex flex-col gap-2">
           <div v-for="accountMember in activeAccountMembers" class="flex items-center gap-4">
             <span>{{ accountMember.user.display_name }}</span>
-            <span class="rounded-full bg-green-500 px-2 py-1 font-semibold text-white">{{ accountMember.access }}</span>
+            <span class="rounded-full bg-green-500 px-2 py-1 text-white font-semibold">{{ accountMember.access }}</span>
             <span class="text-gray-500">({{ accountMember.user.email }})</span>
             <button
               v-if="accountMember.pending && activeMembership && (activeMembership.access === ACCOUNT_ACCESS.OWNER || activeMembership.access === ACCOUNT_ACCESS.ADMIN)"
-              class="focus:shadow-outline-blue rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600 focus:outline-none"
+              class="focus:shadow-outline-blue rounded bg-green-500 px-4 py-2 text-white font-bold hover:bg-green-600 focus:outline-none"
               @click.prevent="accountStore.acceptPendingMembership(accountMember.id)"
             >
               Accept Pending Membership
             </button>
             <button
               v-if="accountMember.pending && activeMembership && (activeMembership.access === ACCOUNT_ACCESS.OWNER || activeMembership.access === ACCOUNT_ACCESS.ADMIN)"
-              class="focus:shadow-outline-blue rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-600 focus:outline-none"
+              class="focus:shadow-outline-blue rounded bg-red-500 px-4 py-2 text-white font-bold hover:bg-red-600 focus:outline-none"
               @click.prevent="accountStore.rejectPendingMembership(accountMember.id)"
             >
               Reject Pending Membership
             </button>
             <button
               v-if="activeMembership && (activeMembership.access === ACCOUNT_ACCESS.OWNER || activeMembership.access === ACCOUNT_ACCESS.ADMIN) && accountMember.access === ACCOUNT_ACCESS.READ_ONLY && !accountMember.pending"
-              class="focus:shadow-outline-blue rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600 focus:outline-none"
+              class="focus:shadow-outline-blue rounded bg-green-500 px-4 py-2 text-white font-bold hover:bg-green-600 focus:outline-none"
               @click.prevent="accountStore.changeUserAccessWithinAccount(accountMember.user.id, ACCOUNT_ACCESS.READ_WRITE)"
             >
               Promote to Read/Write
             </button>
             <button
               v-if="activeMembership && activeMembership.access === ACCOUNT_ACCESS.OWNER && accountMember.access === ACCOUNT_ACCESS.READ_WRITE && !accountMember.pending"
-              class="focus:shadow-outline-blue rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600 focus:outline-none"
+              class="focus:shadow-outline-blue rounded bg-green-500 px-4 py-2 text-white font-bold hover:bg-green-600 focus:outline-none"
               @click.prevent="accountStore.changeUserAccessWithinAccount(accountMember.user.id, ACCOUNT_ACCESS.ADMIN)"
             >
               Promote to Admin
             </button>
             <button
               v-if="activeMembership && activeMembership.access === ACCOUNT_ACCESS.OWNER && accountMember.access !== ACCOUNT_ACCESS.OWNER && !accountMember.pending"
-              class="focus:shadow-outline-blue rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-600 focus:outline-none"
+              class="focus:shadow-outline-blue rounded bg-red-500 px-4 py-2 text-white font-bold hover:bg-red-600 focus:outline-none"
               @click.prevent="accountStore.deleteMembership(accountMember.id)"
             >
               Remove
