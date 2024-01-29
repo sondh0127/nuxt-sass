@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useChat } from 'ai/vue'
+
 definePageMeta({
   middleware: ['protected'],
 })
@@ -27,11 +29,13 @@ async function sendContent() {
     content: _content,
   })
   try {
-    const res = await $fetch('/api/chat', { method: 'POST', body: { content: _content } })
-    messages.value.push({
-      id: messages.value.length,
-      user: res.message.role,
-      content: res.message.content,
+    const res = await $fetch('/api/chat', {
+      method: 'POST',
+      body: {
+        messages: [
+          { role: 'user', content: _content },
+        ],
+      },
     })
   }
   catch (error) {
@@ -41,10 +45,12 @@ async function sendContent() {
     isLoading.value = false
   }
 }
+
+// const { messages, input, handleSubmit } = useChat()
 </script>
 
 <template>
-  <div>
+  <div class="h-full">
     <form @submit.prevent="logout">
       <div>
         {{ user?.username }}
@@ -59,8 +65,19 @@ async function sendContent() {
       </SButton>
     </div>
 
-    <div v-for="item in messages" :key="item.id">
-      {{ item.content }}
-    </div>
+    <!-- <div class="mx-auto max-w-md w-full flex flex-col py-24">
+      <div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
+        {{ m.role === 'user' ? 'User: ' : 'AI: ' }}
+        {{ m.content }}
+      </div>
+
+      <form @submit="handleSubmit">
+        <SInput
+          v-model="input"
+          class="fixed bottom-0 mb-12 max-w-md w-full border border-gray-300 rounded p-2 shadow-xl"
+          placeholder="Say something..."
+        />
+      </form>
+    </div> -->
   </div>
 </template>
