@@ -13,40 +13,7 @@ async function logout() {
   navigateTo('/login')
 }
 
-const content = ref('')
-const messages = ref<{ id: number, user: string, content: string }[]>([])
-
-const isLoading = ref(false)
-async function sendContent() {
-  isLoading.value = true
-  const _content = content.value
-  content.value = ''
-  if (!_content)
-    return
-  messages.value.push({
-    id: messages.value.length,
-    user: 'me',
-    content: _content,
-  })
-  try {
-    const res = await $fetch('/api/chat', {
-      method: 'POST',
-      body: {
-        messages: [
-          { role: 'user', content: _content },
-        ],
-      },
-    })
-  }
-  catch (error) {
-
-  }
-  finally {
-    isLoading.value = false
-  }
-}
-
-// const { messages, input, handleSubmit } = useChat()
+const { messages, input, handleSubmit, isLoading } = useChat()
 </script>
 
 <template>
@@ -57,15 +24,14 @@ async function sendContent() {
       </div>
       <button>Sign out</button>
     </form>
-    <div>
+    <!-- <div>
       <SInput v-model="content" @keyup.enter="sendContent" />
       <SButton :loading="isLoading" @click="sendContent">
         <i v-if="isLoading" class="i-lucide:loader-2 mr-2 h-4 w-4 animate-spin" />
         Chat
       </SButton>
-    </div>
-
-    <!-- <div class="mx-auto max-w-md w-full flex flex-col py-24">
+    </div> -->
+    <div class="mx-auto max-w-md w-full flex flex-col py-24">
       <div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
         {{ m.role === 'user' ? 'User: ' : 'AI: ' }}
         {{ m.content }}
@@ -78,6 +44,6 @@ async function sendContent() {
           placeholder="Say something..."
         />
       </form>
-    </div> -->
+    </div>
   </div>
 </template>

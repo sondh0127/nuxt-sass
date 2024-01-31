@@ -1,6 +1,5 @@
+import { Readable, Transform } from 'node:stream'
 import ollama from 'ollama'
-import { OpenAIStream, Stream, StreamingTextResponse } from 'ai'
-import type { ChatCompletionMessageParam } from 'openai/resources/chat'
 
 export default defineLazyEventHandler(async () => {
   // const apiKey = useRuntimeConfig().openaiApiKey
@@ -10,35 +9,33 @@ export default defineLazyEventHandler(async () => {
   //   apiKey,
   // })
 
+  // Create a custom Transform stream
+
   return defineEventHandler(async (event: any) => {
-    // const body = await readBody(event)
-
-    // const response = await ollama.chat({
-    //   model: 'mistral',
-    //   messages: [
-    //     {
-    //       role: 'user',
-    //       content: body.content,
-    //     },
-    //   ],
-    // })
-    // return response
-
-    // Extract the `prompt` from the body of the request
-    const { messages } = (await readBody(event)) as {
-      messages: ChatCompletionMessageParam[]
-    }
+    const { messages } = await readBody(event)
 
     const response = await ollama.chat({
       model: 'mistral',
       messages,
       stream: true,
     })
-    for await (const part of response)
-      console.log('[LOG] ~ part.message.content:', part.message.content)
+    // Create a readable stream from the response array
+    const readableStream = Readable.from(response)
 
-    return response
+    const transformStream = new Transform({
+      objectMode: true,
+      transform(chunk, encoding, callback) {
+        const transformedChunk = chunk?.message?.content
 
+        this.push(transformedChunk)
+
+        callback()
+      },
+    })
+    readableStream.pipe(transformStream)
+
+    return sendStream(event, transformStream)
+    // TODO: support more model
     // // Convert the response into a friendly text-stream
     // const stream = OpenAIStream(response)
     // console.log('[LOG] ~ stream:', stream)
