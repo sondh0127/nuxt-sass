@@ -59,7 +59,7 @@
     "eslint-plugin-format": "^0.1.0",
     "eslint-ts-patch": "^8.56.0-0",
     "generate-password-ts": "^1.6.5",
-    "nuxt": "^3.9.3",
+    "nuxt": "^3.10.0",
     "nuxt-module-eslint-config": "^0.1.0",
     "openai": "^4.25.0",
     "pinia": "^2.1.7",
