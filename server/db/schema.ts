@@ -1,4 +1,4 @@
-import { boolean, date, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+import { bigserial, boolean, date, integer, jsonb, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
 import { vector } from 'pgvector/drizzle-orm'
 
@@ -27,7 +27,11 @@ export const todoTable = pgTable('todo', {
   createdAt: date('createdAt').defaultNow(),
 })
 
-export const items = pgTable('items', {
-  id: serial('id').primaryKey(),
-  embedding: vector('embedding', { dimensions: 3 }),
+export const documentsTable = pgTable('documents', {
+  id: bigserial('id', { mode: 'number' }).primaryKey(),
+  content: text('content'),
+  metadata: jsonb('metadata'),
+  embedding: vector('embedding', { dimensions: 4096 }),
 })
+
+export type DocumentsInsert = typeof documentsTable.$inferInsert

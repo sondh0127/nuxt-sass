@@ -20,6 +20,26 @@ function sendVector() {
     method: 'POST',
   })
 }
+
+function sendEmbeding() {
+  $fetch('/api/embeddings', {
+    method: 'POST',
+    body: {
+      prompt: 'Hello, this is a test',
+    },
+  })
+}
+
+const similar = ref('')
+
+async function handleEmbedding() {
+  $fetch('/api/documents/match', {
+    method: 'POST',
+    body: {
+      prompt: similar.value,
+    },
+  })
+}
 </script>
 
 <template>
@@ -43,6 +63,17 @@ function sendVector() {
       </SButton>
     </div>
 
+    <div>
+      <SButton @click="sendEmbeding">
+        Send embeddings
+      </SButton>
+
+      <SInput v-model="similar" placeholder="Similar search..." />
+      <SButton @click="handleEmbedding">
+        Find similar
+      </SButton>
+    </div>
+
     <div class="mx-auto max-w-md w-full flex flex-col py-24">
       <div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
         {{ m.role === 'user' ? 'User: ' : 'AI: ' }}
@@ -51,8 +82,7 @@ function sendVector() {
 
       <form @submit="handleSubmit">
         <SInput
-          v-model="input"
-          class="fixed bottom-0 mb-12 max-w-md w-full border border-gray-300 rounded p-2 shadow-xl"
+          v-model="input" class="fixed bottom-0 mb-12 max-w-md w-full border border-gray-300 rounded p-2 shadow-xl"
           placeholder="Say something..."
         />
       </form>
