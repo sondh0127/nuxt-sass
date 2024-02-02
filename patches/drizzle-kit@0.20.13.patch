@@ -1,0 +1,380 @@
+diff --git a/bin.cjs b/bin.cjs
+index 403348d00b572ac8b8e336e8d4f84f37ca35c3e8..c8d597a8e16e5aee45e7cf80dc0e8d02ad3fa373 100755
+--- a/bin.cjs
++++ b/bin.cjs
+@@ -11674,7 +11674,7 @@ var init_mysqlSerializer = __esm({
+                 `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+           The unique constraint ${source_default.underline.blue(
+                   column7.uniqueName
+                 )} on the ${source_default.underline.blue(
+@@ -11737,7 +11737,7 @@ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${so
+ ${withStyle.errorWarning(
+                 `We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+ The unique constraint ${source_default.underline.blue(
+                   name
+                 )} on the ${source_default.underline.blue(
+@@ -11795,7 +11795,7 @@ The unique constraint ${source_default.underline.blue(
+ ${withStyle.errorWarning(
+                   `We've found duplicated unique constraint names in ${source_default.underline.blue(
+                     tableName
+-                  )} table. 
++                  )} table.
+ The unique index ${source_default.underline.blue(
+                     name
+                   )} on the ${source_default.underline.blue(
+@@ -12230,7 +12230,7 @@ var init_pgSerializer = __esm({
+                 `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+           The unique constraint ${source_default.underline.blue(
+                   column7.uniqueName
+                 )} on the ${source_default.underline.blue(
+@@ -12291,7 +12291,7 @@ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${so
+               `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                 tableName
+-              )} table. 
++              )} table.
+         The unique constraint ${source_default.underline.blue(
+                 name
+               )} on the ${source_default.underline.blue(
+@@ -12512,7 +12512,7 @@ ${withStyle.errorWarning(
+           ) AS foreign_table_schema,
+           ccu.table_name AS foreign_table_name,
+           ccu.column_name AS foreign_column_name,
+-          rc.delete_rule, 
++          rc.delete_rule,
+           rc.update_rule
+       FROM
+           information_schema.table_constraints AS tc
+@@ -12590,8 +12590,8 @@ ${withStyle.errorWarning(
+                 const tableCompositePkName = await db.query(
+                   `SELECT conname AS primary_key
+             FROM   pg_constraint join pg_class on (pg_class.oid = conrelid)
+-            WHERE  contype = 'p' 
+-            AND    connamespace = $1::regnamespace  
++            WHERE  contype = 'p'
++            AND    connamespace = $1::regnamespace
+             AND    pg_class.relname = $2;`,
+                   [tableSchema, tableName]
+                 );
+@@ -12942,7 +12942,7 @@ var init_sqliteSerializer = __esm({
+                 `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+           The unique constraint ${source_default.underline.blue(
+                   column7.uniqueName
+                 )} on the ${source_default.underline.blue(
+@@ -13017,7 +13017,7 @@ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${so
+ ${withStyle.errorWarning(
+                 `We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+ The unique constraint ${source_default.underline.blue(
+                   name
+                 )} on the ${source_default.underline.blue(
+@@ -13069,7 +13069,7 @@ The unique constraint ${source_default.underline.blue(
+     fromDatabase3 = async (db, tablesFilter = (table4) => true, progressCallback) => {
+       const result = {};
+       const columns = await db.query(
+-        `SELECT 
++        `SELECT
+     m.name as "tableName", p.name as "columnName", p.type as "columnType", p."notnull" as "notNull", p.dflt_value as "defaultValue", p.pk as pk
+     FROM sqlite_master AS m JOIN pragma_table_info(m.name) AS p
+     WHERE m.type = 'table' and m.tbl_name != 'sqlite_sequence' and m.tbl_name != 'sqlite_stat1' and m.tbl_name != '_litestream_seq' and m.tbl_name != '_litestream_lock' and m.tbl_name != 'libsql_wasm_func_table';
+@@ -13211,7 +13211,7 @@ The unique constraint ${source_default.underline.blue(
+         progressCallback("fks", foreignKeysCount, "done");
+       }
+       const idxs = await db.query(
+-        `SELECT 
++        `SELECT
+     m.tbl_name as tableName,
+     il.name as indexName,
+     ii.name as columnName,
+@@ -13220,7 +13220,7 @@ The unique constraint ${source_default.underline.blue(
+ FROM sqlite_master AS m,
+     pragma_index_list(m.name) AS il,
+     pragma_index_info(il.name) AS ii
+-WHERE 
++WHERE
+     m.type = 'table' and il.name NOT LIKE 'sqlite_autoindex_%';`
+       );
+       for (const idxRow of idxs) {
+@@ -15346,7 +15346,7 @@ var init_sqlgenerator = __esm({
+       if (pgNativeTypes.has(it))
+         return true;
+       const toCheck = it.replace(/ /g, "");
+-      return toCheck.startsWith("varchar(") || toCheck.startsWith("char(") || toCheck.startsWith("numeric(") || toCheck.startsWith("timestamp(") || toCheck.startsWith("intervalyear(") || toCheck.startsWith("intervalmonth(") || toCheck.startsWith("intervalday(") || toCheck.startsWith("intervalhour(") || toCheck.startsWith("intervalminute(") || toCheck.startsWith("intervalsecond(") || toCheck.startsWith("intervalyeartomonth(") || toCheck.startsWith("intervaldaytohour(") || toCheck.startsWith("intervaldaytominute(") || toCheck.startsWith("intervaldaytosecond(") || toCheck.startsWith("intervalhourtominute(") || toCheck.startsWith("intervalhourtosecond(") || toCheck.startsWith("intervalminutetosecond(") || /^(\w+)(\[\d*])+$/.test(it);
++      return toCheck.startsWith("vector(") || toCheck.startsWith("varchar(") || toCheck.startsWith("char(") || toCheck.startsWith("numeric(") || toCheck.startsWith("timestamp(") || toCheck.startsWith("intervalyear(") || toCheck.startsWith("intervalmonth(") || toCheck.startsWith("intervalday(") || toCheck.startsWith("intervalhour(") || toCheck.startsWith("intervalminute(") || toCheck.startsWith("intervalsecond(") || toCheck.startsWith("intervalyeartomonth(") || toCheck.startsWith("intervaldaytohour(") || toCheck.startsWith("intervaldaytominute(") || toCheck.startsWith("intervaldaytosecond(") || toCheck.startsWith("intervalhourtominute(") || toCheck.startsWith("intervalhourtosecond(") || toCheck.startsWith("intervalminutetosecond(") || /^(\w+)(\[\d*])+$/.test(it);
+     };
+     Convertor = class {
+     };
+@@ -16068,7 +16068,7 @@ ${BREAKPOINT}ALTER TABLE ${tableNameWithSchema} ADD CONSTRAINT ${statement.newCo
+       }
+       convert(statement) {
+         const { tableName, columnName, schema: schema4 } = statement;
+-        return `/* 
++        return `/*
+     Unfortunately in current drizzle-kit version we can't automatically get name for primary key.
+     We are working on making it available!
+ 
+@@ -16079,7 +16079,7 @@ ${BREAKPOINT}ALTER TABLE ${tableNameWithSchema} ADD CONSTRAINT ${statement.newCo
+                 AND table_name = '${tableName}'
+                 AND constraint_type = 'PRIMARY KEY';
+         2. Uncomment code below and paste pk name manually
+-        
++
+     Hope to release this update as soon as possible
+ */
+ 
+@@ -35354,7 +35354,7 @@ var require_dbcs_data = __commonJS({
+       // == Japanese/ShiftJIS ====================================================
+       // All japanese encodings are based on JIS X set of standards:
+       // JIS X 0201 - Single-byte encoding of ASCII + ¥ + Kana chars at 0xA1-0xDF.
+-      // JIS X 0208 - Main set of 6879 characters, placed in 94x94 plane, to be encoded by 2 bytes. 
++      // JIS X 0208 - Main set of 6879 characters, placed in 94x94 plane, to be encoded by 2 bytes.
+       //              Has several variations in 1978, 1983, 1990 and 1997.
+       // JIS X 0212 - Supplementary plane of 6067 chars in 94x94 plane. 1990. Effectively dead.
+       // JIS X 0213 - Extension and modern replacement of 0208 and 0212. Total chars: 11233.
+@@ -35371,7 +35371,7 @@ var require_dbcs_data = __commonJS({
+       //               0x8F, (0xA1-0xFE)x2 - 0212 plane (94x94).
+       //  * JIS X 208: 7-bit, direct encoding of 0208. Byte ranges: 0x21-0x7E (94 values). Uncommon.
+       //               Used as-is in ISO2022 family.
+-      //  * ISO2022-JP: Stateful encoding, with escape sequences to switch between ASCII, 
++      //  * ISO2022-JP: Stateful encoding, with escape sequences to switch between ASCII,
+       //                0201-1976 Roman, 0208-1978, 0208-1983.
+       //  * ISO2022-JP-1: Adds esc seq for 0212-1990.
+       //  * ISO2022-JP-2: Adds esc seq for GB2313-1980, KSX1001-1992, ISO8859-1, ISO8859-7.
+@@ -35482,7 +35482,7 @@ var require_dbcs_data = __commonJS({
+       //  * Windows CP 951: Microsoft variant of Big5-HKSCS-2001. Seems to be never public. http://me.abelcheung.org/articles/research/what-is-cp951/
+       //  * Big5-2003 (Taiwan standard) almost superset of cp950.
+       //  * Unicode-at-on (UAO) / Mozilla 1.8. Falling out of use on the Web. Not supported by other browsers.
+-      //  * Big5-HKSCS (-2001, -2004, -2008). Hong Kong standard. 
++      //  * Big5-HKSCS (-2001, -2004, -2008). Hong Kong standard.
+       //    many unicode code points moved from PUA to Supplementary plane (U+2XXXX) over the years.
+       //    Plus, it has 4 combining sequences.
+       //    Seems that Mozilla refused to support it for 10 yrs. https://bugzilla.mozilla.org/show_bug.cgi?id=162431 https://bugzilla.mozilla.org/show_bug.cgi?id=310299
+@@ -35493,7 +35493,7 @@ var require_dbcs_data = __commonJS({
+       //    In the encoder, it might make sense to support encoding old PUA mappings to Big5 bytes seq-s.
+       //    Official spec: http://www.ogcio.gov.hk/en/business/tech_promotion/ccli/terms/doc/2003cmp_2008.txt
+       //                   http://www.ogcio.gov.hk/tc/business/tech_promotion/ccli/terms/doc/hkscs-2008-big5-iso.txt
+-      // 
++      //
+       // Current understanding of how to deal with Big5(-HKSCS) is in the Encoding Standard, http://encoding.spec.whatwg.org/#big5-encoder
+       // Unicode mapping (http://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/OTHER/BIG5.TXT) is said to be wrong.
+       "windows950": "cp950",
+@@ -43818,9 +43818,9 @@ var require_pool_cluster = __commonJS({
+       }
+       /**
+        * pool cluster execute
+-       * @param {*} sql 
+-       * @param {*} values 
+-       * @param {*} cb 
++       * @param {*} sql
++       * @param {*} values
++       * @param {*} cb
+        */
+       execute(sql2, values, cb) {
+         if (typeof values === "function") {
+diff --git a/utils.js b/utils.js
+index 3c6b1b2772a0039f02ff874651c85d968fb60a35..579fbcfbee924396cc3e8b7186862421d50ac357 100644
+--- a/utils.js
++++ b/utils.js
+@@ -11399,7 +11399,7 @@ var init_mysqlSerializer = __esm({
+                 `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+           The unique constraint ${source_default.underline.blue(
+                   column5.uniqueName
+                 )} on the ${source_default.underline.blue(
+@@ -11462,7 +11462,7 @@ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${so
+ ${withStyle.errorWarning(
+                 `We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+ The unique constraint ${source_default.underline.blue(
+                   name
+                 )} on the ${source_default.underline.blue(
+@@ -11520,7 +11520,7 @@ The unique constraint ${source_default.underline.blue(
+ ${withStyle.errorWarning(
+                   `We've found duplicated unique constraint names in ${source_default.underline.blue(
+                     tableName
+-                  )} table. 
++                  )} table.
+ The unique index ${source_default.underline.blue(
+                     name
+                   )} on the ${source_default.underline.blue(
+@@ -11955,7 +11955,7 @@ var init_pgSerializer = __esm({
+                 `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+           The unique constraint ${source_default.underline.blue(
+                   column5.uniqueName
+                 )} on the ${source_default.underline.blue(
+@@ -12016,7 +12016,7 @@ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${so
+               `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                 tableName
+-              )} table. 
++              )} table.
+         The unique constraint ${source_default.underline.blue(
+                 name
+               )} on the ${source_default.underline.blue(
+@@ -12237,7 +12237,7 @@ ${withStyle.errorWarning(
+           ) AS foreign_table_schema,
+           ccu.table_name AS foreign_table_name,
+           ccu.column_name AS foreign_column_name,
+-          rc.delete_rule, 
++          rc.delete_rule,
+           rc.update_rule
+       FROM
+           information_schema.table_constraints AS tc
+@@ -12315,8 +12315,8 @@ ${withStyle.errorWarning(
+                 const tableCompositePkName = await db.query(
+                   `SELECT conname AS primary_key
+             FROM   pg_constraint join pg_class on (pg_class.oid = conrelid)
+-            WHERE  contype = 'p' 
+-            AND    connamespace = $1::regnamespace  
++            WHERE  contype = 'p'
++            AND    connamespace = $1::regnamespace
+             AND    pg_class.relname = $2;`,
+                   [tableSchema, tableName]
+                 );
+@@ -12667,7 +12667,7 @@ var init_sqliteSerializer = __esm({
+                 `
+ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+           The unique constraint ${source_default.underline.blue(
+                   column5.uniqueName
+                 )} on the ${source_default.underline.blue(
+@@ -12742,7 +12742,7 @@ ${withStyle.errorWarning(`We've found duplicated unique constraint names in ${so
+ ${withStyle.errorWarning(
+                 `We've found duplicated unique constraint names in ${source_default.underline.blue(
+                   tableName
+-                )} table. 
++                )} table.
+ The unique constraint ${source_default.underline.blue(
+                   name
+                 )} on the ${source_default.underline.blue(
+@@ -12794,7 +12794,7 @@ The unique constraint ${source_default.underline.blue(
+     fromDatabase3 = async (db, tablesFilter = (table4) => true, progressCallback) => {
+       const result = {};
+       const columns = await db.query(
+-        `SELECT 
++        `SELECT
+     m.name as "tableName", p.name as "columnName", p.type as "columnType", p."notnull" as "notNull", p.dflt_value as "defaultValue", p.pk as pk
+     FROM sqlite_master AS m JOIN pragma_table_info(m.name) AS p
+     WHERE m.type = 'table' and m.tbl_name != 'sqlite_sequence' and m.tbl_name != 'sqlite_stat1' and m.tbl_name != '_litestream_seq' and m.tbl_name != '_litestream_lock' and m.tbl_name != 'libsql_wasm_func_table';
+@@ -12936,7 +12936,7 @@ The unique constraint ${source_default.underline.blue(
+         progressCallback("fks", foreignKeysCount, "done");
+       }
+       const idxs = await db.query(
+-        `SELECT 
++        `SELECT
+     m.tbl_name as tableName,
+     il.name as indexName,
+     ii.name as columnName,
+@@ -12945,7 +12945,7 @@ The unique constraint ${source_default.underline.blue(
+ FROM sqlite_master AS m,
+     pragma_index_list(m.name) AS il,
+     pragma_index_info(il.name) AS ii
+-WHERE 
++WHERE
+     m.type = 'table' and il.name NOT LIKE 'sqlite_autoindex_%';`
+       );
+       for (const idxRow of idxs) {
+@@ -15063,7 +15063,7 @@ var init_sqlgenerator = __esm({
+       if (pgNativeTypes.has(it))
+         return true;
+       const toCheck = it.replace(/ /g, "");
+-      return toCheck.startsWith("varchar(") || toCheck.startsWith("char(") || toCheck.startsWith("numeric(") || toCheck.startsWith("timestamp(") || toCheck.startsWith("intervalyear(") || toCheck.startsWith("intervalmonth(") || toCheck.startsWith("intervalday(") || toCheck.startsWith("intervalhour(") || toCheck.startsWith("intervalminute(") || toCheck.startsWith("intervalsecond(") || toCheck.startsWith("intervalyeartomonth(") || toCheck.startsWith("intervaldaytohour(") || toCheck.startsWith("intervaldaytominute(") || toCheck.startsWith("intervaldaytosecond(") || toCheck.startsWith("intervalhourtominute(") || toCheck.startsWith("intervalhourtosecond(") || toCheck.startsWith("intervalminutetosecond(") || /^(\w+)(\[\d*])+$/.test(it);
++      return toCheck.startsWith("vector(") || toCheck.startsWith("varchar(") || toCheck.startsWith("char(") || toCheck.startsWith("numeric(") || toCheck.startsWith("timestamp(") || toCheck.startsWith("intervalyear(") || toCheck.startsWith("intervalmonth(") || toCheck.startsWith("intervalday(") || toCheck.startsWith("intervalhour(") || toCheck.startsWith("intervalminute(") || toCheck.startsWith("intervalsecond(") || toCheck.startsWith("intervalyeartomonth(") || toCheck.startsWith("intervaldaytohour(") || toCheck.startsWith("intervaldaytominute(") || toCheck.startsWith("intervaldaytosecond(") || toCheck.startsWith("intervalhourtominute(") || toCheck.startsWith("intervalhourtosecond(") || toCheck.startsWith("intervalminutetosecond(") || /^(\w+)(\[\d*])+$/.test(it);
+     };
+     Convertor = class {
+     };
+@@ -15785,7 +15785,7 @@ ${BREAKPOINT}ALTER TABLE ${tableNameWithSchema} ADD CONSTRAINT ${statement.newCo
+       }
+       convert(statement) {
+         const { tableName, columnName, schema: schema4 } = statement;
+-        return `/* 
++        return `/*
+     Unfortunately in current drizzle-kit version we can't automatically get name for primary key.
+     We are working on making it available!
+ 
+@@ -15796,7 +15796,7 @@ ${BREAKPOINT}ALTER TABLE ${tableNameWithSchema} ADD CONSTRAINT ${statement.newCo
+                 AND table_name = '${tableName}'
+                 AND constraint_type = 'PRIMARY KEY';
+         2. Uncomment code below and paste pk name manually
+-        
++
+     Hope to release this update as soon as possible
+ */
+ 
+@@ -34042,7 +34042,7 @@ var require_dbcs_data = __commonJS({
+       // == Japanese/ShiftJIS ====================================================
+       // All japanese encodings are based on JIS X set of standards:
+       // JIS X 0201 - Single-byte encoding of ASCII + ¥ + Kana chars at 0xA1-0xDF.
+-      // JIS X 0208 - Main set of 6879 characters, placed in 94x94 plane, to be encoded by 2 bytes. 
++      // JIS X 0208 - Main set of 6879 characters, placed in 94x94 plane, to be encoded by 2 bytes.
+       //              Has several variations in 1978, 1983, 1990 and 1997.
+       // JIS X 0212 - Supplementary plane of 6067 chars in 94x94 plane. 1990. Effectively dead.
+       // JIS X 0213 - Extension and modern replacement of 0208 and 0212. Total chars: 11233.
+@@ -34059,7 +34059,7 @@ var require_dbcs_data = __commonJS({
+       //               0x8F, (0xA1-0xFE)x2 - 0212 plane (94x94).
+       //  * JIS X 208: 7-bit, direct encoding of 0208. Byte ranges: 0x21-0x7E (94 values). Uncommon.
+       //               Used as-is in ISO2022 family.
+-      //  * ISO2022-JP: Stateful encoding, with escape sequences to switch between ASCII, 
++      //  * ISO2022-JP: Stateful encoding, with escape sequences to switch between ASCII,
+       //                0201-1976 Roman, 0208-1978, 0208-1983.
+       //  * ISO2022-JP-1: Adds esc seq for 0212-1990.
+       //  * ISO2022-JP-2: Adds esc seq for GB2313-1980, KSX1001-1992, ISO8859-1, ISO8859-7.
+@@ -34170,7 +34170,7 @@ var require_dbcs_data = __commonJS({
+       //  * Windows CP 951: Microsoft variant of Big5-HKSCS-2001. Seems to be never public. http://me.abelcheung.org/articles/research/what-is-cp951/
+       //  * Big5-2003 (Taiwan standard) almost superset of cp950.
+       //  * Unicode-at-on (UAO) / Mozilla 1.8. Falling out of use on the Web. Not supported by other browsers.
+-      //  * Big5-HKSCS (-2001, -2004, -2008). Hong Kong standard. 
++      //  * Big5-HKSCS (-2001, -2004, -2008). Hong Kong standard.
+       //    many unicode code points moved from PUA to Supplementary plane (U+2XXXX) over the years.
+       //    Plus, it has 4 combining sequences.
+       //    Seems that Mozilla refused to support it for 10 yrs. https://bugzilla.mozilla.org/show_bug.cgi?id=162431 https://bugzilla.mozilla.org/show_bug.cgi?id=310299
+@@ -34181,7 +34181,7 @@ var require_dbcs_data = __commonJS({
+       //    In the encoder, it might make sense to support encoding old PUA mappings to Big5 bytes seq-s.
+       //    Official spec: http://www.ogcio.gov.hk/en/business/tech_promotion/ccli/terms/doc/2003cmp_2008.txt
+       //                   http://www.ogcio.gov.hk/tc/business/tech_promotion/ccli/terms/doc/hkscs-2008-big5-iso.txt
+-      // 
++      //
+       // Current understanding of how to deal with Big5(-HKSCS) is in the Encoding Standard, http://encoding.spec.whatwg.org/#big5-encoder
+       // Unicode mapping (http://www.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/OTHER/BIG5.TXT) is said to be wrong.
+       "windows950": "cp950",
+@@ -42506,9 +42506,9 @@ var require_pool_cluster = __commonJS({
+       }
+       /**
+        * pool cluster execute
+-       * @param {*} sql 
+-       * @param {*} values 
+-       * @param {*} cb 
++       * @param {*} sql
++       * @param {*} values
++       * @param {*} cb
+        */
+       execute(sql2, values, cb) {
+         if (typeof values === "function") {

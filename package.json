@@ -28,6 +28,7 @@
     "ollama": "^0.4.4",
     "oslo": "^1.0.2",
     "pg": "^8.11.3",
+    "pgvector": "^0.1.7",
     "postgres": "^3.4.3",
     "vee-validate": "^4.12.4"
   },
@@ -72,5 +73,10 @@
     "vue-json-pretty": "^2.3.0",
     "vue-router": "^4.2.5",
     "zod": "^3.22.4"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "drizzle-kit@0.20.13": "patches/drizzle-kit@0.20.13.patch"
+    }
   }
 }

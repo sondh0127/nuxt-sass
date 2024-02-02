@@ -14,6 +14,12 @@ async function logout() {
 }
 
 const { messages, input, handleSubmit, isLoading } = useChat()
+
+function sendVector() {
+  $fetch('/api/vector', {
+    method: 'POST',
+  })
+}
 </script>
 
 <template>
@@ -31,6 +37,12 @@ const { messages, input, handleSubmit, isLoading } = useChat()
         Chat
       </SButton>
     </div> -->
+    <div>
+      <SButton :loading="isLoading" @click="sendVector">
+        🤖
+      </SButton>
+    </div>
+
     <div class="mx-auto max-w-md w-full flex flex-col py-24">
       <div v-for="m in messages" :key="m.id" class="whitespace-pre-wrap">
         {{ m.role === 'user' ? 'User: ' : 'AI: ' }}

@@ -1,5 +1,7 @@
 import { boolean, date, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
+import { vector } from 'pgvector/drizzle-orm'
+
 export const userTable = pgTable('user', {
   id: text('id').primaryKey(),
   githubId: text('github_id').unique(),
@@ -23,4 +25,9 @@ export const todoTable = pgTable('todo', {
   text: text('text').notNull(),
   done: boolean('done').default(false),
   createdAt: date('createdAt').defaultNow(),
+})
+
+export const items = pgTable('items', {
+  id: serial('id').primaryKey(),
+  embedding: vector('embedding', { dimensions: 3 }),
 })

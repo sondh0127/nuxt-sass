@@ -15,6 +15,13 @@
       "when": 1706375026680,
       "tag": "0001_parallel_starbolt",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706844896457,
+      "tag": "0002_colossal_corsair",
+      "breakpoints": true
     }
   ]
 }

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  drizzle-kit@0.20.13:
+    hash: don4zsrieaozzezr3bv65yuizy
+    path: patches/drizzle-kit@0.20.13.patch
+
 dependencies:
   '@antfu/utils':
     specifier: ^0.7.7
@@ -38,6 +43,9 @@ dependencies:
   pg:
     specifier: ^8.11.3
     version: 8.11.3
+  pgvector:
+    specifier: ^0.1.7
+    version: 0.1.7
   postgres:
     specifier: ^3.4.3
     version: 3.4.3
@@ -111,7 +119,7 @@ devDependencies:
     version: 3.2.3
   drizzle-kit:
     specifier: ^0.20.13
-    version: 0.20.13
+    version: 0.20.13(patch_hash=don4zsrieaozzezr3bv65yuizy)
   drizzle-zod:
     specifier: ^0.5.1
     version: 0.5.1(drizzle-orm@0.29.3)(zod@3.22.4)
@@ -6615,7 +6623,7 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.20.13:
+  /drizzle-kit@0.20.13(patch_hash=don4zsrieaozzezr3bv65yuizy):
     resolution: {integrity: sha512-j9oZSQXNWG+KBJm0Sg3S/zJpncHGKnpqNfFuM4NUxUMGTcihDHhP9SW6Jncqwb5vsP1Xm0a8JLm3PZUIspC/oA==}
     hasBin: true
     dependencies:
@@ -6636,6 +6644,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+    patched: true
 
   /drizzle-orm@0.29.3(pg@8.11.3)(postgres@3.4.3)(react@18.2.0):
     resolution: {integrity: sha512-uSE027csliGSGYD0pqtM+SAQATMREb3eSM/U8s6r+Y0RFwTKwftnwwSkqx3oS65UBgqDOM0gMTl5UGNpt6lW0A==}
@@ -10275,6 +10284,11 @@ packages:
     resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
     dependencies:
       split2: 4.2.0
+
+  /pgvector@0.1.7:
+    resolution: {integrity: sha512-hl1/Rvvu8iENi/0x4QcZh6o3bF2GWyyKIEu5GfXIzRhzhbOo7aQmoTPNWedRG1pziif+gOMTKKzHaJorgr8F0A==}
+    engines: {node: '>= 12'}
+    dev: false
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
