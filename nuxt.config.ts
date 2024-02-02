@@ -129,7 +129,7 @@ export default defineNuxtConfig({
     //   ignore: ['/hi'],
     // },
     imports: {
-      dirs: ['db'],
+      dirs: ['./server/db'],
       presets: [
         ...sharedPresets,
       ],

@@ -25,7 +25,7 @@ function sendEmbeding() {
   $fetch('/api/embeddings', {
     method: 'POST',
     body: {
-      prompt: 'Hello, this is a test',
+      prompt: '',
     },
   })
 }

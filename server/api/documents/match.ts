@@ -1,7 +1,5 @@
 import ollama from 'ollama'
-
 import { l2Distance } from 'pgvector/drizzle-orm'
-import { documentsTable } from '~/server/db/schema'
 
 export default defineEventHandler(async (event: any) => {
   const { prompt } = await readBody(event)
