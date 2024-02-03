@@ -1,8 +1,10 @@
 import { OAuth2RequestError } from 'arctic'
 import { generateId } from 'lucia'
 import { userTable } from '~/server/db/schema'
+import { useLucia } from '~/server/utils/auth'
 
 export default defineEventHandler(async (event) => {
+  const lucia = await useLucia()
   const query = getQuery(event)
   const code = query.code?.toString() ?? null
   const state = query.state?.toString() ?? null

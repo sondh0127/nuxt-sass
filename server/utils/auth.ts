@@ -5,28 +5,33 @@ import type { UserDB } from '../db/schema'
 import { sessionTable, userTable } from '../db/schema'
 import { db } from './db'
 
-const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable)
+let luciaIns: Lucia
+export async function useLucia() {
+  if (!luciaIns) {
+    const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable)
 
-export const lucia = new Lucia(adapter, {
-  sessionCookie: {
-    // IMPORTANT!
-    attributes: {
-      // set to `true` when using HTTPS
-      secure: !import.meta.dev,
-    },
-  },
-  getUserAttributes: (attributes) => {
-    return {
-      githubId: attributes.githubId,
-      username: attributes.username,
-    }
-  },
-})
-
+    luciaIns = new Lucia(adapter, {
+      sessionCookie: {
+        // IMPORTANT!
+        attributes: {
+          // set to `true` when using HTTPS
+          secure: !import.meta.dev,
+        },
+      },
+      getUserAttributes: (attributes) => {
+        return {
+          githubId: attributes.githubId,
+          username: attributes.username,
+        }
+      },
+    })
+  }
+  return luciaIns
+}
 // IMPORTANT!
 declare module 'lucia' {
   interface Register {
-    Lucia: typeof lucia
+    Lucia: typeof luciaIns
     DatabaseUserAttributes: Omit<UserDB, 'id'>
   }
 }
