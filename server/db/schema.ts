@@ -27,11 +27,21 @@ export const todoTable = pgTable('todo', {
   createdAt: date('createdAt').defaultNow(),
 })
 
-export const documentsTable = pgTable('documents', {
-  id: bigserial('id', { mode: 'number' }).primaryKey(),
-  content: text('content'),
-  metadata: jsonb('metadata'),
-  embedding: vector('embedding', { dimensions: 4096 }),
+export const DocumentsTableConf = {
+  name: 'documents',
+  columns: {
+    id: { name: 'id' },
+    content: { name: 'content' },
+    metadata: { name: 'metadata' },
+    embedding: { name: 'embedding' },
+  },
+}
+
+export const documentsTable = pgTable(DocumentsTableConf.name, {
+  id: bigserial(DocumentsTableConf.columns.id.name, { mode: 'number' }).primaryKey(),
+  content: text(DocumentsTableConf.columns.content.name),
+  metadata: jsonb(DocumentsTableConf.columns.metadata.name),
+  embedding: vector(DocumentsTableConf.columns.embedding.name, { dimensions: 4096 }),
 })
 
 export type DocumentsInsert = typeof documentsTable.$inferInsert
