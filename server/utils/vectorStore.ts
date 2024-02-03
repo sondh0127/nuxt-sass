@@ -19,7 +19,7 @@ let VectorStore: PGVectorStore
 export async function useVectorStore() {
   if (!VectorStore) {
     // const embeddings = await HuggingFaceEmbeddingSingleton.getInstance()
-    const embeddings = await useOllamaEmbedding()
+    const embeddings = await useHuggingFaceEmbedding()
     VectorStore = await PGVectorStore.initialize(embeddings, PgVectorStoreConfig)
     // Initialise cleanup on initial
     process.on('beforeExit', () => {

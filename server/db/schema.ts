@@ -41,7 +41,7 @@ export const documentsTable = pgTable(DocumentsTableConf.name, {
   id: bigserial(DocumentsTableConf.columns.id.name, { mode: 'number' }).primaryKey(),
   content: text(DocumentsTableConf.columns.content.name),
   metadata: jsonb(DocumentsTableConf.columns.metadata.name),
-  embedding: vector(DocumentsTableConf.columns.embedding.name, { dimensions: 4096 }),
+  embedding: vector(DocumentsTableConf.columns.embedding.name, { dimensions: 384 }),
 })
 
 export type DocumentsInsert = typeof documentsTable.$inferInsert
