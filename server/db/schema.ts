@@ -1,4 +1,4 @@
-import { bigserial, boolean, date, integer, jsonb, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+import { bigserial, boolean, date, integer, jsonb, pgTable, serial, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 import { vector } from 'pgvector/drizzle-orm'
 
@@ -26,6 +26,28 @@ export const todoTable = pgTable('todo', {
   done: boolean('done').default(false),
   createdAt: date('createdAt').defaultNow(),
 })
+
+export const MessagesTable = pgTable(
+  'messages',
+  {
+    id: uuid('id').defaultRandom(),
+    // roomId: uuid('room_id').references(() => RoomTable.id, {
+    //   onDelete: 'cascade',
+    //   onUpdate: 'cascade',
+    // }),
+    timeStamp: timestamp('time_stamp').defaultNow(),
+    persona: text('persona'),
+    content: text('content'),
+    // documentTitles: text('document_titles').array().default([]),
+    // isAborted: boolean('is_aborted').default(false),
+  },
+  // (table) => {
+  //   return {
+  //     pk: primaryKey({ columns: [table.roomId, table.id] }),
+  //     timeIndex: index('time_stamp_index').on(table.timeStamp).asc(),
+  //   }
+  // },
+)
 
 export const DocumentsTableConf = {
   name: 'documents',
