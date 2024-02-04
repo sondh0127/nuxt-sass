@@ -44,7 +44,7 @@ export const MessagesTable = pgTable('messages', {
     onUpdate: 'cascade',
   }),
   timeStamp: timestamp('time_stamp').defaultNow(),
-  persona: text('persona'),
+  role: text('role'),
   content: text('content'),
   // documentTitles: text('document_titles').array().default([]),
   // isAborted: boolean('is_aborted').default(false),

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS "messages" (
 	"id" uuid DEFAULT gen_random_uuid(),
 	"room_id" uuid,
 	"time_stamp" timestamp DEFAULT now(),
-	"persona" text,
+	"role" text,
 	"content" text,
 	CONSTRAINT "messages_room_id_id_pk" PRIMARY KEY("room_id","id")
 );

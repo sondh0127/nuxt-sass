@@ -2,25 +2,37 @@
 const emit = defineEmits<{
   click: [id: string]
 }>()
-
-const { invoke, useGet } = useApi()
-async function addRoom() {
-  const res = await invoke('/api/rooms', {
-    method: 'POST',
-    body: {},
-  })
-}
+const queryClient = useQueryClient()
 
 const { data: rooms, isLoading } = useQuery({
   queryKey: ['/api/rooms'],
   queryFn: () => $fetch('/api/rooms'),
 })
 
+const createMutation = useMutation({
+  mutationFn: () => $fetch('/api/rooms', {
+    method: 'POST',
+  }),
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['/api/rooms'] })
+  },
+})
+
+async function addRoom() {
+  const res = await createMutation.mutateAsync()
+}
+
+const removeMutation = useMutation({
+  mutationFn: (id: string) => {
+    return $fetch('/api/rooms', { method: 'DELETE', body: { id } })
+  },
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['/api/rooms'] })
+  },
+})
+
 async function removeRoom(id: string) {
-  const res = await invoke('/api/rooms', {
-    method: 'DELETE',
-    body: { id },
-  })
+  const res = await removeMutation.mutateAsync(id)
 }
 </script>
 

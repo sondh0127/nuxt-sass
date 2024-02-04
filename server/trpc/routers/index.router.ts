@@ -1,11 +1,9 @@
 import { accountRouter } from './account.router'
-import { authRouter } from './auth.router'
 import { todoRouter } from './todo.router'
 import { notesRouter } from './notes.router'
 import { brainRouter } from './brain.router'
 
 export const appRouter = router({
-  auth: authRouter,
   todo: todoRouter,
   // account: accountRouter,
   // notes: notesRouter,

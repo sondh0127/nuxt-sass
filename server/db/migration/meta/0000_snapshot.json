@@ -1,5 +1,5 @@
 {
-  "id": "00b08203-bb70-4af4-bf18-56cae6b4d107",
+  "id": "920c3ccc-b0e5-4bcc-8efe-7417769f228d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -62,8 +62,8 @@
           "notNull": false,
           "default": "now()"
         },
-        "persona": {
-          "name": "persona",
+        "role": {
+          "name": "role",
           "type": "text",
           "primaryKey": false,
           "notNull": false

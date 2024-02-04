@@ -11,12 +11,6 @@ async function logout() {
   navigateTo('/login')
 }
 
-function sendVector() {
-  $fetch('/api/vector', {
-    method: 'POST',
-  })
-}
-
 function sendEmbeding() {
   $fetch('/api/embeddings', {
     method: 'POST',
@@ -37,7 +31,7 @@ async function handleEmbedding() {
   })
 }
 
-const selectedRoom = ref()
+const roomId = ref()
 </script>
 
 <template>
@@ -51,14 +45,9 @@ const selectedRoom = ref()
       </form>
     </nav>
     <main class="h-full flex">
-      <RoomList class="w-256px bg-green/20" @click="(room) => selectedRoom = room" />
+      <RoomList class="w-256px bg-green/20" @click="(id) => roomId = id" />
       <div>
-        selectedRoom: {{ selectedRoom }}
-        <div>
-          <SButton :loading="isLoading" @click="sendVector">
-            🤖
-          </SButton>
-        </div>
+        roomId: {{ roomId }}
 
         <div>
           <SButton @click="sendEmbeding">
@@ -71,7 +60,7 @@ const selectedRoom = ref()
           </SButton>
         </div>
 
-        <MessageList />
+        <MessageList v-if="roomId" :room-id="roomId" />
       </div>
     </main>
   </div>
