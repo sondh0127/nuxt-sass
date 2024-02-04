@@ -22,6 +22,9 @@ dependencies:
   '@lucia-auth/adapter-drizzle':
     specifier: ^1.0.0
     version: 1.0.0(lucia@3.0.0)
+  '@tanstack/vue-query-devtools':
+    specifier: ^5.18.1
+    version: 5.18.1(@tanstack/vue-query@5.17.19)(vue@3.4.15)
   '@vee-validate/nuxt':
     specifier: ^4.12.4
     version: 4.12.4(rollup@2.79.1)(vue@3.4.15)
@@ -4276,6 +4279,21 @@ packages:
 
   /@tanstack/query-core@5.17.19:
     resolution: {integrity: sha512-Lzw8FUtnLCc9Jwz0sw9xOjZB+/mCCmJev38v2wHMUl/ioXNIhnNWeMxu0NKUjIhAd62IRB3eAtvxAGDJ55UkyA==}
+
+  /@tanstack/query-devtools@5.18.1:
+    resolution: {integrity: sha512-U8bDnDGuwdVMT4ndegPTcjOHOmX/UOjjB7o7UalRIq3DMHLRf8Ufh4+xoAvk3LNK5GBmUBfFSw4osYe5l9n7Lw==}
+    dev: false
+
+  /@tanstack/vue-query-devtools@5.18.1(@tanstack/vue-query@5.17.19)(vue@3.4.15):
+    resolution: {integrity: sha512-n8SHMbO/tBvnizshXwuAJX1fBx0MEh7qBCD6ii0uwO1LvAxbnT6Bopd9L3A0kIabi7kgIxwAYE6I110ejX0SEQ==}
+    peerDependencies:
+      '@tanstack/vue-query': ^5.18.1
+      vue: ^3.3.0
+    dependencies:
+      '@tanstack/query-devtools': 5.18.1
+      '@tanstack/vue-query': 5.17.19(vue@3.4.15)
+      vue: 3.4.15(typescript@5.3.3)
+    dev: false
 
   /@tanstack/vue-query@5.17.19(vue@3.4.15):
     resolution: {integrity: sha512-8LsQmOy44qV1FxAPukjhdEYvcDoRq4P+PRkKeig7EsdfgaopxhSH+/GpxyDZiyEfU2Rg/JYQ3p88ufQYV424Sw==}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 import { appName } from '~/constants'
 
 useHead({
@@ -11,6 +12,7 @@ useHead({
   <NuxtLayout>
     <SToastToaster />
     <NuxtPage />
+    <VueQueryDevtools />
   </NuxtLayout>
 </template>
 

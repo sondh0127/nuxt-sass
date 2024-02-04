@@ -4,13 +4,17 @@ const emit = defineEmits<{
 }>()
 
 const { invoke, useGet } = useApi()
-const { data: rooms, pending, error, refresh } = await useGet('/api/rooms')
 async function addRoom() {
   const res = await invoke('/api/rooms', {
     method: 'POST',
     body: {},
   })
 }
+
+const { data: rooms, isLoading } = useQuery({
+  queryKey: ['/api/rooms'],
+  queryFn: () => $fetch('/api/rooms'),
+})
 
 async function removeRoom(id: string) {
   const res = await invoke('/api/rooms', {
@@ -30,6 +34,7 @@ async function removeRoom(id: string) {
       Chat List
     </div>
     <div class="divide flex flex-col divide-y divide-gray">
+      {{ isLoading ? 'Loading...' : '' }}
       <div
         v-for="item in rooms" :key="item.id"
         class="flex cursor-pointer justify-between bg-yellow py-3"

@@ -1,10 +1,16 @@
 <script lang="ts" setup>
 import { useChat } from 'ai/vue'
 
-const { messages, input, handleSubmit, isLoading } = useChat()
+const { roomId } = definePropsRefs<{
+  roomId: string
+}>()
 
-const { data, pending, error, refresh } = await useFetch('/api/messages', {
+const { messages, input, handleSubmit, isLoading: isLoadingChat } = useChat()
 
+const { data, isLoading } = useQuery({
+  queryKey: ['/api/messages', roomId],
+  queryFn: () => $fetch('/api/messages', { query: { roomId } }),
+  enabled: () => !!roomId.value,
 })
 </script>
 

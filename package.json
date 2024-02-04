@@ -21,6 +21,7 @@
     "@hebilicious/vue-query-nuxt": "^0.3.0",
     "@langchain/community": "^0.0.26",
     "@lucia-auth/adapter-drizzle": "^1.0.0",
+    "@tanstack/vue-query-devtools": "^5.18.1",
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/zod": "^4.12.4",
     "@xenova/transformers": "^2.14.2",
