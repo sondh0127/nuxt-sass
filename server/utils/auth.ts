@@ -2,13 +2,13 @@ import { Lucia } from 'lucia'
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle'
 import { GitHub } from 'arctic'
 import type { UserDB } from '../db/schema'
-import { sessionTable, userTable } from '../db/schema'
-import { db } from './db'
+import { SessionTable, UserTable } from '../db/schema'
 
 let luciaIns: Lucia
 export async function useLucia() {
   if (!luciaIns) {
-    const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable)
+    const db = await useDb()
+    const adapter = new DrizzlePostgreSQLAdapter(db, SessionTable, UserTable)
 
     luciaIns = new Lucia(adapter, {
       sessionCookie: {

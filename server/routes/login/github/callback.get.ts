@@ -1,6 +1,6 @@
 import { OAuth2RequestError } from 'arctic'
 import { generateId } from 'lucia'
-import { userTable } from '~/server/db/schema'
+import { UserTable } from '~/server/db/schema'
 import { useLucia } from '~/server/utils/auth'
 
 export default defineEventHandler(async (event) => {
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
       },
     })
     const githubUser: GitHubUser = await githubUserResponse.json()
-    const existingUser = await db.select().from(userTable).where(eq(userTable.githubId, githubUser.id)).limit(1)
+    const existingUser = await db.select().from(UserTable).where(eq(UserTable.githubId, githubUser.id)).limit(1)
 
     if (existingUser.length) {
       const session = await lucia.createSession(existingUser[0].id, {})
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const userId = generateId(15)
-    await db.insert(userTable).values({
+    await db.insert(UserTable).values({
       id: userId,
       githubId: githubUser.id,
       username: githubUser.login,

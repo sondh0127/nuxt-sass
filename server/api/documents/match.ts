@@ -10,8 +10,8 @@ export default defineEventHandler(async (event: any) => {
     },
   })
   const allItems = await db.select()
-    .from(documentsTable)
-    .orderBy(l2Distance(documentsTable.embedding, response.embedding))
+    .from(DocumentsTable)
+    .orderBy(l2Distance(DocumentsTable.embedding, response.embedding))
     .limit(5)
 
   return allItems

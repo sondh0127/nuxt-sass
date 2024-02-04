@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import { todoTable } from './schema'
+import { TodoTable } from './schema'
 
-export const InsertSchemaTodo = createInsertSchema(todoTable)
+export const InsertSchemaTodo = createInsertSchema(TodoTable)
 export type EditSchema = z.infer<typeof InsertSchemaTodo>

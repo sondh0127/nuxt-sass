@@ -15,6 +15,11 @@ async function logout() {
 
 const { messages, input, handleSubmit, isLoading } = useChat()
 
+const { data, pending, error, refresh } = await useFetch('/api/messages', {
+
+})
+
+console.log('[LOG] ~ data:', data)
 function sendVector() {
   $fetch('/api/vector', {
     method: 'POST',
