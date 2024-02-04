@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@antfu/utils": "^0.7.7",
+    "@hebilicious/vue-query-nuxt": "^0.3.0",
     "@langchain/community": "^0.0.26",
     "@lucia-auth/adapter-drizzle": "^1.0.0",
     "@vee-validate/nuxt": "^4.12.4",

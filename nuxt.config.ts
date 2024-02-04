@@ -44,6 +44,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vee-validate/nuxt',
     'nuxt-module-eslint-config',
+    '@hebilicious/vue-query-nuxt',
   ],
   features: {
     // For UnoCSS
@@ -163,18 +164,6 @@ export default defineNuxtConfig({
       },
     ],
     presets: [
-      {
-        from: '@tanstack/vue-query',
-        imports: [
-          'useQuery',
-          'useInfiniteQuery',
-          'useMutation',
-          'useIsFetching',
-          'useIsMutating',
-          'useQueryClient',
-          'useQueries',
-        ],
-      },
       ...sharedPresets,
     ],
   },
