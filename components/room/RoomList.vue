@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+const emit = defineEmits<{
+  click: [id: string]
+}>()
+
 const { invoke, useGet } = useApi()
 const { data: rooms, pending, error, refresh } = await useGet('/api/rooms')
 async function addRoom() {
@@ -26,7 +30,11 @@ async function removeRoom(id: string) {
       Chat List
     </div>
     <div class="divide flex flex-col divide-y divide-gray">
-      <div v-for="item in rooms" :key="item.id" class="flex justify-between bg-yellow py-3">
+      <div
+        v-for="item in rooms" :key="item.id"
+        class="flex cursor-pointer justify-between bg-yellow py-3"
+        @click="emit('click', item.id)"
+      >
         <div>
           {{ item.id }}
         </div>

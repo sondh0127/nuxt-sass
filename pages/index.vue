@@ -45,6 +45,8 @@ async function handleEmbedding() {
     },
   })
 }
+
+const selectedRoom = ref()
 </script>
 
 <template>
@@ -58,8 +60,9 @@ async function handleEmbedding() {
       </form>
     </nav>
     <main class="h-full flex">
-      <RoomList class="w-256px bg-green/20" />
+      <RoomList class="w-256px bg-green/20" @click="(room) => selectedRoom = room" />
       <div>
+        selectedRoom: {{ selectedRoom }}
         <div>
           <SButton :loading="isLoading" @click="sendVector">
             🤖
