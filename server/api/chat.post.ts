@@ -2,6 +2,7 @@ import { PromptTemplate } from '@langchain/core/prompts'
 import { StringOutputParser } from '@langchain/core/output_parsers'
 import { RunnablePassthrough, RunnableSequence } from '@langchain/core/runnables'
 import type { Document } from 'langchain/document'
+import { AIMessage, HumanMessage } from 'langchain/schema'
 
 function formatDocsAsString(docs: Document[]) {
   return docs
@@ -79,7 +80,8 @@ export default defineLazyEventHandler(async () => {
       answerChain,
     ])
 
+    // TODO: use LangChainStream from vercel
     const question = messages[messages.length - 1].content
-    return chain.stream({ question })
+    return chain.invoke({ question })
   })
 })

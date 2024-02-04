@@ -134,6 +134,9 @@ export default defineNuxtConfig({
         ...sharedPresets,
       ],
     },
+    experimental: {
+      asyncContext: true,
+    },
   },
   imports: {
     dirs: ['db', 'stores'],

@@ -38,7 +38,7 @@ async function removeRoom(id: string) {
         <div>
           {{ item.id }}
         </div>
-        <SButton class="flex-shrink-0" size="icon" @click="removeRoom(item.id)">
+        <SButton class="flex-shrink-0" size="icon" @click.stop="removeRoom(item.id)">
           <div i-ri:close-line />
         </SButton>
       </div>
