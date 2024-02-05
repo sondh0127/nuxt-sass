@@ -3,7 +3,6 @@ import type { FullDBUser } from './service.types'
 import { fullDBUser } from './service.types'
 import { UtilService } from './util.service'
 import prisma_client from '~~/prisma/prisma.client'
-import { db, users } from '@/db'
 
 const config = useRuntimeConfig()
 
