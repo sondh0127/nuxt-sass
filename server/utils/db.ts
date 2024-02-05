@@ -12,9 +12,10 @@ export async function useDb() {
       await client`CREATE EXTENSION IF NOT EXISTS vector`
       _db = drizzle(client, { schema })
     }
+    else {
+      throw new Error('No database configured for production')
+    }
   }
-  else {
-    throw new Error('No database configured for production')
-  }
+
   return _db
 }
