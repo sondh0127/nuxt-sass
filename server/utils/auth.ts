@@ -15,7 +15,6 @@ export async function useLucia() {
 
     _lucia = new Lucia(adapter, {
       sessionCookie: {
-        // IMPORTANT!
         attributes: {
           // set to `true` when using HTTPS
           secure: !import.meta.dev,
