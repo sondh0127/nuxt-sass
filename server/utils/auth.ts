@@ -17,7 +17,8 @@ export async function useLucia() {
       sessionCookie: {
         attributes: {
           // set to `true` when using HTTPS
-          secure: !import.meta.dev,
+          // secure: !import.meta.dev,
+          secure: true,
         },
       },
       getUserAttributes: (attributes) => {
