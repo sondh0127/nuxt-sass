@@ -38,6 +38,4 @@ declare module 'lucia' {
   }
 }
 
-const config = useRuntimeConfig()
-
-export const github = new GitHub(config.githubClientId, config.githubClientSecret)
+export const github = new GitHub(process.env.GITHUB_CLIENT_ID, process.env.GITHUB_CLIENT_SECRET)
