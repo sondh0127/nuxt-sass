@@ -5,6 +5,8 @@ import { useLucia } from '~/server/utils/auth'
 
 export default defineEventHandler(async (event) => {
   const lucia = await useLucia()
+  const db = useDb()
+
   const query = getQuery(event)
   const code = query.code?.toString() ?? null
   const state = query.state?.toString() ?? null
@@ -23,7 +25,6 @@ export default defineEventHandler(async (event) => {
       },
     })
     const githubUser: GitHubUser = await githubUserResponse.json()
-    const db = await useDb()
     const existingUser = await db.select().from(UserTable).where(eq(UserTable.githubId, githubUser.id)).limit(1)
 
     if (existingUser.length) {

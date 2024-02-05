@@ -1,4 +1,4 @@
 export default defineEventHandler(async (event) => {
-  const db = await useDb()
+  const db = useDb()
   return await db.insert(RoomTable).values({})
 })

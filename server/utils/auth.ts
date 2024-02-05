@@ -10,7 +10,7 @@ globalThis.crypto = webcrypto as Crypto
 let _lucia: Lucia
 export async function useLucia() {
   if (!_lucia) {
-    const db = await useDb()
+    const db = useDb()
     const adapter = new DrizzlePostgreSQLAdapter(db, SessionTable, UserTable)
 
     _lucia = new Lucia(adapter, {

@@ -4,12 +4,11 @@ import postgres from 'postgres'
 import * as schema from '../db/schema'
 
 let _db: PostgresJsDatabase<typeof schema>
-export async function useDb() {
+export function useDb() {
   if (!_db) {
     const connectionString = process.env.DATABASE_URL!
     if (connectionString) {
       const client = postgres(connectionString)
-      await client`CREATE EXTENSION IF NOT EXISTS vector`
       _db = drizzle(client, { schema })
     }
     else {
