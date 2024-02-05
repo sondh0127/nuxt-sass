@@ -4,9 +4,9 @@ import { useChat } from 'ai/vue'
 const { roomId } = definePropsRefs<{
   roomId: string
 }>()
-const { sLoading, suspense } = useQuery({
+const { isLoading } = useQuery({
   queryKey: ['/api/messages', roomId],
-  queryFn: () => $fetch('/api/messages', { query: { roomId } }),
+  queryFn: () => $fetch('/api/messages', { query: { roomId: roomId.value } }),
   enabled: () => !!roomId.value,
 })
 
