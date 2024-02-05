@@ -1,16 +1,19 @@
+import { webcrypto } from 'node:crypto'
 import { Lucia } from 'lucia'
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle'
 import { GitHub } from 'arctic'
 import type { UserDB } from '../db/schema'
 import { SessionTable, UserTable } from '../db/schema'
 
-let luciaIns: Lucia
+globalThis.crypto = webcrypto as Crypto
+
+let _lucia: Lucia
 export async function useLucia() {
-  if (!luciaIns) {
+  if (!_lucia) {
     const db = await useDb()
     const adapter = new DrizzlePostgreSQLAdapter(db, SessionTable, UserTable)
 
-    luciaIns = new Lucia(adapter, {
+    _lucia = new Lucia(adapter, {
       sessionCookie: {
         // IMPORTANT!
         attributes: {
@@ -26,12 +29,12 @@ export async function useLucia() {
       },
     })
   }
-  return luciaIns
+  return _lucia
 }
 // IMPORTANT!
 declare module 'lucia' {
   interface Register {
-    Lucia: typeof luciaIns
+    Lucia: typeof _lucia
     DatabaseUserAttributes: Omit<UserDB, 'id'>
   }
 }
