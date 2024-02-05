@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
       },
     })
     const githubUser: GitHubUser = await githubUserResponse.json()
+    const db = await useDb()
     const existingUser = await db.select().from(UserTable).where(eq(UserTable.githubId, githubUser.id)).limit(1)
 
     if (existingUser.length) {
@@ -42,15 +43,16 @@ export default defineEventHandler(async (event) => {
     return sendRedirect(event, '/')
   }
   catch (e) {
-    // the specific error message depends on the provider
     if (e instanceof OAuth2RequestError) {
       // invalid code
       throw createError({
+        message: e.message,
         status: 400,
       })
     }
     throw createError({
       status: 500,
+      message: e.message ?? 'Unknown error',
     })
   }
 })
