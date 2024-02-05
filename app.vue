@@ -20,8 +20,6 @@ useHead({
 html,
 body,
 #__nuxt {
-  height: 100dvh;
-  margin: 0;
-  padding: 0;
+  @apply h-100dvg m-0 p-0;
 }
 </style>
