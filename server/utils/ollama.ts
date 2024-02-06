@@ -8,6 +8,7 @@ export async function useOllamaChat() {
     ChatOllamaSingleton = new ChatOllama({
       model: 'mistral',
       // numCtx: 32678,
+      baseUrl: process.env.OLLAMA_BASE_URL,
     })
   }
   return ChatOllamaSingleton
@@ -23,6 +24,7 @@ export async function useOllamaEmbedding() {
         numThread: 6,
         numGpu: 1,
       },
+      baseUrl: process.env.OLLAMA_BASE_URL,
     })
   }
   return OllamaEmbeddingSingleton

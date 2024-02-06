@@ -82,6 +82,6 @@ export default defineLazyEventHandler(async () => {
 
     // TODO: use LangChainStream from vercel
     const question = messages[messages.length - 1].content
-    return chain.invoke({ question })
+    return chain.stream({ question })
   })
 })
